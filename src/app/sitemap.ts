@@ -1,43 +1,31 @@
 import { MetadataRoute } from "next";
 
-// अगर future में blog dynamic होगा तो यहाँ से fetch कर सकते हो
-async function getBlogPosts() {
-  // Example static (later you can connect database or files)
-  return [
-    {
-      slug: "reduce-image-size-in-kb",
-    },
-    {
-      slug: "compress-jpg-online",
-    },
-  ];
-}
-
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://reduceimagesizeonline.com";
 
-  const blogPosts = await getBlogPosts();
+  const staticPages = [
+    "",
+    "/reduce-image-size",
+    "/blog",
+  ];
 
-  const blogUrls = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
+  const blogPosts = [
+    "how-to-reduce-image-size",
+  ];
 
   return [
-    {
-      url: `${baseUrl}/`,
+    ...staticPages.map((route) => ({
+      url: `${baseUrl}${route}`,
       lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/reduce-image-size`,
+      changeFrequency: "weekly" as const,
+      priority: route === "" ? 1 : 0.8,
+    })),
+
+    ...blogPosts.map((slug) => ({
+      url: `${baseUrl}/blog/${slug}`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    ...blogUrls,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
   ];
 }
