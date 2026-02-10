@@ -1,0 +1,139 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* HEADER */
+.header {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: auto;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #334155;
+  font-weight: 500;
+}
+
+/* LAYOUT */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.hero h1 {
+  font-size: 42px;
+}
+
+.subtitle {
+  color: #475569;
+  max-width: 720px;
+  margin: 12px auto 30px;
+}
+
+/* UPLOAD BOX */
+.upload-box {
+  border: 2px dashed #60a5fa;
+  border-radius: 16px;
+  background: #f8fbff;
+  padding: 50px 20px;
+  max-width: 720px;
+  margin: 30px auto;
+}
+
+.upload-box.clickable {
+  cursor: pointer;
+}
+
+.upload-input {
+  display: none;
+}
+
+.upload-content {
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 42px;
+  color: #2563eb;
+  margin-bottom: 12px;
+}
+
+/* BUTTON */
+.primary-btn {
+  background: #2563eb;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  border: none;
+}
+
+.primary-btn.full {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* FEATURES */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  border: 1px solid #e5e7eb;
+  padding: 26px;
+  border-radius: 14px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.feature-card.disabled {
+  opacity: 0.5;
+}
+
+/* TOOL */
+.tool-card {
+  max-width: 720px;
+  margin: auto;
+  border: 1px solid #e5e7eb;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.option {
+  margin-bottom: 20px;
+}
