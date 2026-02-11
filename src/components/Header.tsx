@@ -20,6 +20,9 @@ export default function Header() {
           <Link href="/">Home</Link>
           <Link href="/reduce-image-size">Reduce Image Size</Link>
           <Link href="/blog">Blog</Link>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
+
         </nav>
       </div>
     </header>
