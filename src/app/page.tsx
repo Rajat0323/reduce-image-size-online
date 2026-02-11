@@ -1,8 +1,20 @@
 export const metadata = {
-  title: "Reduce Image Size Online Free | Compress Images Instantly",
+  title: "Reduce Image Size Online Free (JPG, PNG, WEBP) – Fast & Secure Compressor",
   description:
-    "Reduce image size online for free. Compress JPG, PNG, and WEBP images directly in your browser. No upload required. Fast, secure and unlimited.",
+    "Reduce image size online free. Compress JPG, PNG and WEBP images instantly without losing quality. Reduce image size in KB or MB. 100% secure browser-based image compressor.",
+  keywords: [
+    "reduce image size",
+    "reduce image size online",
+    "compress image online",
+    "reduce image size in kb",
+    "reduce image size in mb",
+    "image compressor free",
+    "compress jpg",
+    "compress png",
+    "compress webp"
+  ],
 };
+
 
 export default function Home() {
   return (
@@ -18,8 +30,9 @@ export default function Home() {
         }}
       >
         <h1 style={{ fontSize: 48, marginBottom: 20 }}>
-          Reduce Image Size Online
+          Reduce Image Size Online Free – Compress JPG, PNG & WEBP Instantly
         </h1>
+
 
         <p style={{ fontSize: 18, color: "#555", marginBottom: 40 }}>
           Compress JPG, PNG and WEBP images directly in your browser.
@@ -122,22 +135,29 @@ export default function Home() {
 
       {/* SEO CONTENT SECTION */}
      <section style={{ maxWidth: 900, margin: "60px auto", lineHeight: 1.8 }}>
-  <h2 style={{ fontSize: 32, marginBottom: 20 }}>
-    How to Reduce Image Size Online – Fast & Secure
-  </h2>
+<h2 style={{ fontSize: 32, marginBottom: 20 }}>
+  Reduce Image Size Online Without Losing Quality
+</h2>
 
-  <p style={{ color: "#475569", fontSize: 18 }}>
-    Our tool allows you to <strong>reduce image size online</strong> directly in your browser 
-    without uploading files to any server. You can compress single or multiple images at once 
-    and instantly download optimized files. This helps improve website speed, SEO ranking, 
-    and overall performance.
-  </p>
+<p style={{ color: "#475569", fontSize: 18 }}>
+  Looking to <strong>reduce image size online</strong> quickly and securely?
+  Our free image compressor helps you reduce image size in KB or MB
+  without sacrificing visual quality. Perfect for websites, blogs,
+  eCommerce stores, and social media uploads.
+</p>
 
-  <p style={{ color: "#475569", fontSize: 18, marginTop: 20 }}>
-    Whether you need to reduce image size in KB or MB for websites, blogs, e-commerce, 
-    or social media, our free image compressor ensures high-quality results while 
-    minimizing file size.
-  </p>
+<p style={{ color: "#475569", fontSize: 18, marginTop: 20 }}>
+  Large image files slow down your website and hurt SEO rankings.
+  By compressing images, you improve page speed, Core Web Vitals,
+  and overall user experience.
+</p>
+   <p style={{ marginTop: 20 }}>
+  Want detailed guidance? Read our complete guide on{" "}
+  <a href="/blog/how-to-reduce-image-size" style={{ color: "#1a73e8" }}>
+    how to reduce image size properly
+  </a>.
+</p>
+
 
   <h3 style={{ marginTop: 40, fontSize: 24 }}>
     ✨ Key Features
@@ -169,6 +189,25 @@ export default function Home() {
 
 
       {/* CTA SECTION */}
+      <section style={{ maxWidth: 900, margin: "60px auto", lineHeight: 1.8 }}>
+  <h2>Frequently Asked Questions</h2>
+
+  <h3>Can I reduce image size without losing quality?</h3>
+  <p>
+    Yes. Our compression algorithm maintains high visual quality while reducing file size significantly.
+  </p>
+
+  <h3>How do I reduce image size in KB?</h3>
+  <p>
+    Adjust the compression quality and resize dimensions to achieve the desired KB size.
+  </p>
+
+  <h3>Is this image compressor secure?</h3>
+  <p>
+    Yes. All processing happens inside your browser. No images are uploaded to any server.
+  </p>
+</section>
+
       <section
         style={{
           padding: "80px 20px",
