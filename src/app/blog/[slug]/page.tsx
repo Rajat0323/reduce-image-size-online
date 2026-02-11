@@ -3,6 +3,8 @@ import path from "path";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import ReactMarkdown from "react-markdown";
+import RelatedPosts from "../RelatedPosts";
 
 type Props = {
   params: { slug: string };
@@ -10,6 +12,7 @@ type Props = {
 
 const baseUrl = "https://www.reduceimagesizeonline.com";
 
+// 📌 Get blog data
 function getPostData(slug: string) {
   const blogDir = path.join(process.cwd(), "src/content/blog");
   const filePath = path.join(blogDir, `${slug}.md`);
@@ -22,10 +25,9 @@ function getPostData(slug: string) {
   return { content, data };
 }
 
-// 🔥 Dynamic Metadata (Title, Description, OG)
+// 🔥 Dynamic SEO Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostData(params.slug);
-
   if (!post) return {};
 
   return {
@@ -47,6 +49,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// 📌 Static generation
+export async function generateStaticParams() {
+  const blogDir = path.join(process.cwd(), "src/content/blog");
+  const files = fs.readdirSync(blogDir);
+
+  return files.map((file) => ({
+    slug: file.replace(".md", ""),
+  }));
+}
+
+// 📌 Blog Page
 export default function BlogPost({ params }: Props) {
   const post = getPostData(params.slug);
   if (!post) return notFound();
@@ -75,7 +88,7 @@ export default function BlogPost({ params }: Props) {
 
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", padding: 60 }}>
-      {/* 🔥 Article Schema */}
+      {/* Article Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -83,11 +96,17 @@ export default function BlogPost({ params }: Props) {
         }}
       />
 
-      <h1 style={{ fontSize: 40 }}>{data.title}</h1>
+      <h1 style={{ fontSize: 40, marginBottom: 20 }}>
+        {data.title}
+      </h1>
 
-      <div style={{ marginTop: 30, lineHeight: 1.8 }}>
-        {content}
-      </div>
+      <p style={{ color: "#666", marginBottom: 30 }}>
+        {data.description}
+      </p>
+
+      <article style={{ lineHeight: 1.8 }}>
+        <ReactMarkdown>{content}</ReactMarkdown>
+      </article>
 
       <RelatedPosts currentSlug={params.slug} />
     </div>
