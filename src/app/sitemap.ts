@@ -1,16 +1,22 @@
 import { MetadataRoute } from "next";
+import fs from "fs";
+import path from "path";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.reduceimagesizeonline.com";
+
+  const blogDir = path.join(process.cwd(), "src/content/blog");
+
+  const blogFiles = fs.readdirSync(blogDir);
+
+  const blogSlugs = blogFiles.map((file) =>
+    file.replace(".md", "")
+  );
 
   const staticPages = [
     "",
     "/reduce-image-size",
     "/blog",
-  ];
-
-  const blogPosts = [
-    "how-to-reduce-image-size",
   ];
 
   return [
@@ -21,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route === "" ? 1 : 0.8,
     })),
 
-    ...blogPosts.map((slug) => ({
+    ...blogSlugs.map((slug) => ({
       url: `${baseUrl}/blog/${slug}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
