@@ -4,12 +4,19 @@ import type { Metadata } from "next";
 import { softwareSchema } from "../seo/schema";
 import { faqSchema } from "../seo/faqData";
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://www.reduceimagesizeonline.com"), // 🔥 Replace with your real domain later
+const siteUrl = "https://www.reduceimagesizeonline.com";
 
-  title: "Reduce Image Size Online Free | Compress Images in KB & MB",
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+
+  title: {
+    default:
+      "Reduce Image Size Online Free (JPG, PNG, WEBP) – Fast & Secure Compressor",
+    template: "%s | ReduceImageSizeOnline",
+  },
+
   description:
-    "Reduce image size online for free. Compress JPG, PNG and WEBP images in KB or MB without losing quality. Upload single or multiple images and download instantly.",
+    "Reduce image size online free. Compress JPG, PNG and WEBP images instantly without losing quality. Reduce image size in KB or MB. 100% secure browser-based image compressor.",
 
   keywords: [
     "reduce image size online",
@@ -22,6 +29,10 @@ export const metadata: Metadata = {
     "batch image compressor",
   ],
 
+  alternates: {
+    canonical: "/", // ✅ Adds canonical automatically
+  },
+
   icons: {
     icon: "/favicon.ico",
   },
@@ -30,11 +41,11 @@ export const metadata: Metadata = {
     title: "Reduce Image Size Online Free",
     description:
       "Free online tool to reduce image size in KB or MB. Compress multiple images instantly.",
-    url: "https://www.reduceimagesizeonline.com",
-    siteName: "ReduceImageSize",
+    url: siteUrl,
+    siteName: "ReduceImageSizeOnline",
     images: [
       {
-        url: "/og-image.png", // Put this image inside public folder
+        url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
         alt: "Reduce Image Size Online Tool",
@@ -48,7 +59,7 @@ export const metadata: Metadata = {
     title: "Reduce Image Size Online Free",
     description:
       "Compress images instantly in your browser. No upload required.",
-    images: ["/og-image.png"],
+    images: [`${siteUrl}/og-image.png`],
   },
 };
 
