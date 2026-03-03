@@ -3,6 +3,11 @@
 import { useRef, useState } from "react";
 import JSZip from "jszip";
 
+export const metadata = {
+  alternates: {
+    canonical: "/reduce-image-size",
+  },
+};
 type ImgType = {
   file: File;
   preview: string;
@@ -37,7 +42,7 @@ export default function ReduceImagePage() {
     }));
     setImages(mapped);
   }
-
+  
   async function compressImages() {
   setProcessing(true);
 

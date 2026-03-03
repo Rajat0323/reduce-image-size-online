@@ -29,9 +29,7 @@ export const metadata: Metadata = {
     "batch image compressor",
   ],
 
-  alternates: {
-    canonical: "/", // ✅ Adds canonical automatically
-  },
+
 
   icons: {
     icon: "/favicon.ico",

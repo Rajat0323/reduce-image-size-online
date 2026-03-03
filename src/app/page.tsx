@@ -1,4 +1,7 @@
 export const metadata = {
+  alternates: {
+    canonoical: "/",
+  },
   title: "Reduce Image Size Online Free (JPG, PNG, WEBP) – Fast & Secure Compressor",
   description:
     "Reduce image size online free. Compress JPG, PNG and WEBP images instantly without losing quality. Reduce image size in KB or MB. 100% secure browser-based image compressor.",
@@ -14,7 +17,6 @@ export const metadata = {
     "compress webp"
   ],
 };
-
 
 export default function Home() {
   return (
