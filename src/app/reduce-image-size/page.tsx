@@ -28,7 +28,7 @@ export default function ReduceImagePage() {
   function openPicker() {
     inputRef.current?.click();
   }
-
+  alternates: { canonical: "/reduce-image-size" }
   function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files || []);
     const mapped = files.map((file) => ({

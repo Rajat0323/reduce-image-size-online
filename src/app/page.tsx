@@ -17,7 +17,7 @@ export const metadata = {
     "compress webp"
   ],
 };
-
+ alternates: { canonical: "/" }
 export default function Home() {
   return (
     <div style={{ background: "#f5f7fb" }}>
