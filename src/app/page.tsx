@@ -1,6 +1,6 @@
 export const metadata = {
   alternates: {
-    canonoical: "/",
+    canonical: "/",
   },
   title: "Reduce Image Size Online Free (JPG, PNG, WEBP) – Fast & Secure Compressor",
   description:
