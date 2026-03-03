@@ -5,7 +5,7 @@ import { softwareSchema } from "../seo/schema";
 import { faqSchema } from "../seo/faqData";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yourdomain.com"), // 🔥 Replace with your real domain later
+  metadataBase: new URL("https://www.reduceimagesizeonline.com"), // 🔥 Replace with your real domain later
 
   title: "Reduce Image Size Online Free | Compress Images in KB & MB",
   description:
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Reduce Image Size Online Free",
     description:
       "Free online tool to reduce image size in KB or MB. Compress multiple images instantly.",
-    url: "https://yourdomain.com",
+    url: "https://www.reduceimagesizeonline.com",
     siteName: "ReduceImageSize",
     images: [
       {
