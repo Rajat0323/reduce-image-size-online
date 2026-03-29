@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import type { Metadata } from "next";
 import { softwareSchema } from "../seo/schema";
 import { faqSchema } from "../seo/faqData";
@@ -89,6 +90,7 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

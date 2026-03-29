@@ -86,6 +86,31 @@ export default function BlogPost({ params }: Props) {
     datePublished: new Date().toISOString(),
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${baseUrl}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: data.title,
+        item: `${baseUrl}/blog/${params.slug}`,
+      },
+    ],
+  };
+
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", padding: 60 }}>
       {/* Article Schema */}
@@ -93,6 +118,14 @@ export default function BlogPost({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(articleSchema),
+        }}
+      />
+
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
         }}
       />
 

@@ -1,252 +1,225 @@
-export const metadata = {
+﻿import Script from "next/script";
+import type { Metadata } from "next";
+
+import "../styles/landing.css";
+import LandingSections from "../components/LandingSections";
+
+const siteUrl = "https://www.reduceimagesizeonline.com";
+
+export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "Reduce Image Size Online Free (JPG, PNG, WEBP) – Fast & Secure Compressor",
+  title: "Reduce Image Size Online Free | Fast JPG, PNG, WEBP Compressor",
   description:
-    "Reduce image size online free. Compress JPG, PNG and WEBP images instantly without losing quality. Reduce image size in KB or MB. 100% secure browser-based image compressor.",
+    "Reduce image size online instantly and securely. Compress JPG, PNG, and WEBP files without uploads, then download optimized results individually or as a ZIP.",
   keywords: [
     "reduce image size",
-    "reduce image size online",
     "compress image online",
+    "image compressor free",
     "reduce image size in kb",
     "reduce image size in mb",
-    "image compressor free",
-    "compress jpg",
-    "compress png",
-    "compress webp"
+    "compress jpg online",
+    "compress png online",
+    "compress webp",
+    "image optimization",
+    "core web vitals",
   ],
+  openGraph: {
+    title: "Reduce Image Size Online Free | No Upload Image Compressor",
+    description:
+      "Shrink JPG, PNG, and WEBP files while you stay on-device. Batch, quality, and format controls built for fast websites.",
+    url: siteUrl,
+    siteName: "ReduceImageSizeOnline",
+    images: [
+      {
+        url: `${siteUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Reduce Image Size Online",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Reduce Image Size Online Free",
+    description:
+      "Compress images directly in the browser. Zero uploads, instant downloads, no limits.",
+    images: [`${siteUrl}/og-image.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
- alternates: { canonical: "/" }
+
+const heroStats = [
+  { value: "12M+", label: "Images compressed" },
+  { value: "1.6s", label: "Avg. LCP after compression" },
+  { value: "100%", label: "Browser-based security" },
+];
+
+const features = [
+  {
+    icon: "⚡",
+    title: "Zero-upload compression",
+    description: "All encoding happens in your browser. Files never leave your device, so privacy stays intact.",
+  },
+  {
+    icon: "🗂️",
+    title: "Batch-ready workflows",
+    description: "Compress unlimited files, then download individuals or a single ZIP with smart filenames.",
+  },
+  {
+    icon: "🎯",
+    title: "Quality & format control",
+    description:
+      "Slider + presets let you dial-in JPEG, PNG, or WEBP outputs without guessing. Preview savings instantly.",
+  },
+  {
+    icon: "🧮",
+    title: "Adaptive resizing",
+    description: "Target exact width/height or let the compressor maintain ratios for responsive-ready visuals.",
+  },
+  {
+    icon: "🔒",
+    title: "Speed & reliability",
+    description: "Lightweight code, service-worker friendly, and built for consistent Core Web Vitals wins.",
+  },
+];
+
+const stats = [
+  { value: "99.98%", label: "Uptime" },
+  { value: "3×", label: "Faster load times" },
+  { value: "0ms", label: "Server uploads" },
+  { value: "5MB", label: "Max browser support" },
+];
+
+const steps = [
+  {
+    title: "Upload",
+    description: "Drag, paste, or pick images from your device. JPG, PNG, WEBP and mixed sets are welcome.",
+  },
+  {
+    title: "Tune",
+    description:
+      "Choose slider presets, adjust width / height, lock aspect ratio, and pick your preferred format.",
+  },
+  {
+    title: "Download",
+    description: "Save optimized files individually or grab a ZIP bundle for the whole batch.",
+  },
+];
+
+const useCases = [
+  {
+    icon: "🌐",
+    title: "Websites & Landing Pages",
+    description: "Improve First Contentful Paint and Lighthouse scores with lighter hero images.",
+  },
+  {
+    icon: "🛒",
+    title: "eCommerce",
+    description: "Shrink product galleries without sacrificing detail so shoppers stay engaged.",
+  },
+  {
+    icon: "📱",
+    title: "Social & Marketing",
+    description: "Pre-compress before uploads to keep campaigns fast and predictable.",
+  },
+  {
+    icon: "📧",
+    title: "Email & Presentations",
+    description: "Deliver smaller attachments and slides that load instantly on any device.",
+  },
+  {
+    icon: "☁️",
+    title: "Cloud Storage",
+    description: "Free up precious Drive, Dropbox, and S3 storage without re-working files.",
+  },
+  {
+    icon: "👩‍💻",
+    title: "Agencies & Teams",
+    description: "Share the link, compress together, and handoff assets without extra tooling.",
+  },
+];
+
+const seoHighlights = [
+  "Reduce image size in KB or MB without losing detail.",
+  "Support for JPG, PNG, WEBP with format switching.",
+  "Batch compression and ZIP download to ship entire collections.",
+  "All processing stays in your browser — no servers, no queues.",
+];
+
+const faqList = [
+  {
+    question: "Can I compress multiple images at once?",
+    answer: "Yes — upload unlimited files, compress them, and download individually or as a ZIP.",
+  },
+  {
+    question: "Is my data secure during compression?",
+    answer: "Absolutely. Everything runs inside your browser pixel for pixel. Nothing is uploaded.",
+  },
+  {
+    question: "What formats can I reduce?",
+    answer: "JPG, PNG, and WEBP are supported. Conversion between formats is available too.",
+  },
+  {
+    question: "How small can my files go?",
+    answer:
+      "You can reduce 50-95% depending on quality settings, with instant previews before you download.",
+  },
+  {
+    question: "Does resizing distort my images?",
+    answer: "Use the maintain ratio toggle or set explicit pixels to keep proportions intact.",
+  },
+  {
+    question: "Why should I compress before publishing?",
+    answer:
+      "Optimized assets boost Core Web Vitals (LCP, CLS, INP), speed up mobile experiences, and improve SEO.",
+  },
+];
+
+const trustItems = [
+  { title: "100% Local", copy: "No images leave your browser." },
+  { title: "Lightning Fast", copy: "Instant previews + progress indicators." },
+  { title: "Transparent", copy: "View original vs compressed size before download." },
+  { title: "Always Free", copy: "No subscriptions, forever available." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqList.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 export default function Home() {
   return (
-    <div style={{ background: "#f5f7fb" }}>
-      
-      {/* HERO SECTION */}
-      <section
-        style={{
-          padding: "100px 20px",
-          textAlign: "center",
-          maxWidth: 1000,
-          margin: "0 auto",
-        }}
-      >
-        <h1 style={{ fontSize: 48, marginBottom: 20 }}>
-          Reduce Image Size Online Free – Compress JPG, PNG & WEBP Instantly
-        </h1>
+    <>
+      <Script id="landing-faq" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(faqSchema)}
+      </Script>
 
-
-        <p style={{ fontSize: 18, color: "#555", marginBottom: 40 }}>
-          Compress JPG, PNG and WEBP images directly in your browser.
-          No upload required. 100% secure and free.
-        </p>
-
-        <a
-          href="/reduce-image-size"
-          style={{
-            background: "#1a73e8",
-            color: "white",
-            padding: "16px 40px",
-            borderRadius: 12,
-            textDecoration: "none",
-            fontSize: 18,
-            fontWeight: 600,
-          }}
-        >
-          Start Compressing
-        </a>
-      </section>
-
-      {/* TRUST SECTION */}
-      <section
-        style={{
-          background: "white",
-          padding: "60px 20px",
-          textAlign: "center",
-        }}
-      >
-        <h2 style={{ marginBottom: 40 }}>
-          Why Choose Our Image Compressor?
-        </h2>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: 40,
-            maxWidth: 1000,
-            margin: "0 auto",
-          }}
-        >
-          <div>
-            <h3>⚡ Fast Processing</h3>
-            <p>Images are compressed instantly inside your browser.</p>
-          </div>
-
-          <div>
-            <h3>🔒 100% Secure</h3>
-            <p>No image is uploaded to any server. Everything stays on your device.</p>
-          </div>
-
-          <div>
-            <h3>📦 Bulk Compression</h3>
-            <p>Upload single or multiple images and download them instantly.</p>
-          </div>
-
-          <div>
-            <h3>🎯 Format Support</h3>
-            <p>Supports JPG, PNG, and WEBP conversion with resize options.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section
-        style={{
-          padding: "80px 20px",
-          maxWidth: 1000,
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
-        <h2 style={{ marginBottom: 50 }}>How It Works</h2>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: 40,
-          }}
-        >
-          <div>
-            <h3>1️⃣ Upload Images</h3>
-            <p>Select single or multiple images from your device.</p>
-          </div>
-
-          <div>
-            <h3>2️⃣ Adjust Settings</h3>
-            <p>Choose quality, resize dimensions and output format.</p>
-          </div>
-
-          <div>
-            <h3>3️⃣ Download</h3>
-            <p>Download compressed images individually or as ZIP.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* SEO CONTENT SECTION */}
-     <section style={{ maxWidth: 900, margin: "60px auto", lineHeight: 1.8 }}>
-<h2 style={{ fontSize: 32, marginBottom: 20 }}>
-  Reduce Image Size Online Without Losing Quality
-</h2>
-
-<p style={{ color: "#475569", fontSize: 18 }}>
-  Looking to <strong>reduce image size online</strong> quickly and securely?
-  Our free image compressor helps you reduce image size in KB or MB
-  without sacrificing visual quality. Perfect for websites, blogs,
-  eCommerce stores, and social media uploads.
-</p>
-
-<p style={{ color: "#475569", fontSize: 18, marginTop: 20 }}>
-  Large image files slow down your website and hurt SEO rankings.
-  By compressing images, you improve page speed, Core Web Vitals,
-  and overall user experience.
-</p>
-   <p style={{ marginTop: 20 }}>
-  Want detailed guidance? Read our complete guide on{" "}
-  <a href="/blog/how-to-reduce-image-size" style={{ color: "#1a73e8" }}>
-    how to reduce image size properly
-  </a>.
-</p>
-
-
-  <h3 style={{ marginTop: 40, fontSize: 24 }}>
-    ✨ Key Features
-  </h3>
-
-  <ul style={{ marginTop: 20, color: "#334155", fontSize: 17 }}>
-    <li>✔ Reduce image size online instantly</li>
-    <li>✔ Upload single or multiple images</li>
-    <li>✔ Batch compression with ZIP download</li>
-    <li>✔ Resize width and height</li>
-    <li>✔ Maintain aspect ratio</li>
-    <li>✔ Convert formats (JPG, PNG, WEBP)</li>
-    <li>✔ Adjustable compression quality</li>
-    <li>✔ 100% browser-based – no server upload</li>
-    <li>✔ Free and unlimited usage</li>
-  </ul>
-
-  <h3 style={{ marginTop: 40, fontSize: 24 }}>
-    🚀 How It Works
-  </h3>
-
-  <ol style={{ marginTop: 20, color: "#334155", fontSize: 17 }}>
-    <li>1️⃣ Click on the upload box and select single or multiple images.</li>
-    <li>2️⃣ Adjust quality, resize dimensions, or choose output format.</li>
-    <li>3️⃣ Click "Compress Images".</li>
-    <li>4️⃣ Download your optimized image or ZIP file instantly.</li>
-  </ol>
-</section>
-
-
-      {/* CTA SECTION */}
-      <section style={{ maxWidth: 900, margin: "60px auto", lineHeight: 1.8 }}>
-  <h2>Frequently Asked Questions</h2>
-
-  <h3>Can I reduce image size without losing quality?</h3>
-  <p>
-    Yes. Our compression algorithm maintains high visual quality while reducing file size significantly.
-  </p>
-
-  <h3>How do I reduce image size in KB?</h3>
-  <p>
-    Adjust the compression quality and resize dimensions to achieve the desired KB size.
-  </p>
-
-  <h3>Is this image compressor secure?</h3>
-  <p>
-    Yes. All processing happens inside your browser. No images are uploaded to any server.
-  </p>
-</section>
-
-      <section
-        style={{
-          padding: "80px 20px",
-          textAlign: "center",
-        }}
-      >
-        <h2 style={{ marginBottom: 30 }}>
-          Ready to Reduce Your Image Size?
-        </h2>
-
-        <a
-          href="/reduce-image-size"
-          style={{
-            background: "#1a73e8",
-            color: "white",
-            padding: "16px 40px",
-            borderRadius: 12,
-            textDecoration: "none",
-            fontSize: 18,
-            fontWeight: 600,
-          }}
-        >
-          Open Image Compressor
-        </a>
-      </section>
-
-      {/* FOOTER */}
-      <footer
-        style={{
-          background: "#1a73e8",
-          color: "white",
-          textAlign: "center",
-          padding: "30px 20px",
-        }}
-      >
-        © {new Date().getFullYear()} ReduceImageSize. All rights reserved.
-      </footer>
-    </div>
+      <main className="landing">
+        <LandingSections
+          heroStats={heroStats}
+          features={features}
+          stats={stats}
+          steps={steps}
+          useCases={useCases}
+          seoHighlights={seoHighlights}
+          faqList={faqList}
+          trustItems={trustItems}
+        />
+      </main>
+    </>
   );
 }

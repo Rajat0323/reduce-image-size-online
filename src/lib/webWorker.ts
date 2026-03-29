@@ -4,6 +4,10 @@ self.onmessage = async (e) => {
   const bitmap = await createImageBitmap(file);
   const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
   const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    self.postMessage({ success: false, error: "Canvas context not available" });
+    return;
+  }
 
   ctx.drawImage(bitmap, 0, 0);
 

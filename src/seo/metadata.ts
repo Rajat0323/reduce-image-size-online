@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     title: "Reduce Image Size Online Free",
     description:
       "Free online tool to reduce image size in KB or MB. Batch compress images without losing quality.",
-    url: "https://yourdomain.com",
-    siteName: "ReduceImageSize",
+    url: "https://www.reduceimagesizeonline.com",
+    siteName: "Reduce Image Size Online",
     type: "website",
   },
   twitter: {
