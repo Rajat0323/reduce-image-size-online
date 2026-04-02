@@ -1,197 +1,87 @@
-﻿import Script from "next/script";
+import Link from "next/link";
+import Script from "next/script";
 import type { Metadata } from "next";
 
 import "../styles/landing.css";
-import LandingSections from "../components/LandingSections";
-
-const siteUrl = "https://www.reduceimagesizeonline.com";
+import AdSlot from "@/components/AdSlot";
+import { homeTools } from "@/lib/toolCatalog";
 
 export const metadata: Metadata = {
+  title: "Image Compressor to 20KB Online India | ReduceImageSize",
+  description:
+    "Use an image compressor to 20KB online for India-focused forms, KYC, passport photos, and mobile uploads, plus resize, convert, and optimize images.",
   alternates: {
     canonical: "/",
   },
-  title: "Reduce Image Size Online Free | Fast JPG, PNG, WEBP Compressor",
-  description:
-    "Reduce image size online instantly and securely. Compress JPG, PNG, and WEBP files without uploads, then download optimized results individually or as a ZIP.",
-  keywords: [
-    "reduce image size",
-    "compress image online",
-    "image compressor free",
-    "reduce image size in kb",
-    "reduce image size in mb",
-    "compress jpg online",
-    "compress png online",
-    "compress webp",
-    "image optimization",
-    "core web vitals",
-  ],
   openGraph: {
-    title: "Reduce Image Size Online Free | No Upload Image Compressor",
+    title: "Image Compressor to 20KB Online India | ReduceImageSize",
     description:
-      "Shrink JPG, PNG, and WEBP files while you stay on-device. Batch, quality, and format controls built for fast websites.",
-    url: siteUrl,
-    siteName: "ReduceImageSizeOnline",
-    images: [
-      {
-        url: `${siteUrl}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Reduce Image Size Online",
-      },
-    ],
+      "Compress images to 20KB online for Indian forms, exam portals, KYC uploads, and mobile-friendly image workflows.",
+    url: "https://www.reduceimagesizeonline.com/",
+    siteName: "ReduceImageSize",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reduce Image Size Online Free",
+    title: "Image Compressor to 20KB Online India | ReduceImageSize",
     description:
-      "Compress images directly in the browser. Zero uploads, instant downloads, no limits.",
-    images: [`${siteUrl}/og-image.png`],
-  },
-  robots: {
-    index: true,
-    follow: true,
+      "Compress, resize, and convert images with exact-KB workflows for Indian uploads and fast web publishing.",
   },
 };
 
-const heroStats = [
-  { value: "12M+", label: "Images compressed" },
-  { value: "1.6s", label: "Avg. LCP after compression" },
-  { value: "100%", label: "Browser-based security" },
-];
-
-const features = [
+const benefits = [
   {
-    icon: "⚡",
-    title: "Zero-upload compression",
-    description: "All encoding happens in your browser. Files never leave your device, so privacy stays intact.",
+    title: "Free to use",
+    description: "Use the image tools without sign-up friction or gated workflows.",
   },
   {
-    icon: "🗂️",
-    title: "Batch-ready workflows",
-    description: "Compress unlimited files, then download individuals or a single ZIP with smart filenames.",
+    title: "No sign-up required",
+    description: "Open a tool, drop an image, and get to work immediately.",
   },
   {
-    icon: "🎯",
-    title: "Quality & format control",
-    description:
-      "Slider + presets let you dial-in JPEG, PNG, or WEBP outputs without guessing. Preview savings instantly.",
+    title: "Fast browser processing",
+    description: "Most tools run directly in the browser for quick results and lighter infrastructure.",
   },
   {
-    icon: "🧮",
-    title: "Adaptive resizing",
-    description: "Target exact width/height or let the compressor maintain ratios for responsive-ready visuals.",
-  },
-  {
-    icon: "🔒",
-    title: "Speed & reliability",
-    description: "Lightweight code, service-worker friendly, and built for consistent Core Web Vitals wins.",
+    title: "Secure files",
+    description: "Images stay local while you compress, resize, convert, crop, and enhance them.",
   },
 ];
 
-const stats = [
-  { value: "99.98%", label: "Uptime" },
-  { value: "3×", label: "Faster load times" },
-  { value: "0ms", label: "Server uploads" },
-  { value: "5MB", label: "Max browser support" },
-];
-
-const steps = [
+const indiaUseCases = [
   {
-    title: "Upload",
-    description: "Drag, paste, or pick images from your device. JPG, PNG, WEBP and mixed sets are welcome.",
+    title: "Government forms and exam portals",
+    description: "Target exact KB sizes for applications, hall tickets, and portal photo uploads.",
   },
   {
-    title: "Tune",
-    description:
-      "Choose slider presets, adjust width / height, lock aspect ratio, and pick your preferred format.",
+    title: "KYC and mobile document uploads",
+    description: "Prepare lighter images that upload faster on mobile data and lower-bandwidth connections.",
   },
   {
-    title: "Download",
-    description: "Save optimized files individually or grab a ZIP bundle for the whole batch.",
+    title: "Passport photos and job applications",
+    description: "Resize and compress profile images while keeping the subject clear and readable.",
   },
 ];
 
-const useCases = [
+const homeFaq = [
   {
-    icon: "🌐",
-    title: "Websites & Landing Pages",
-    description: "Improve First Contentful Paint and Lighthouse scores with lighter hero images.",
+    question: "What tools are available in ReduceImageSize?",
+    answer: "ReduceImageSize includes image compressor, resizer, converter, crop, bulk compression, rotate and flip, background remover, and image upscaler pages.",
   },
   {
-    icon: "🛒",
-    title: "eCommerce",
-    description: "Shrink product galleries without sacrificing detail so shoppers stay engaged.",
+    question: "Can I compress image files to 50KB, 100KB, or 200KB?",
+    answer: "Yes. The hub includes dedicated SEO-friendly pages and presets for common exact-KB image targets.",
   },
   {
-    icon: "📱",
-    title: "Social & Marketing",
-    description: "Pre-compress before uploads to keep campaigns fast and predictable.",
+    question: "Does ReduceImageSize store uploaded files?",
+    answer: "No. The tools are designed around browser-based processing and do not store images on a server.",
   },
-  {
-    icon: "📧",
-    title: "Email & Presentations",
-    description: "Deliver smaller attachments and slides that load instantly on any device.",
-  },
-  {
-    icon: "☁️",
-    title: "Cloud Storage",
-    description: "Free up precious Drive, Dropbox, and S3 storage without re-working files.",
-  },
-  {
-    icon: "👩‍💻",
-    title: "Agencies & Teams",
-    description: "Share the link, compress together, and handoff assets without extra tooling.",
-  },
-];
-
-const seoHighlights = [
-  "Reduce image size in KB or MB without losing detail.",
-  "Support for JPG, PNG, WEBP with format switching.",
-  "Batch compression and ZIP download to ship entire collections.",
-  "All processing stays in your browser — no servers, no queues.",
-];
-
-const faqList = [
-  {
-    question: "Can I compress multiple images at once?",
-    answer: "Yes — upload unlimited files, compress them, and download individually or as a ZIP.",
-  },
-  {
-    question: "Is my data secure during compression?",
-    answer: "Absolutely. Everything runs inside your browser pixel for pixel. Nothing is uploaded.",
-  },
-  {
-    question: "What formats can I reduce?",
-    answer: "JPG, PNG, and WEBP are supported. Conversion between formats is available too.",
-  },
-  {
-    question: "How small can my files go?",
-    answer:
-      "You can reduce 50-95% depending on quality settings, with instant previews before you download.",
-  },
-  {
-    question: "Does resizing distort my images?",
-    answer: "Use the maintain ratio toggle or set explicit pixels to keep proportions intact.",
-  },
-  {
-    question: "Why should I compress before publishing?",
-    answer:
-      "Optimized assets boost Core Web Vitals (LCP, CLS, INP), speed up mobile experiences, and improve SEO.",
-  },
-];
-
-const trustItems = [
-  { title: "100% Local", copy: "No images leave your browser." },
-  { title: "Lightning Fast", copy: "Instant previews + progress indicators." },
-  { title: "Transparent", copy: "View original vs compressed size before download." },
-  { title: "Always Free", copy: "No subscriptions, forever available." },
 ];
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: faqList.map((faq) => ({
+  mainEntity: homeFaq.map((faq) => ({
     "@type": "Question",
     name: faq.question,
     acceptedAnswer: {
@@ -201,24 +91,178 @@ const faqSchema = {
   })),
 };
 
+const imageTools = homeTools.filter((tool) => tool.category === "image");
+const aiTools = homeTools.filter((tool) => tool.category === "ai");
+
+function iconForTool(slug: string) {
+  switch (slug) {
+    case "image-compressor":
+      return "CP";
+    case "image-resizer":
+      return "RS";
+    case "image-converter":
+      return "CV";
+    case "crop-image":
+      return "CR";
+    case "bulk-image-compressor":
+      return "BK";
+    case "rotate-flip-image":
+      return "RF";
+    case "background-remover":
+      return "BG";
+    case "image-upscaler":
+      return "UP";
+    default:
+      return "IM";
+  }
+}
+
 export default function Home() {
   return (
     <>
-      <Script id="landing-faq" type="application/ld+json" strategy="afterInteractive">
+      <Script id="home-faq" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(faqSchema)}
       </Script>
 
-      <main className="landing">
-        <LandingSections
-          heroStats={heroStats}
-          features={features}
-          stats={stats}
-          steps={steps}
-          useCases={useCases}
-          seoHighlights={seoHighlights}
-          faqList={faqList}
-          trustItems={trustItems}
-        />
+      <main className="landing hub-page">
+        <section className="hero">
+          <div className="hero-inner section-content">
+            <span className="badge-pill">ReduceImageSize tool hub</span>
+            <h1 className="hero-title">Image Compressor to 20KB Online for India - Free and Fast</h1>
+            <p className="hero-subtitle">
+              Use one professional image platform for Indian form uploads, KYC photos, passport
+              images, website optimization, and everyday compression, resizing, conversion,
+              cropping, background removal, and upscaling.
+            </p>
+            <div className="hero-cta">
+              <Link href="/compress-image-to-20kb" className="btn btn-primary">
+                Compress to 20KB
+              </Link>
+              <Link href="/image-resizer" className="btn btn-ghost">
+                Try Image Resizer
+              </Link>
+            </div>
+          </div>
+          <div className="hero-illustration" aria-hidden="true" />
+        </section>
+
+        <section className="section section-alt ad-band">
+          <div className="section-content">
+            <AdSlot label="Top banner ad slot" compact />
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="section-content">
+            <p className="section-heading">Image Tools</p>
+            <div className="hub-grid">
+              {imageTools.map((tool) => (
+                <Link key={tool.slug} href={`/${tool.slug}`} className="hub-card">
+                  <span className="hub-card-icon">{iconForTool(tool.slug)}</span>
+                  <div>
+                    <h3>{tool.name}</h3>
+                    <p>{tool.description}</p>
+                  </div>
+                  <span className="hub-card-footer">Open tool</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section section-alt ad-band">
+          <div className="section-content">
+            <AdSlot label="Mid-page ad slot" compact />
+          </div>
+        </section>
+
+        <section className="section section-alt">
+          <div className="section-content">
+            <p className="section-heading">Background Remover and AI Tools</p>
+            <div className="hub-grid">
+              {aiTools.map((tool) => (
+                <Link key={tool.slug} href={`/${tool.slug}`} className="hub-card">
+                  <span className="hub-card-icon">{iconForTool(tool.slug)}</span>
+                  <div>
+                    <h3>{tool.name}</h3>
+                    <p>{tool.description}</p>
+                  </div>
+                  <span className="hub-card-footer">Open AI tool</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="section-content">
+            <p className="section-heading">Benefits</p>
+            <div className="hub-benefit-grid">
+              {benefits.map((benefit) => (
+                <article key={benefit.title} className="hub-benefit-card">
+                  <h3>{benefit.title}</h3>
+                  <p>{benefit.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section section-alt">
+          <div className="section-content">
+            <p className="section-heading">Built for real India upload workflows</p>
+            <div className="hub-benefit-grid">
+              {indiaUseCases.map((item) => (
+                <article key={item.title} className="hub-benefit-card reveal-fade">
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section section-alt">
+          <div className="section-content">
+            <p className="section-heading">Popular exact-size pages</p>
+            <div className="intent-link-grid">
+              <Link href="/compress-image-to-20kb" className="intent-link-card">
+                <strong>Compress image to 20KB</strong>
+                <span>Helpful for signatures, IDs, and strict upload limits</span>
+              </Link>
+              <Link href="/compress-image-to-30kb" className="intent-link-card">
+                <strong>Compress image to 30KB</strong>
+                <span>Useful for compact profile photos and portal uploads</span>
+              </Link>
+              <Link href="/compress-image-to-50kb" className="intent-link-card">
+                <strong>Compress image to 50KB</strong>
+                <span>For forms, profile photos, and compact uploads</span>
+              </Link>
+              <Link href="/compress-image-to-100kb" className="intent-link-card">
+                <strong>Compress image to 100KB</strong>
+                <span>Great for avatars, portals, and lightweight images</span>
+              </Link>
+              <Link href="/compress-image-to-200kb" className="intent-link-card">
+                <strong>Compress image to 200KB</strong>
+                <span>Useful for blogs, stores, and web publishing</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="section-content">
+            <p className="section-heading">Frequently asked questions</p>
+            <div className="grid faq-grid">
+              {homeFaq.map((faq) => (
+                <article key={faq.question} className="faq-card">
+                  <h3>{faq.question}</h3>
+                  <p>{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );

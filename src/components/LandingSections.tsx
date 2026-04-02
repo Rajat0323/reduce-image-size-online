@@ -80,7 +80,7 @@ export default function LandingSections({
           </p>
 
           <div className="hero-cta">
-            <Link href="/reduce-image-size" className="btn btn-primary">
+            <Link href="/image-compressor" className="btn btn-primary">
               Launch Compressor
             </Link>
             <Link href="/blog" className="btn btn-ghost">
@@ -255,7 +255,7 @@ export default function LandingSections({
             ))}
           </div>
           <div className="hero-cta" style={{ marginTop: 32 }}>
-            <Link href="/reduce-image-size" className="btn btn-primary">
+            <Link href="/image-compressor" className="btn btn-primary">
               Launch Compressor
             </Link>
             <Link href="/blog/how-to-reduce-image-size" className="btn btn-ghost">

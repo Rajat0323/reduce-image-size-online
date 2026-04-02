@@ -83,6 +83,30 @@
   margin-bottom: 24px;
 }
 
+.target-size-section {
+  margin-bottom: 28px;
+}
+
+.target-size-section label {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.target-size-section input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5f5;
+  background: #f8fafc;
+}
+
+.control-helper {
+  margin-top: 10px;
+  color: #475569;
+  font-size: 0.92rem;
+}
+
 .quality-presets {
   display: flex;
   gap: 12px;
@@ -275,6 +299,14 @@ input[type="range"] {
 .stat-pill span {
   color: #475569;
   font-size: 0.9rem;
+}
+
+.target-success {
+  color: #047857;
+}
+
+.target-note {
+  color: #0f172a;
 }
 
 @media (max-width: 768px) {

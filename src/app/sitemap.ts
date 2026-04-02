@@ -1,22 +1,20 @@
 import { MetadataRoute } from "next";
-import fs from "fs";
-import path from "path";
+import { getAllPosts } from "@/lib/blog";
+import { intentPages } from "@/lib/intentPages";
+import { toolPages } from "@/lib/toolCatalog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.reduceimagesizeonline.com";
-
-  const blogDir = path.join(process.cwd(), "src/content/blog");
-
-  const blogFiles = fs.readdirSync(blogDir);
-
-  const blogSlugs = blogFiles.map((file) =>
-    file.replace(".md", "")
-  );
+  const blogSlugs = getAllPosts().map((post) => post.slug);
 
   const staticPages = [
     "",
-    "/reduce-image-size",
+    "/image-compressor",
     "/blog",
+    "/about",
+    "/contact",
+    "/privacy-policy",
+    "/terms",
   ];
 
   return [
@@ -32,6 +30,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.7,
+    })),
+
+    ...[...intentPages, ...toolPages].map((page) => ({
+      url: `${baseUrl}/${page.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.75,
     })),
   ];
 }

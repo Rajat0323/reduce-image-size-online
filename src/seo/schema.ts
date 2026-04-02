@@ -1,23 +1,46 @@
+const siteUrl = "https://www.reduceimagesizeonline.com";
+
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "ReduceImageSize",
+  url: siteUrl,
+  inLanguage: "en-IN",
+};
+
+export const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "ReduceImageSize",
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo.svg`,
+  sameAs: [],
+};
+
 export const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Reduce Image Size Online",
+  name: "ReduceImageSize",
   applicationCategory: "MultimediaApplication",
   operatingSystem: "Web Browser",
   description:
-    "Reduce image size online for free. Compress JPG, PNG, and WEBP images in KB or MB without losing quality.",
+    "ReduceImageSize is an India-focused image tool hub for compression, resizing, conversion, cropping, rotate and flip edits, background removal, and image upscaling.",
   offers: {
     "@type": "Offer",
     price: "0",
     priceCurrency: "USD",
   },
   featureList: [
-    "Reduce image size online",
-    "Batch image compression",
-    "Resize width and height",
-    "Maintain aspect ratio",
-    "Convert JPG, PNG, WEBP",
+    "Compress JPG, PNG, and WEBP images",
+    "Resize by dimensions, percentage, and presets",
+    "Convert between JPG, PNG, and WebP",
+    "Crop image with aspect presets",
+    "Bulk image compression",
+    "Rotate and flip image",
+    "Background remover",
+    "Image upscaler",
     "Download single image or ZIP file",
-    "Browser-based compression",
+    "Browser-based processing",
+    "Image compressor to 20KB online",
   ],
 };

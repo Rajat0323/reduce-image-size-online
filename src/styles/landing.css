@@ -19,6 +19,14 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #d4d4fc;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+}
+
+[data-theme="light"] .badge-pill {
+  color: #4338ca;
+  border-color: rgba(67, 56, 202, 0.2);
+  background: rgba(255, 255, 255, 0.72);
 }
 
 .use-cases-grid {
@@ -89,6 +97,7 @@
   background: radial-gradient(circle, rgba(86, 169, 255, 0.5), transparent 70%);
   border-radius: 50%;
   filter: blur(0);
+  animation: floatOrb 7s ease-in-out infinite;
 }
 
 .gradient-pill {
@@ -120,6 +129,76 @@
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 6px;
   font-size: 0.95rem;
+}
+
+.intent-link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.intent-link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    background 0.28s ease;
+}
+
+.intent-link-card:hover,
+.intent-link-card:focus-visible,
+.use-case-card:hover,
+.trust-card:hover,
+.hub-card:hover,
+.hub-benefit-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--color-accent) 42%, var(--color-border));
+}
+
+.intent-link-card strong {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.intent-link-card span {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.92rem;
+}
+
+[data-theme="light"] .use-case-card,
+[data-theme="light"] .trust-card,
+[data-theme="light"] .seo-block,
+[data-theme="light"] .intent-link-card {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .intent-link-card strong,
+[data-theme="light"] .footer-grid h4 {
+  color: var(--color-text);
+}
+
+[data-theme="light"] .intent-link-card span,
+[data-theme="light"] .seo-block p,
+[data-theme="light"] .footer-grid a {
+  color: var(--color-subtle);
+}
+
+@keyframes floatOrb {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-18px, -12px, 0) scale(1.05);
+  }
 }
 
 @media (max-width: 768px) {

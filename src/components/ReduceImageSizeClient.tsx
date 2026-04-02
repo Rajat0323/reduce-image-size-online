@@ -1,8 +1,9 @@
 ﻿"use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import JSZip from "jszip";
 import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 
 import "../styles/tool.css";
 
@@ -13,6 +14,11 @@ type ImgType = {
   compressedUrl?: string;
   originalSize: number;
   compressedSize?: number;
+  targetSizeKB?: number;
+  targetReached?: boolean;
+  outputWidth?: number;
+  outputHeight?: number;
+  qualityUsed?: number;
 };
 
 const qualityPresets = [
@@ -21,13 +27,18 @@ const qualityPresets = [
   { label: "High (95%)", value: 0.95 },
 ];
 
+const targetPresets = [20, 50, 100, 200];
+const allowedFormats = ["image/jpeg", "image/png", "image/webp"];
+
 export default function ReduceImageSizeClient() {
+  const searchParams = useSearchParams();
   const inputRef = useRef<HTMLInputElement>(null);
   const downloadRef = useRef<HTMLButtonElement>(null);
 
   const [images, setImages] = useState<ImgType[]>([]);
   const [quality, setQuality] = useState(0.8);
   const [format, setFormat] = useState("image/jpeg");
+  const [targetSizeKB, setTargetSizeKB] = useState<number | "">("");
   const [width, setWidth] = useState<number | "">("");
   const [height, setHeight] = useState<number | "">("");
   const [maintainRatio, setMaintainRatio] = useState(true);
@@ -35,6 +46,23 @@ export default function ReduceImageSizeClient() {
   const [error, setError] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
   const [comparisonSliders, setComparisonSliders] = useState<Record<number, number>>({});
+
+  useEffect(() => {
+    const target = searchParams.get("target");
+    const formatParam = searchParams.get("format");
+
+    if (target) {
+      const parsedTarget = Number(target);
+
+      if (Number.isFinite(parsedTarget) && parsedTarget > 0) {
+        setTargetSizeKB(parsedTarget);
+      }
+    }
+
+    if (formatParam && allowedFormats.includes(formatParam)) {
+      setFormat(formatParam);
+    }
+  }, [searchParams]);
 
   function openPicker() {
     inputRef.current?.click();
@@ -52,6 +80,11 @@ export default function ReduceImageSizeClient() {
   }
 
   async function compressImages() {
+    if (images.length === 0) {
+      setError("Upload at least one image to start compression.");
+      return;
+    }
+
     setProcessing(true);
     setError("");
     setProgress(0);
@@ -85,6 +118,7 @@ export default function ReduceImageSizeClient() {
             width,
             height,
             maintainRatio,
+            targetSizeKB: targetSizeKB || null,
           });
         });
 
@@ -94,6 +128,11 @@ export default function ReduceImageSizeClient() {
             compressedBlob: result.blob,
             compressedUrl: URL.createObjectURL(result.blob),
             compressedSize: result.size,
+            targetSizeKB: result.targetSizeKB || undefined,
+            targetReached: result.targetReached,
+            outputWidth: result.width,
+            outputHeight: result.height,
+            qualityUsed: result.qualityUsed,
           });
         } else {
           setError(
@@ -121,10 +160,28 @@ export default function ReduceImageSizeClient() {
     }, 300);
   }
 
+  function formatSize(bytes: number) {
+    return `${(bytes / 1024).toFixed(1)} KB`;
+  }
+
   function getExtension(type: string) {
     if (type === "image/png") return "png";
     if (type === "image/webp") return "webp";
     return "jpg";
+  }
+
+  function getTargetMessage(img: ImgType) {
+    if (!img.targetSizeKB || !img.compressedSize) {
+      return null;
+    }
+
+    const diff = Math.abs(img.compressedSize / 1024 - img.targetSizeKB);
+
+    if (img.targetReached) {
+      return `Target met: ${img.targetSizeKB} KB or smaller`;
+    }
+
+    return `Closest result: ${formatSize(img.compressedSize)} (${diff.toFixed(1)} KB away from ${img.targetSizeKB} KB)`;
   }
 
   async function downloadHandler() {
@@ -168,7 +225,10 @@ export default function ReduceImageSizeClient() {
     <div className="tool-root">
       <section className="tool-hero" id="tool">
         <h1>Online Image Compressor</h1>
-        <p>Compress JPG, PNG & WEBP instantly. Free, secure, no upload needed.</p>
+        <p>
+          Compress JPG, PNG and WEBP instantly. Target 20KB, 50KB, 100KB or 200KB
+          without uploading your files.
+        </p>
       </section>
 
       <div className="tool-wrapper">
@@ -198,7 +258,39 @@ export default function ReduceImageSizeClient() {
           {images.length > 0 && (
             <>
               <div className="tool-card">
-                <h3>Choose size & format</h3>
+                <h3>Choose size and format</h3>
+
+                <div className="target-size-section">
+                  <label htmlFor="target-size">Target file size in KB (optional)</label>
+                  <div className="quality-presets">
+                    {targetPresets.map((preset) => (
+                      <button
+                        key={preset}
+                        type="button"
+                        className={`preset-button ${targetSizeKB === preset ? "active" : ""}`}
+                        onClick={() =>
+                          setTargetSizeKB((current) => (current === preset ? "" : preset))
+                        }
+                      >
+                        {preset} KB
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    id="target-size"
+                    type="number"
+                    min="1"
+                    placeholder="Enter target size in KB"
+                    value={targetSizeKB}
+                    onChange={(e) =>
+                      setTargetSizeKB(e.target.value ? Number(e.target.value) : "")
+                    }
+                  />
+                  <p className="control-helper">
+                    Exact-size targeting works best with JPG or WEBP. Leave it blank for
+                    manual quality-based compression.
+                  </p>
+                </div>
 
                 <div className="quality-presets">
                   {qualityPresets.map((preset) => (
@@ -213,7 +305,7 @@ export default function ReduceImageSizeClient() {
                   ))}
                 </div>
 
-                <label>Quality: {Math.round(quality * 100)}%</label>
+                <label>Quality ceiling: {Math.round(quality * 100)}%</label>
                 <input
                   type="range"
                   min="0.1"
@@ -337,14 +429,14 @@ export default function ReduceImageSizeClient() {
 
                     <div className="compression-stats">
                       <div className="stat-pill">
-                        <strong>{(img.originalSize / 1024).toFixed(1)} KB</strong>
+                        <strong>{formatSize(img.originalSize)}</strong>
                         <span>Original Size</span>
                       </div>
 
                       {img.compressedSize && (
                         <>
                           <div className="stat-pill" style={{ background: "#f0fdf4", borderColor: "#10b981" }}>
-                            <strong>{(img.compressedSize / 1024).toFixed(1)} KB</strong>
+                            <strong>{formatSize(img.compressedSize)}</strong>
                             <span>Compressed Size</span>
                           </div>
 
@@ -359,8 +451,21 @@ export default function ReduceImageSizeClient() {
                     </div>
 
                     <p className="footnote">
-                      {img.file.name} • {img.file.type || "image"}
+                      {img.file.name} | {img.file.type || "image"}
                     </p>
+                    {img.outputWidth && img.outputHeight && (
+                      <p className="footnote">
+                        Output: {img.outputWidth} x {img.outputHeight}px
+                        {img.qualityUsed
+                          ? ` at ${(img.qualityUsed * 100).toFixed(0)}% quality`
+                          : ""}
+                      </p>
+                    )}
+                    {getTargetMessage(img) && (
+                      <p className={`footnote ${img.targetReached ? "target-success" : "target-note"}`}>
+                        {getTargetMessage(img)}
+                      </p>
+                    )}
                   </motion.div>
                 ))}
               </div>

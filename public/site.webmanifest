@@ -1,0 +1,17 @@
+{
+  "name": "ReduceImageSize",
+  "short_name": "ReduceImageSize",
+  "description": "India-focused image tools for compression, conversion, resizing, and exact-KB uploads.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1222",
+  "theme_color": "#6d5efc",
+  "icons": [
+    {
+      "src": "/images/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

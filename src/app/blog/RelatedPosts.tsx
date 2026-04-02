@@ -1,32 +1,43 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 
-const baseUrl = "https://www.reduceimagesizeonline.com";
+import { getAllPosts } from "@/lib/blog";
 
 export default function RelatedPosts({ currentSlug }: { currentSlug: string }) {
-  const blogDir = path.join(process.cwd(), "src/content/blog");
-  const files = fs.readdirSync(blogDir);
+  const posts = getAllPosts()
+    .filter((post) => post.slug !== currentSlug)
+    .slice(0, 3);
 
-  const slugs = files
-    .map((file) => file.replace(".md", ""))
-    .filter((slug) => slug !== currentSlug)
-    .slice(0, 3); // show 3 related
-
-  if (slugs.length === 0) return null;
+  if (posts.length === 0) return null;
 
   return (
-    <div style={{ marginTop: 60 }}>
-      <h3>Related Articles</h3>
-      <ul>
-        {slugs.map((slug) => (
-          <li key={slug}>
-            <Link href={`/blog/${slug}`}>
-              {slug.replace(/-/g, " ")}
-            </Link>
-          </li>
+    <section className="blog-stack">
+      <div>
+        <p className="section-heading">Related articles</p>
+        <p className="section-subtitle">
+          Keep exploring exact-size workflows, quality tips, and practical image optimization
+          strategies.
+        </p>
+      </div>
+
+      <div className="blog-card-grid">
+        {posts.map((post) => (
+          <Link key={post.slug} href={`/blog/${post.slug}`} className="blog-card">
+            <span className="eyebrow-link">Related guide</span>
+            <h3>{post.title}</h3>
+            <p>{post.description}</p>
+            <div className="blog-card-footer">
+              <span>
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+              <span className="blog-card-cta">Read next</span>
+            </div>
+          </Link>
         ))}
-      </ul>
-    </div>
+      </div>
+    </section>
   );
 }

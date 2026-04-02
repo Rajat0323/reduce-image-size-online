@@ -16,6 +16,17 @@
   --radius-sm: 10px;
 }
 
+[data-theme="light"] {
+  --color-background: #eef3ff;
+  --color-surface: #ffffff;
+  --color-card: rgba(255, 255, 255, 0.9);
+  --color-border: rgba(15, 23, 42, 0.1);
+  --color-muted: rgba(15, 23, 42, 0.72);
+  --color-text: #0f172a;
+  --color-subtle: #475569;
+  --shadow-soft: 0 18px 40px rgba(148, 163, 184, 0.22);
+}
+
 *,
 *::before,
 *::after {
@@ -29,6 +40,7 @@ body {
   color: var(--color-text);
   min-height: 100vh;
   line-height: 1.6;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 main {
@@ -56,7 +68,7 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(2, 6, 23, 0.8);
+  background: color-mix(in srgb, var(--color-background) 82%, transparent);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -106,7 +118,7 @@ textarea {
 
 .nav-links a:hover,
 .nav-links a:focus-visible {
-  color: #ffffff;
+  color: var(--color-text);
 }
 
 .menu-toggle {
@@ -125,7 +137,11 @@ textarea {
   padding: 12px 28px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
   cursor: pointer;
 }
 
@@ -142,9 +158,9 @@ textarea {
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--color-card) 90%, transparent);
   color: var(--color-text);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--color-border);
 }
 
 .section {
@@ -187,6 +203,23 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition:
+    transform 0.32s ease,
+    box-shadow 0.32s ease,
+    border-color 0.32s ease;
+}
+
+.feature-card:hover,
+.feature-card:focus-within,
+.stat-card:hover,
+.stat-card:focus-within,
+.step-card:hover,
+.step-card:focus-within,
+.faq-card:hover,
+.faq-card:focus-within {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.26);
 }
 
 .feature-card h3,
@@ -195,14 +228,14 @@ textarea {
 .faq-card h3 {
   margin: 0 0 8px;
   font-size: 1.25rem;
-  color: #e2e8f0;
+  color: var(--color-text);
 }
 
 .feature-card p,
 .step-card p,
 .faq-card p {
   margin: 0;
-  color: #e2e8f0;
+  color: var(--color-subtle);
 }
 
 .feature-card .icon,
@@ -228,9 +261,10 @@ textarea {
 
 .hero {
   min-height: 520px;
-  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.25), transparent 40%),
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 45%),
-    linear-gradient(135deg, #0a0f1c 0%, #121a2e 100%);
+  background:
+    radial-gradient(circle at top right, rgba(99, 102, 241, 0.32), transparent 36%),
+    radial-gradient(circle at 12% 22%, rgba(56, 189, 248, 0.18), transparent 34%),
+    linear-gradient(135deg, #0a1020 0%, #16213d 52%, #191f52 100%);
   padding-top: 140px;
   position: relative;
   overflow: hidden;
@@ -243,6 +277,18 @@ textarea {
   background: radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent 50%);
   filter: blur(60px);
   opacity: 0.6;
+}
+
+[data-theme="light"] .hero {
+  background:
+    radial-gradient(circle at top right, rgba(99, 102, 241, 0.2), transparent 34%),
+    radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.16), transparent 30%),
+    linear-gradient(135deg, #f8fbff 0%, #edf4ff 46%, #e6edff 100%);
+}
+
+[data-theme="light"] .hero::after {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.12), transparent 54%);
+  opacity: 0.85;
 }
 
 .hero-inner {
@@ -285,6 +331,16 @@ textarea {
   border-radius: var(--radius-sm);
   padding: 16px;
   text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.hero-stat:hover {
+  transform: translateY(-4px);
 }
 
 .hero-stat strong {
@@ -302,9 +358,17 @@ textarea {
   background: #020617;
 }
 
+[data-theme="light"] .section-alt {
+  background: color-mix(in srgb, var(--color-background) 72%, #dbe7ff);
+}
+
 .trust-section {
   background: #0f172a;
   color: var(--color-subtle);
+}
+
+[data-theme="light"] .trust-section {
+  background: #e8efff;
 }
 
 .footer {
@@ -353,7 +417,7 @@ textarea {
 .nav-mobile {
   position: fixed;
   inset: 0;
-  background: rgba(2, 6, 23, 0.95);
+  background: color-mix(in srgb, var(--color-background) 92%, transparent);
   padding-top: 80px;
   padding-inline: 24px;
   display: flex;
@@ -364,8 +428,26 @@ textarea {
 }
 
 .nav-mobile a {
-  color: #f8fafc;
+  color: var(--color-text);
   font-size: 1.1rem;
+}
+
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: revealUp 0.7s ease forwards;
+}
+
+.reveal-fade:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.reveal-fade:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.reveal-fade:nth-child(4) {
+  animation-delay: 0.24s;
 }
 
 @keyframes fadeIn {
@@ -374,5 +456,34 @@ textarea {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal-fade {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }

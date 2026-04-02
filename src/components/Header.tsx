@@ -3,13 +3,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/reduce-image-size", label: "Compressor" },
+  { href: "/image-compressor", label: "Compressor" },
+  { href: "/image-resizer", label: "Resizer" },
+  { href: "/image-converter", label: "Converter" },
+  { href: "/background-remover", label: "Background Remover" },
   { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -19,10 +21,10 @@ export default function Header() {
     <header className="header">
       <div className="header-inner">
         <Link href="/" className="logo">
-          <Image src="/logo.png" alt="ReduceImageSize Logo" width={40} height={40} priority />
+          <Image src="/images/logo.svg" alt="ReduceImageSize Logo" width={40} height={40} priority />
           <span className="logo-title">
             ReduceImageSize
-            <small>Fast compressor</small>
+            <small>Image tool hub</small>
           </span>
         </Link>
 
@@ -32,8 +34,9 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
-          <Link href="/reduce-image-size" className="btn btn-ghost">
-            Open Compressor
+          <ThemeToggle />
+          <Link href="/image-compressor" className="btn btn-ghost">
+            Launch Tool
           </Link>
         </nav>
 
@@ -54,12 +57,13 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
+          <ThemeToggle />
           <Link
-            href="/reduce-image-size"
+            href="/image-compressor"
             className="btn btn-primary"
             onClick={() => setMenuOpen(false)}
           >
-            Compress Images
+            Launch Tool
           </Link>
         </div>
       )}

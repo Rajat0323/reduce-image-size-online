@@ -1,70 +1,165 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+import "../../styles/hub.css";
+import { getAllPosts } from "@/lib/blog";
+import { homeTools } from "@/lib/toolCatalog";
+
+export const metadata: Metadata = {
+  title: "Image Compression Blog India | ReduceImageSize",
+  description:
+    "Read practical image-compression guides for India-focused form uploads, KYC photos, website speed, and exact-KB image workflows.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Image Compression Blog India | ReduceImageSize",
+    description:
+      "Practical guides for image compressor to 20KB, exact-size uploads, format conversion, and faster web images.",
+    url: "https://www.reduceimagesizeonline.com/blog",
+    siteName: "ReduceImageSize",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Image Compression Blog India | ReduceImageSize",
+    description:
+      "Learn exact-KB compression, image conversion, and mobile-friendly upload workflows for India-focused use cases.",
+  },
+};
 
 export default function BlogPage() {
-  const blogDir = path.join(process.cwd(), "src/content/blog");
-
-  const files = fs
-    .readdirSync(blogDir)
-    .filter((file) => file.endsWith(".md"));
-
-  const blogs = files.map((file) => {
-    const slug = file.replace(".md", "");
-    return {
-      slug,
-      title: slug.replace(/-/g, " "),
-    };
-  });
+  const blogs = getAllPosts();
+  const [featuredPost, ...otherPosts] = blogs;
+  const featuredTools = homeTools.slice(0, 4);
+  const quickLinks = [
+    {
+      href: "/image-compressor",
+      title: "Open the main compressor",
+      copy: "Reduce JPG, PNG, and WebP images with before-and-after previews.",
+    },
+    {
+      href: "/compress-image-to-50kb",
+      title: "Compress image to 50KB",
+      copy: "Great for forms, applications, and profile uploads with size limits.",
+    },
+    {
+      href: "/compress-image-to-100kb",
+      title: "Compress image to 100KB",
+      copy: "Useful for web-ready profile photos, avatars, and lightweight assets.",
+    },
+  ];
 
   return (
-    <div style={{ background: "#f8fbff", minHeight: "100vh", padding: "80px 20px" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        
-        {/* Heading */}
-        <div style={{ textAlign: "center", marginBottom: 60 }}>
-          <h1 style={{ fontSize: 44, marginBottom: 15 }}>
-            Image Optimization Blog
-          </h1>
-          <p style={{ color: "#64748b", fontSize: 18 }}>
-            Learn how to reduce image size, improve performance and boost SEO.
-          </p>
-        </div>
-
-        {/* Blog Cards */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: 30,
-          }}
-        >
-          {blogs.map((blog) => (
-            <Link
-              key={blog.slug}
-              href={`/blog/${blog.slug}`}
-              style={{
-                background: "white",
-                padding: 30,
-                borderRadius: 18,
-                boxShadow: "0 10px 25px rgba(0,0,0,0.05)",
-                textDecoration: "none",
-                transition: "all 0.2s ease",
-                border: "1px solid #e2e8f0",
-              }}
-            >
-              <h2 style={{ fontSize: 22, color: "#1e3a8a", marginBottom: 12 }}>
-                {blog.title}
-              </h2>
-
-              <p style={{ color: "#475569", fontSize: 15 }}>
-                Click to read full article →
+    <main className="blog-shell landing">
+      <div className="section-content blog-stack">
+        {featuredPost && (
+          <section className="blog-hero-card reveal-fade">
+            <div className="blog-hero-copy">
+              <span className="eyebrow-link">Featured guide</span>
+              <h1 className="blog-title">Image Optimization Blog</h1>
+              <p className="blog-summary">
+                Learn how to compress, resize, convert, and prepare images for Indian government
+                forms, KYC uploads, passport photos, exams, mobile uploads, and fast websites.
               </p>
-            </Link>
-          ))}
-        </div>
+              <div className="blog-chip-row">
+                <span className="blog-chip">Exact-KB workflows</span>
+                <span className="blog-chip">Website performance</span>
+                <span className="blog-chip">Professional image editing</span>
+              </div>
+              <div className="article-actions">
+                <Link href={`/blog/${featuredPost.slug}`} className="btn btn-primary">
+                  Read featured article
+                </Link>
+                <Link href="/image-compressor" className="btn btn-ghost">
+                  Open compressor
+                </Link>
+              </div>
+            </div>
 
+            <Link href={`/blog/${featuredPost.slug}`} className="blog-card">
+              <span className="eyebrow-link">Editor&apos;s pick</span>
+              <h2>{featuredPost.title}</h2>
+              <p>{featuredPost.description}</p>
+              <div className="blog-card-footer">
+                <span>
+                  {new Date(featuredPost.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+                <span className="blog-card-cta">Read article</span>
+              </div>
+            </Link>
+          </section>
+        )}
+
+        <section className="blog-grid">
+          <div className="blog-stack">
+            <div>
+              <p className="section-heading">Latest image guides</p>
+              <p className="section-subtitle">
+                Every article is written to help visitors choose the right tool quickly and move
+                through exact-size uploads with fewer retries and more confidence about quality
+                limits.
+              </p>
+            </div>
+
+            <div className="blog-card-grid">
+              {otherPosts.map((blog) => (
+                <Link key={blog.slug} href={`/blog/${blog.slug}`} className="blog-card reveal-fade">
+                  <span className="eyebrow-link">Blog article</span>
+                  <h2>{blog.title}</h2>
+                  <p>{blog.description}</p>
+                  <div className="blog-card-footer">
+                    <span>
+                      {new Date(blog.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
+                    <span className="blog-card-cta">Read more</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <aside className="blog-sidebar">
+            <div className="blog-sidebar-card reveal-fade">
+              <h3>Popular tool paths</h3>
+              <p>Send readers directly into the most common workflows from the content hub.</p>
+              <ul className="blog-link-list">
+                {quickLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href}>
+                      <strong>{item.title}</strong>
+                      <span>{item.copy}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="blog-sidebar-card reveal-fade">
+              <h3>Browse top tools</h3>
+              <p>Move between content and tools without breaking the user journey.</p>
+              <ul className="blog-link-list">
+                {featuredTools.map((tool) => (
+                  <li key={tool.slug}>
+                    <Link href={`/${tool.slug}`}>
+                      <strong>{tool.name}</strong>
+                      <span>{tool.description}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }
