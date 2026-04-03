@@ -6,7 +6,8 @@ export type ToolMode =
   | "bulk-compressor"
   | "rotate-flip"
   | "background-remover"
-  | "upscaler";
+  | "upscaler"
+  | "ml-to-oz";
 
 export type ToolCategory = "image" | "ai";
 
@@ -18,6 +19,7 @@ export type ToolPage = {
   mode: ToolMode;
   title: string;
   description: string;
+  keywords?: string[];
   heroTitle: string;
   heroCopy: string;
   badge: string;
@@ -28,6 +30,49 @@ export type ToolPage = {
 };
 
 export const toolPages: ToolPage[] = [
+  {
+    slug: "ml-to-oz-calculator",
+    name: "ML to Oz Calculator",
+    shortName: "ML to Oz",
+    category: "image",
+    mode: "ml-to-oz",
+    title: "ML to Oz Calculator | Convert Milliliters to Ounces Free",
+    description:
+      "Use a free ml to oz calculator to convert milliliters to US fluid ounces instantly for recipes, bottles, drinks, and product measurements.",
+    keywords: [
+      "ml to oz",
+      "ml to oz calculator",
+      "convert ml to oz",
+      "100 ml to oz",
+      "500 ml to oz",
+      "milliliters to ounces",
+    ],
+    heroTitle: "ML to Oz Calculator",
+    heroCopy:
+      "Convert milliliters to ounces instantly with a fast US-focused calculator for recipes, bottles, drinks, and measurement charts.",
+    badge: "Calculator tool",
+    featureList: [
+      "US fluid ounce conversion",
+      "UK fluid ounce reference",
+      "Cups, tablespoons, and teaspoons included",
+      "Fast browser-based calculation",
+    ],
+    faqList: [
+      {
+        question: "How do I convert ml to oz?",
+        answer: "Multiply milliliters by 0.033814 to get US fluid ounces.",
+      },
+      {
+        question: "How many oz is 500 ml?",
+        answer: "500 ml is about 16.907 US fluid ounces.",
+      },
+      {
+        question: "Is this calculator free to use?",
+        answer: "Yes. The ml to oz calculator is free and works instantly in the browser.",
+      },
+    ],
+    homeFeatured: true,
+  },
   {
     slug: "compress-image-to-20kb",
     name: "Compress Image to 20KB",

@@ -25,6 +25,7 @@ export function generateMetadata({ params }: Props): Metadata {
     return {
       title: tool.title,
       description: tool.description,
+      keywords: tool.keywords,
       alternates: {
         canonical: `/${tool.slug}`,
       },

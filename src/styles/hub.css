@@ -752,6 +752,52 @@
   font-size: 1.2rem;
 }
 
+.calculator-result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.calculator-result-card {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 22px;
+}
+
+.calculator-result-card strong,
+.calculator-note strong {
+  display: block;
+  color: var(--color-text);
+}
+
+.calculator-result-card strong {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.1;
+  margin-top: 8px;
+}
+
+.calculator-result-card p,
+.calculator-note p {
+  margin: 10px 0 0;
+  color: var(--color-subtle);
+}
+
+.calculator-result-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.calculator-note {
+  margin-top: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
 .reactEasyCrop_Container {
   position: absolute;
   inset: 0;

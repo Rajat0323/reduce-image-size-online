@@ -11,6 +11,7 @@ const navItems = [
   { href: "/image-resizer", label: "Resizer" },
   { href: "/image-converter", label: "Converter" },
   { href: "/background-remover", label: "Background Remover" },
+  { href: "/ml-to-oz-calculator", label: "ML to Oz" },
   { href: "/blog", label: "Blog" },
 ];
 

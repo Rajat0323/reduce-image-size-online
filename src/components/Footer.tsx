@@ -6,6 +6,7 @@ const productLinks = [
   { href: "/image-converter", label: "Image Converter" },
   { href: "/crop-image", label: "Crop Image Tool" },
   { href: "/bulk-image-compressor", label: "Bulk Compressor" },
+  { href: "/ml-to-oz-calculator", label: "ML to Oz Calculator" },
 ];
 
 const popularLinks = [
@@ -14,6 +15,7 @@ const popularLinks = [
   { href: "/rotate-flip-image", label: "Rotate and Flip" },
   { href: "/background-remover", label: "Background Remover" },
   { href: "/image-upscaler", label: "Image Upscaler" },
+  { href: "/ml-to-oz-calculator", label: "ML to Oz Calculator" },
   { href: "/compress-image-to-50kb", label: "Compress to 50KB" },
   { href: "/compress-image-to-100kb", label: "Compress to 100KB" },
   { href: "/compress-image-to-200kb", label: "Compress to 200KB" },

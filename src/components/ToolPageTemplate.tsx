@@ -4,6 +4,7 @@ import { Suspense } from "react";
 
 import AdSlot from "@/components/AdSlot";
 import ImageToolWorkspace from "@/components/ImageToolWorkspace";
+import MlToOzPage from "@/components/MlToOzPage";
 import type { ToolPage } from "@/lib/toolCatalog";
 
 type ToolPageTemplateProps = {
@@ -18,12 +19,17 @@ const relatedLinks = [
   { href: "/bulk-image-compressor", label: "Bulk Image Compressor" },
   { href: "/background-remover", label: "Background Remover" },
   { href: "/image-upscaler", label: "Image Upscaler" },
+  { href: "/ml-to-oz-calculator", label: "ML to Oz Calculator" },
   { href: "/compress-image-to-20kb", label: "Compress Image to 20KB" },
   { href: "/compress-image-to-30kb", label: "Compress Image to 30KB" },
   { href: "/compress-image-to-50kb", label: "Compress Image to 50KB" },
 ];
 
 export default function ToolPageTemplate({ tool }: ToolPageTemplateProps) {
+  if (tool.mode === "ml-to-oz") {
+    return <MlToOzPage />;
+  }
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

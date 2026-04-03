@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | ReduceImageSize",
   },
   description:
-    "ReduceImageSize is an India-focused image tool hub to compress images to 20KB, resize, convert, crop, remove backgrounds, and optimize uploads online.",
+    "ReduceImageSize is an India-focused tool hub to compress images to 20KB, resize, convert, crop, remove backgrounds, optimize uploads online, and use an ml to oz calculator.",
   keywords: [
     "image compressor to 20kb",
     "compress image to 20kb online india",
@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     "compress image to 50kb",
     "compress image to 100kb",
     "compress image to 200kb",
+    "ml to oz",
   ],
   icons: {
     icon: [
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ReduceImageSize | Fast Image Tool Hub",
     description:
-      "Use a complete image tool hub to compress, resize, convert, crop, and enhance images online.",
+      "Use a complete tool hub to compress, resize, convert, crop, enhance images online, and convert ml to oz.",
     url: siteUrl,
     siteName: "ReduceImageSize",
     images: [
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ReduceImageSize | Fast Image Tool Hub",
-    description: "Compress, resize, convert, crop, and enhance images in your browser.",
+    description: "Compress, resize, convert, crop, enhance images, and convert ml to oz in your browser.",
     images: [`${siteUrl}/og-image.png`],
   },
 };

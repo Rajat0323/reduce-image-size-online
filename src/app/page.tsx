@@ -9,7 +9,7 @@ import { homeTools } from "@/lib/toolCatalog";
 export const metadata: Metadata = {
   title: "Image Compressor to 20KB Online India | ReduceImageSize",
   description:
-    "Use an image compressor to 20KB online for India-focused forms, KYC, passport photos, and mobile uploads, plus resize, convert, and optimize images.",
+    "Use an image compressor to 20KB online for India-focused forms, KYC, passport photos, and mobile uploads, plus resize, convert, optimize images, and use an ml to oz calculator.",
   alternates: {
     canonical: "/",
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Image Compressor to 20KB Online India | ReduceImageSize",
     description:
-      "Compress, resize, and convert images with exact-KB workflows for Indian uploads and fast web publishing.",
+      "Compress, resize, and convert images with exact-KB workflows for Indian uploads, plus an ml to oz calculator.",
   },
 };
 
@@ -66,7 +66,7 @@ const indiaUseCases = [
 const homeFaq = [
   {
     question: "What tools are available in ReduceImageSize?",
-    answer: "ReduceImageSize includes image compressor, resizer, converter, crop, bulk compression, rotate and flip, background remover, and image upscaler pages.",
+    answer: "ReduceImageSize includes image compressor, resizer, converter, crop, bulk compression, rotate and flip, background remover, image upscaler, and ml to oz calculator pages.",
   },
   {
     question: "Can I compress image files to 50KB, 100KB, or 200KB?",
@@ -112,6 +112,8 @@ function iconForTool(slug: string) {
       return "BG";
     case "image-upscaler":
       return "UP";
+    case "ml-to-oz-calculator":
+      return "OZ";
     default:
       return "IM";
   }
@@ -154,7 +156,7 @@ export default function Home() {
 
         <section className="section">
           <div className="section-content">
-            <p className="section-heading">Image Tools</p>
+            <p className="section-heading">Popular Tools</p>
             <div className="hub-grid">
               {imageTools.map((tool) => (
                 <Link key={tool.slug} href={`/${tool.slug}`} className="hub-card">
