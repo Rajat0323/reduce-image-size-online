@@ -1,3 +1,30 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms | ReduceImageSize",
+  description:
+    "Review the ReduceImageSize terms and conditions for using the site's browser-based tools and content.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    title: "Terms | ReduceImageSize",
+    description:
+      "Review the ReduceImageSize terms and conditions for using the site's browser-based tools and content.",
+    url: "https://www.reduceimagesizeonline.com/terms",
+    siteName: "ReduceImageSize",
+    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms | ReduceImageSize",
+    description:
+      "Review the ReduceImageSize terms and conditions for using the site's browser-based tools and content.",
+    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
+  },
+};
+
 export default function TermsPage() {
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", padding: "60px 20px" }}>

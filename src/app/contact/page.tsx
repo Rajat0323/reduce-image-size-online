@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Reduce Image Size Online",
+  title: "Contact ReduceImageSize",
   description:
-    "Contact Reduce Image Size Online for support, questions, or partnership inquiries.",
+    "Contact ReduceImageSize for support, questions, partnerships, or help with image tool workflows.",
   alternates: {
     canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact ReduceImageSize",
+    description:
+      "Contact ReduceImageSize for support, questions, partnerships, or help with image tool workflows.",
+    url: "https://www.reduceimagesizeonline.com/contact",
+    siteName: "ReduceImageSize",
+    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact ReduceImageSize",
+    description:
+      "Contact ReduceImageSize for support, questions, partnerships, or help with image tool workflows.",
+    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
   },
 };
 

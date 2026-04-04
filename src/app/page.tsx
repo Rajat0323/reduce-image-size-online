@@ -9,7 +9,7 @@ import { homeTools } from "@/lib/toolCatalog";
 export const metadata: Metadata = {
   title: "Image Compressor to 20KB Online India | ReduceImageSize",
   description:
-    "Use an image compressor to 20KB online for India-focused forms, KYC, passport photos, and mobile uploads, plus resize, convert, optimize images, and use an ml to oz calculator.",
+    "Use an image compressor to 20KB online for forms, KYC, passport photos, mobile uploads, and ml to oz conversions.",
   alternates: {
     canonical: "/",
   },
@@ -25,7 +25,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Image Compressor to 20KB Online India | ReduceImageSize",
     description:
-      "Compress, resize, and convert images with exact-KB workflows for Indian uploads, plus an ml to oz calculator.",
+      "Compress, resize, and convert images with exact-KB workflows for Indian uploads, plus ml to oz conversion.",
+    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
   },
 };
 

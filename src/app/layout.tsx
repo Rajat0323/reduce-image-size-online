@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | ReduceImageSize",
   },
   description:
-    "ReduceImageSize is an India-focused tool hub to compress images to 20KB, resize, convert, crop, remove backgrounds, optimize uploads online, and use an ml to oz calculator.",
+    "ReduceImageSize is a tool hub for image compression, resizing, conversion, background removal, and ml to oz conversion.",
   keywords: [
     "image compressor to 20kb",
     "compress image to 20kb online india",

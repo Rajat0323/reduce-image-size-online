@@ -29,12 +29,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       url: `${baseUrl}/blog/${params.slug}`,
       siteName: "Reduce Image Size Online",
+      images: [
+        {
+          url: `${baseUrl}/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: `${post.title} | ReduceImageSize`,
+        },
+      ],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      images: [`${baseUrl}/og-image.png`],
     },
   };
 }
@@ -173,6 +182,7 @@ export default function BlogPost({ params }: Props) {
                 <ReactMarkdown
                   components={{
                     a: ({ ...props }) => <a {...props} target="_self" rel={undefined} />,
+                    h1: ({ children }) => <h2>{children}</h2>,
                   }}
                 >
                   {content}

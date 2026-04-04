@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Reduce Image Size Online",
+  title: "About ReduceImageSize",
   description:
-    "Learn about Reduce Image Size Online, a browser-based image compressor focused on privacy, exact-KB targets, and fast website workflows.",
+    "Learn about ReduceImageSize, a privacy-first tool hub for image compression, exact-KB workflows, and browser-based tools.",
   alternates: {
     canonical: "/about",
+  },
+  openGraph: {
+    title: "About ReduceImageSize",
+    description:
+      "Learn about ReduceImageSize, a privacy-first tool hub for image compression and browser-based workflows.",
+    url: "https://www.reduceimagesizeonline.com/about",
+    siteName: "ReduceImageSize",
+    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About ReduceImageSize",
+    description:
+      "Learn about ReduceImageSize, a privacy-first tool hub for image compression and browser-based workflows.",
+    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
   },
 };
 

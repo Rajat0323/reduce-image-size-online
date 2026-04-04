@@ -3,6 +3,7 @@ const siteUrl = "https://www.reduceimagesizeonline.com";
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
   name: "ReduceImageSize",
   url: siteUrl,
   inLanguage: "en-IN",
@@ -11,18 +12,24 @@ export const websiteSchema = {
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
   name: "ReduceImageSize",
   url: siteUrl,
-  logo: `${siteUrl}/images/logo.svg`,
-  sameAs: [],
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteUrl}/images/logo.svg`,
+  },
 };
 
 export const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
+  "@id": `${siteUrl}/#software`,
   name: "ReduceImageSize",
   applicationCategory: "MultimediaApplication",
   operatingSystem: "Web Browser",
+  url: siteUrl,
+  image: `${siteUrl}/og-image.png`,
   description:
     "ReduceImageSize is an India-focused image tool hub for compression, resizing, conversion, cropping, rotate and flip edits, background removal, and image upscaling.",
   offers: {

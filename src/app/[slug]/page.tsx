@@ -12,6 +12,16 @@ type Props = {
   params: { slug: string };
 };
 
+function clampMetaText(value: string, maxLength: number) {
+  if (value.length <= maxLength) {
+    return value;
+  }
+
+  const trimmed = value.slice(0, maxLength - 1);
+  const lastSpace = trimmed.lastIndexOf(" ");
+  return `${trimmed.slice(0, lastSpace > 40 ? lastSpace : trimmed.length).trim()}…`;
+}
+
 export function generateStaticParams() {
   return [...intentPages, ...toolPages].map((page) => ({
     slug: page.slug,
@@ -22,24 +32,36 @@ export function generateMetadata({ params }: Props): Metadata {
   const tool = getToolPage(params.slug);
 
   if (tool) {
+    const title = clampMetaText(tool.title, 60);
+    const description = clampMetaText(tool.description, 155);
+
     return {
-      title: tool.title,
-      description: tool.description,
+      title,
+      description,
       keywords: tool.keywords,
       alternates: {
         canonical: `/${tool.slug}`,
       },
       openGraph: {
-        title: tool.title,
-        description: tool.description,
+        title,
+        description,
         url: `${SITE_URL}/${tool.slug}`,
         siteName: SITE_NAME,
+        images: [
+          {
+            url: `${SITE_URL}/og-image.png`,
+            width: 1200,
+            height: 630,
+            alt: `${tool.name} by ${SITE_NAME}`,
+          },
+        ],
         type: "website",
       },
       twitter: {
         card: "summary_large_image",
-        title: tool.title,
-        description: tool.description,
+        title,
+        description,
+        images: [`${SITE_URL}/og-image.png`],
       },
     };
   }
@@ -50,23 +72,35 @@ export function generateMetadata({ params }: Props): Metadata {
     return {};
   }
 
+  const title = clampMetaText(page.title, 60);
+  const description = clampMetaText(page.description, 155);
+
   return {
-    title: page.title,
-    description: page.description,
+    title,
+    description,
     alternates: {
       canonical: `/${page.slug}`,
     },
     openGraph: {
-      title: page.title,
-      description: page.description,
+      title,
+      description,
       url: `${SITE_URL}/${page.slug}`,
       siteName: SITE_NAME,
+      images: [
+        {
+          url: `${SITE_URL}/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: `${page.heroTitle} by ${SITE_NAME}`,
+        },
+      ],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: page.title,
-      description: page.description,
+      title,
+      description,
+      images: [`${SITE_URL}/og-image.png`],
     },
   };
 }

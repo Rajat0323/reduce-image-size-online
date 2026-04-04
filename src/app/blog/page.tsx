@@ -8,16 +8,24 @@ import { homeTools } from "@/lib/toolCatalog";
 export const metadata: Metadata = {
   title: "Image Compression Blog India | ReduceImageSize",
   description:
-    "Read practical guides for image compression, exact-KB uploads, website speed, and ml to oz calculator searches with strong intent-focused answers.",
+    "Read practical guides for image compression, exact-KB uploads, website speed, and ml to oz calculator searches.",
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
     title: "Image Compression Blog India | ReduceImageSize",
     description:
-      "Practical guides for image compressor to 20KB, exact-size uploads, format conversion, faster web images, and ml to oz calculator intent.",
+      "Practical guides for image compressor to 20KB, exact-size uploads, format conversion, faster web images, and ml to oz.",
     url: "https://www.reduceimagesizeonline.com/blog",
     siteName: "ReduceImageSize",
+    images: [
+      {
+        url: "https://www.reduceimagesizeonline.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ReduceImageSize blog",
+      },
+    ],
     type: "website",
   },
   twitter: {
@@ -25,6 +33,7 @@ export const metadata: Metadata = {
     title: "Image Compression Blog India | ReduceImageSize",
     description:
       "Learn exact-KB compression, image conversion, and mobile-friendly upload workflows for India-focused use cases.",
+    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
   },
 };
 
