@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import "../../styles/landing.css";
 import IntentLandingPage from "@/components/IntentLandingPage";
@@ -12,6 +12,13 @@ type Props = {
   params: { slug: string };
 };
 
+const legacyRedirects: Record<string, string> = {
+  "compress-to-20kb": "/compress-image-to-20kb",
+  "compress-to-50kb": "/compress-image-to-50kb",
+  "compress-to-100kb": "/compress-image-to-100kb",
+  "compress-to-200kb": "/compress-image-to-200kb",
+};
+
 function clampMetaText(value: string, maxLength: number) {
   if (value.length <= maxLength) {
     return value;
@@ -19,7 +26,7 @@ function clampMetaText(value: string, maxLength: number) {
 
   const trimmed = value.slice(0, maxLength - 1);
   const lastSpace = trimmed.lastIndexOf(" ");
-  return `${trimmed.slice(0, lastSpace > 40 ? lastSpace : trimmed.length).trim()}…`;
+  return `${trimmed.slice(0, lastSpace > 40 ? lastSpace : trimmed.length).trim()}...`;
 }
 
 export function generateStaticParams() {
@@ -29,6 +36,18 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: Props): Metadata {
+  if (legacyRedirects[params.slug]) {
+    return {
+      alternates: {
+        canonical: legacyRedirects[params.slug],
+      },
+      robots: {
+        index: false,
+        follow: true,
+      },
+    };
+  }
+
   const tool = getToolPage(params.slug);
 
   if (tool) {
@@ -106,6 +125,10 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default function IntentPage({ params }: Props) {
+  if (legacyRedirects[params.slug]) {
+    redirect(legacyRedirects[params.slug]);
+  }
+
   const tool = getToolPage(params.slug);
 
   if (tool) {

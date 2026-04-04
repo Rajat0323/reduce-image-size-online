@@ -7,6 +7,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.reduceimagesizeonline.com";
   const blogSlugs = getAllPosts().map((post) => post.slug);
   const lastModified = new Date("2026-04-02");
+  const excludedLegacyIntentSlugs = new Set([
+    "compress-to-20kb",
+    "compress-to-50kb",
+    "compress-to-100kb",
+    "compress-to-200kb",
+  ]);
 
   const staticPages = [
     "",
@@ -41,7 +47,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: slug === "complete-guide-to-image-tools-india" ? 0.85 : 0.72,
     })),
 
-    ...[...intentPages, ...toolPages].map((page) => ({
+    ...[
+      ...intentPages.filter((page) => !excludedLegacyIntentSlugs.has(page.slug)),
+      ...toolPages,
+    ].map((page) => ({
       url: `${baseUrl}/${page.slug}`,
       lastModified,
       changeFrequency: "weekly" as const,
