@@ -2,6 +2,12 @@ node_modules
 .next
 .env
 .env.local
+backend/.env
+backend/.env.*
+!backend/.env.example
 dist
 build
 .vercel
+__pycache__/
+*.pyc
+tsconfig.tsbuildinfo

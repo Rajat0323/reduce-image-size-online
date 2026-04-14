@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: reduceimagesize_seo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  seo-api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file:
+      - backend/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+
+  seo-worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    command: celery -A app.tasks.celery_app worker --loglevel=info
+    env_file:
+      - backend/.env
+    depends_on:
+      - postgres
+      - redis
+
+  seo-beat:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    command: celery -A app.tasks.celery_app beat --loglevel=info
+    env_file:
+      - backend/.env
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+  postgres_data:
