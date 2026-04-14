@@ -60,6 +60,8 @@ class PublishRequest(BaseModel):
     content_markdown: str
     summary: str | None = None
     schema_json: dict | None = None
+    slug: str | None = None
+    outline: list[str] = Field(default_factory=list)
     status: str = "published"
 
 

@@ -3,7 +3,7 @@ from datetime import datetime
 
 import httpx
 from slugify import slugify
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 
 from app.config import settings
@@ -199,23 +199,48 @@ class PublishingService:
             db.add(keyword)
             db.flush()
 
-        article = Article(
-            title=payload["title"],
-            slug=payload["slug"],
-            summary=payload.get("summary"),
-            meta_title=payload["meta_title"],
-            meta_description=payload["meta_description"],
-            schema_json=json.dumps(payload.get("schema_json") or {}),
-            outline=json.dumps(payload.get("outline") or []),
-            content_markdown=payload["content_markdown"],
-            content_html=None,
-            status=payload.get("status", "published"),
-            published_at=datetime.utcnow(),
-            keyword_id=keyword.id,
-        )
-        db.add(article)
+        resolved_slug = slugify(payload.get("slug") or payload["title"])
+        article = db.scalar(select(Article).where(Article.keyword_id == keyword.id))
+        if not article:
+            article = db.scalar(select(Article).where(Article.slug == resolved_slug))
+        if not article:
+            article = db.scalar(select(Article).where(Article.title == payload["title"]))
+
+        if article:
+            article.title = payload["title"]
+            article.slug = resolved_slug
+            article.summary = payload.get("summary")
+            article.meta_title = payload["meta_title"]
+            article.meta_description = payload["meta_description"]
+            article.schema_json = json.dumps(payload.get("schema_json") or {})
+            article.outline = json.dumps(payload.get("outline") or [])
+            article.content_markdown = payload["content_markdown"]
+            article.content_html = None
+            article.status = payload.get("status", "published")
+            article.published_at = datetime.utcnow()
+            article.keyword_id = keyword.id
+        else:
+            article = Article(
+                title=payload["title"],
+                slug=resolved_slug,
+                summary=payload.get("summary"),
+                meta_title=payload["meta_title"],
+                meta_description=payload["meta_description"],
+                schema_json=json.dumps(payload.get("schema_json") or {}),
+                outline=json.dumps(payload.get("outline") or []),
+                content_markdown=payload["content_markdown"],
+                content_html=None,
+                status=payload.get("status", "published"),
+                published_at=datetime.utcnow(),
+                keyword_id=keyword.id,
+            )
+            db.add(article)
+
         db.flush()
         return article
+
+    def reset_internal_links(self, db: Session, source_id: int) -> None:
+        db.execute(delete(InternalLink).where(InternalLink.source_id == source_id))
 
 
 class RankingService:

@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+from slugify import slugify
 
 from app.config import settings
 from app.db import Base, engine, get_db
@@ -107,7 +108,7 @@ def generate_content(payload: ContentGenerationRequest, db: Session = Depends(ge
 
 @app.post("/publish", response_model=ArticleResponse)
 def publish_article(payload: PublishRequest, db: Session = Depends(get_db)):
-    slug = payload.title.lower().replace(" ", "-")
+    slug = slugify(payload.slug or payload.title)
     article = publishing_service.publish(
         db,
         {
@@ -120,7 +121,7 @@ def publish_article(payload: PublishRequest, db: Session = Depends(get_db)):
             "content_markdown": payload.content_markdown,
             "schema_json": payload.schema_json,
             "status": payload.status,
-            "outline": [],
+            "outline": payload.outline,
         },
     )
 
@@ -128,6 +129,7 @@ def publish_article(payload: PublishRequest, db: Session = Depends(get_db)):
     article.content_markdown = content_with_links
     db.flush()
 
+    publishing_service.reset_internal_links(db, article.id)
     for link in links:
         db.add(InternalLink(source_id=article.id, target_id=link["target_id"], anchor_text=link["anchor_text"]))
 
