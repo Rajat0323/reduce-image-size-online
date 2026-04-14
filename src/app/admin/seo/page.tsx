@@ -1,5 +1,6 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
+import SeoAutomationControls from "@/components/SeoAutomationControls";
 import { getSeoArticles, getSeoRankings } from "@/lib/seoAutomationApi";
 
 export const metadata = {
@@ -17,7 +18,7 @@ export default async function SeoDashboardPage() {
           rankings.reduce((total, item) => total + (item.position || 0), 0) /
           rankings.filter((item) => item.position).length
         ).toFixed(1)
-      : "—";
+      : "--";
 
   return (
     <main className="blog-shell landing">
@@ -33,7 +34,7 @@ export default async function SeoDashboardPage() {
             <div className="blog-chip-row">
               <span className="blog-chip">FastAPI backend</span>
               <span className="blog-chip">PostgreSQL + Redis</span>
-              <span className="blog-chip">Automated publishing</span>
+              <span className="blog-chip">Manual + automated publishing</span>
             </div>
           </div>
 
@@ -56,6 +57,8 @@ export default async function SeoDashboardPage() {
 
         <section className="blog-grid">
           <div className="blog-stack">
+            <SeoAutomationControls />
+
             <div>
               <p className="section-heading">Recent automation output</p>
               <p className="section-subtitle">

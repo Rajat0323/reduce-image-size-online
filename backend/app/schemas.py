@@ -91,3 +91,27 @@ class RankingSyncResponse(BaseModel):
     synced_keywords: int
     records_written: int
     source: str
+
+
+class PipelineArticleSummary(BaseModel):
+    keyword: str
+    article_id: int
+    title: str
+    slug: str
+    status: str
+
+
+class ManualPipelineRequest(BaseModel):
+    seed_keyword: str
+    niche: str | None = None
+    country: str = "IN"
+    max_results: int = Field(default=5, ge=1, le=20)
+    publish_count: int = Field(default=1, ge=1, le=5)
+    target_word_count: int = Field(default=2200, ge=1200, le=4000)
+    sync_rankings: bool = False
+
+
+class ManualPipelineResponse(BaseModel):
+    discovered_keywords: list[str]
+    published_articles: list[PipelineArticleSummary]
+    rankings_sync: RankingSyncResponse | None = None
