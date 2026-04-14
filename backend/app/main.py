@@ -48,8 +48,7 @@ if settings.next_frontend_url:
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=list(dict.fromkeys(allowed_origins)),
-    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_origins=["*"],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
