@@ -13,52 +13,9 @@ from app.models import Article, InternalLink, Keyword, Ranking
 class ContentGenerationService:
     def generate(self, keyword: str, competitor_insights: dict, target_word_count: int) -> dict:
         generated = self._generate_with_groq(keyword, competitor_insights, target_word_count)
-        if generated:
+        if generated and self._word_count(generated["content_markdown"]) >= self._minimum_word_count(target_word_count):
             return generated
-
-        outline = [
-            f"Introduction to {keyword}",
-            "What users need to know",
-            "Competitor gaps and opportunities",
-            "Step-by-step strategy",
-            "Examples and FAQs",
-            "Internal resources and next steps",
-        ]
-        title = f"{keyword.title()}: Complete Guide for 2026"
-        meta_title = f"{keyword.title()} Guide | Better Than Competitors"
-        meta_description = (
-            f"Learn {keyword} with a clear, SEO-focused guide covering examples, FAQs, and practical next steps."
-        )
-        content_markdown = "\n\n".join(
-            [
-                f"# {title}",
-                f"This article targets **{keyword}** with a deeper structure than the current top pages.",
-                "## What you will learn\n\n- Search intent\n- Competitor gaps\n- Better structure\n- FAQs\n- Internal linking placeholders",
-                "## Competitor insights\n\n"
-                f"- Average word count: {competitor_insights['avg_word_count']}\n"
-                f"- Keyword density: {competitor_insights['keyword_density']}\n"
-                f"- Top URLs: {', '.join(competitor_insights['top_ranking_urls'])}",
-                "## Better content plan\n\n"
-                "Write for clarity, solve the exact query quickly, and then expand with richer examples, FAQs, and linked support content.",
-                "## FAQ\n\n### What makes this article rank?\n\nDepth, clarity, search intent alignment, and internal linking.",
-                "## Related reading\n\n[[INTERNAL_LINKS]]",
-            ]
-        )
-        schema_json = {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": title,
-            "datePublished": datetime.utcnow().date().isoformat(),
-        }
-        return {
-            "title": title,
-            "meta_title": meta_title[:60],
-            "meta_description": meta_description[:155],
-            "slug": slugify(keyword),
-            "outline": outline,
-            "content_markdown": content_markdown,
-            "schema_json": schema_json,
-        }
+        return self._build_rich_fallback(keyword, competitor_insights, target_word_count)
 
     def _generate_with_groq(self, keyword: str, competitor_insights: dict, target_word_count: int) -> dict | None:
         if not settings.groq_api_key:
@@ -84,6 +41,8 @@ Requirements:
 - FAQ section
 - Use [[INTERNAL_LINKS]] placeholder once
 - Natural keyword usage, no stuffing
+- Include practical use cases, comparison table, mistakes to avoid, and a final CTA section
+- Write for humans first; avoid generic filler and obvious AI phrasing
 - Meta title under 60 chars
 - Meta description under 155 chars
 """.strip()
@@ -140,6 +99,120 @@ Requirements:
                 "datePublished": datetime.utcnow().date().isoformat(),
             },
         }
+
+    def _build_rich_fallback(self, keyword: str, competitor_insights: dict, target_word_count: int) -> dict:
+        title = self._build_title(keyword, competitor_insights.get("country", "US"))
+        meta_title = self._build_meta_title(keyword)
+        meta_description = self._build_meta_description(keyword, competitor_insights.get("country", "US"))
+        slug = slugify(keyword)
+        outline = [
+            "Quick answer",
+            "Why people search for this",
+            "How to get the best result",
+            "Best settings and quality tips",
+            "Common mistakes",
+            "Frequently asked questions",
+            "Related tools",
+        ]
+
+        target_context = self._describe_country_context(competitor_insights.get("country", "US"))
+        content_markdown = "\n\n".join(
+            [
+                f"# {title}",
+                f"Compressing images for **{keyword}** is usually about matching a strict file-size limit while keeping text, faces, and document edges readable. {target_context}",
+                "## Quick answer",
+                f"If you need **{keyword}**, start with a JPG or WEBP image, reduce dimensions if the file is very large, and then lower quality in small steps until the final file lands close to the target size. Avoid over-compressing in one jump because that often creates blurry edges and muddy colors.",
+                "## Why people search for this",
+                f"People usually search for **{keyword}** when they are uploading a document, photo, signature, or application image to a website that rejects larger files. A good page should help users understand both the file-size target and the quality trade-off so they can upload successfully on the first try.",
+                "## Who this is useful for",
+                "- Job application uploads\n- Government and exam portals\n- Passport or profile photos\n- Mobile uploads on slower connections\n- Website owners trying to improve page speed",
+                "## How to get the best result",
+                "1. Start with the cleanest source image available.\n2. Resize the image before applying heavy compression.\n3. Choose the right format: JPG for photos, PNG for graphics with hard edges, WEBP when supported.\n4. Reduce quality gradually and compare readability after each change.\n5. Download the final file and verify the exact KB size before submitting.",
+                "### Step-by-step workflow",
+                "Start by checking the file size of your original image. If the file is many times larger than the target, resizing the width and height first often delivers a cleaner final result than pushing compression alone. After that, lower the quality in measured steps and test the file after each export so you can stop once the file clears the upload limit.",
+                "### Real-world use cases",
+                "For government and exam portals, readability matters more than perfect color detail. For passport or profile photos, facial edges and skin tone should stay natural. For website uploads, you usually want the smallest file that still looks crisp on common mobile screens. Thinking about the final use case first helps you make better compression decisions.",
+                "## Best settings and quality tips",
+                f"The top-ranking pages for this topic average about **{competitor_insights.get('avg_word_count', target_word_count)} words**, which shows that users want practical guidance rather than a one-line answer. For most uploads, the best balance comes from combining moderate resizing with moderate compression instead of pushing quality extremely low. This keeps facial details, logos, and text more readable.",
+                "### Format tips",
+                "- Use JPG for camera photos and scanned documents.\n- Use PNG only when transparency or sharp graphic edges matter.\n- Use WEBP for modern website uploads where smaller file sizes matter most.",
+                "### Quality checklist before downloading",
+                "- Zoom in on text, signatures, and fine edges.\n- Make sure faces still look natural and not over-smoothed.\n- Check that the background does not show heavy blocky compression.\n- Reconfirm the final file size after each export because some portals reject even slightly oversized files.",
+                "### Before you upload",
+                "- Check that the image is upright.\n- Confirm the file size target exactly.\n- Zoom in and verify text, signatures, and faces remain clear.\n- Keep a second copy at slightly higher quality in case the portal rejects the first attempt.",
+                "## Common mistakes",
+                "- Compressing the image multiple times in different tools\n- Starting with a blurry source file\n- Ignoring dimensions and changing only quality\n- Using PNG when JPG would create a much smaller file\n- Uploading without rechecking the final size",
+                "### How to avoid failed uploads",
+                "A surprising number of failed uploads happen because the image technically meets the target but has become unreadable. If the page asks for a profile photo, keep the subject centered and avoid aggressive crops. If the page asks for a document, leave enough contrast so that small text stays legible. A slightly larger but acceptable file is usually better than an unreadable one.",
+                "## Practical comparison",
+                "| Goal | Best first step | Why it helps |\n| --- | --- | --- |\n| Large photo file | Resize dimensions first | Removes unnecessary pixels before quality loss |\n| Document image | Use clear crop and moderate JPG quality | Keeps text readable |\n| Website speed | Convert to WEBP if supported | Better compression for modern browsers |\n| Form upload | Verify target KB after each change | Avoid repeated rejections |",
+                "## When to resize before compressing",
+                "If your image comes from a modern smartphone, the original dimensions are often far larger than any form or website really needs. Reducing an image from a very large width to a more realistic upload size can remove a huge amount of unnecessary data before you touch the quality slider. That usually produces a better-looking final file at the same target KB.",
+                "## When to keep more quality",
+                "If the image contains printed text, handwritten signatures, certificates, or screenshots, be conservative with compression. These image types show artifacts earlier than portrait photos. In those cases, cropping empty margins and slightly reducing dimensions often works better than lowering quality too far.",
+                "## Frequently asked questions",
+                f"### Can I get **{keyword}** without losing quality?\nSome quality loss is normal when the target is strict, but you can keep the result professional by resizing first and compressing gradually.",
+                f"### Which format is best for **{keyword}**?\nFor most photos, JPG gives the best balance. PNG is better for graphics, but it can stay larger unless the image is very simple.",
+                "### Why does my image become blurry?\nHeavy compression removes visual detail. Reduce dimensions before lowering quality too far.",
+                "### Should I keep editing the same file again and again?\nNo. Always work from the original file so quality does not degrade across repeated exports.",
+                "### What should I do if the portal still rejects the image?\nCheck whether the website also requires a specific dimension, aspect ratio, or file format. Some forms mention KB size but silently reject files that do not match their image rules.",
+                "## Related tools",
+                "[[INTERNAL_LINKS]]",
+                "## Final recommendation",
+                f"If your goal is **{keyword}**, focus on clarity first and size second. A file that meets the limit but looks unreadable will still fail the real task. Use a reliable compressor, verify the final size, and keep a backup version in case you need a small adjustment. When possible, save one version that comfortably meets the target and another slightly higher-quality backup so you can react quickly if the upload portal behaves inconsistently.",
+                "## Next step",
+                "Once the file is ready, upload it immediately and confirm that the site accepts it before closing your session. If you are working against a deadline, keep the original image and your compressed copy together in one folder so you can retry in seconds.",
+            ]
+        )
+        schema_json = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": title,
+            "datePublished": datetime.utcnow().date().isoformat(),
+        }
+        return {
+            "title": title,
+            "meta_title": meta_title,
+            "meta_description": meta_description,
+            "slug": slug,
+            "outline": outline,
+            "content_markdown": content_markdown,
+            "schema_json": schema_json,
+        }
+
+    def _build_title(self, keyword: str, country: str) -> str:
+        if country.upper() == "IN":
+            return f"{keyword.title()}: Complete Guide for India"
+        return f"{keyword.title()}: Complete Guide"
+
+    def _build_meta_title(self, keyword: str) -> str:
+        short = keyword.title()
+        if len(short) > 52:
+            short = short[:49].rstrip() + "..."
+        return short
+
+    def _build_meta_description(self, keyword: str, country: str) -> str:
+        suffix = "for free without losing quality."
+        if country.upper() == "IN":
+            suffix = "for India forms, uploads, and websites."
+        description = f"Learn how to {keyword} {suffix}"
+        return description[:155]
+
+    def _describe_country_context(self, country: str) -> str:
+        if country.upper() == "IN":
+            return (
+                "For India-focused workflows, this often matters for application forms, KYC uploads, "
+                "government portals, and mobile users working with limited bandwidth."
+            )
+        return (
+            "This is especially useful when a website sets hard file-size limits for uploads or when page speed matters."
+        )
+
+    def _word_count(self, content_markdown: str) -> int:
+        return len([word for word in content_markdown.split() if word.strip()])
+
+    def _minimum_word_count(self, target_word_count: int) -> int:
+        return max(1100, min(target_word_count - 350, 1600))
 
 
 class SeoOptimizationService:
@@ -206,6 +279,8 @@ class PublishingService:
         if not article:
             article = db.scalar(select(Article).where(Article.title == payload["title"]))
 
+        status = payload.get("status", "draft")
+
         if article:
             article.title = payload["title"]
             article.slug = resolved_slug
@@ -216,8 +291,8 @@ class PublishingService:
             article.outline = json.dumps(payload.get("outline") or [])
             article.content_markdown = payload["content_markdown"]
             article.content_html = None
-            article.status = payload.get("status", "published")
-            article.published_at = datetime.utcnow()
+            article.status = status
+            article.published_at = datetime.utcnow() if status == "published" else None
             article.keyword_id = keyword.id
         else:
             article = Article(
@@ -230,12 +305,13 @@ class PublishingService:
                 outline=json.dumps(payload.get("outline") or []),
                 content_markdown=payload["content_markdown"],
                 content_html=None,
-                status=payload.get("status", "published"),
-                published_at=datetime.utcnow(),
+                status=status,
+                published_at=datetime.utcnow() if status == "published" else None,
                 keyword_id=keyword.id,
             )
             db.add(article)
 
+        keyword.status = "published" if status == "published" else "approved"
         db.flush()
         return article
 

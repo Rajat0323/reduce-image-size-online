@@ -1,7 +1,7 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 import SeoAutomationControls from "@/components/SeoAutomationControls";
-import { getSeoArticles, getSeoRankings } from "@/lib/seoAutomationApi";
+import { getAdminSeoArticles, getAdminSeoRankings } from "@/lib/seoAdminApi";
 
 export const metadata = {
   title: "SEO Automation Dashboard",
@@ -9,15 +9,17 @@ export const metadata = {
 };
 
 export default async function SeoDashboardPage() {
-  const [articles, rankings] = await Promise.all([getSeoArticles().catch(() => []), getSeoRankings().catch(() => [])]);
+  const [articles, rankings] = await Promise.all([
+    getAdminSeoArticles().catch(() => []),
+    getAdminSeoRankings().catch(() => []),
+  ]);
 
   const publishedCount = articles.filter((article) => article.status === "published").length;
+  const draftCount = articles.filter((article) => article.status !== "published").length;
+  const rankedItems = rankings.filter((item) => item.position);
   const avgPosition =
-    rankings.length > 0
-      ? (
-          rankings.reduce((total, item) => total + (item.position || 0), 0) /
-          rankings.filter((item) => item.position).length
-        ).toFixed(1)
+    rankedItems.length > 0
+      ? (rankings.reduce((total, item) => total + (item.position || 0), 0) / rankedItems.length).toFixed(1)
       : "--";
 
   return (
@@ -28,13 +30,13 @@ export default async function SeoDashboardPage() {
             <span className="eyebrow-link">Admin panel</span>
             <h1 className="blog-title">SEO Automation Dashboard</h1>
             <p className="blog-summary">
-              Monitor keywords, generated content, publishing output, and ranking performance from
-              one place.
+              Review drafts, publish the strongest articles, and monitor ranking feedback from one
+              protected control center.
             </p>
             <div className="blog-chip-row">
               <span className="blog-chip">FastAPI backend</span>
-              <span className="blog-chip">PostgreSQL + Redis</span>
-              <span className="blog-chip">Manual + automated publishing</span>
+              <span className="blog-chip">Protected admin flow</span>
+              <span className="blog-chip">Draft-first publishing</span>
             </div>
           </div>
 
@@ -49,9 +51,18 @@ export default async function SeoDashboardPage() {
               <span>published articles</span>
             </div>
             <div className="article-stat">
+              <strong>{draftCount}</strong>
+              <span>drafts awaiting review</span>
+            </div>
+            <div className="article-stat">
               <strong>{avgPosition}</strong>
               <span>average tracked position</span>
             </div>
+            <form action="/api/admin/logout" method="POST" className="admin-logout-form">
+              <button className="btn btn-ghost" type="submit">
+                Log out
+              </button>
+            </form>
           </div>
         </section>
 
@@ -62,7 +73,8 @@ export default async function SeoDashboardPage() {
             <div>
               <p className="section-heading">Recent automation output</p>
               <p className="section-subtitle">
-                Review generated content, check metadata, and open the public article pages.
+                Review generated drafts, tighten the copy, and publish only the pages you feel good
+                about.
               </p>
             </div>
 
@@ -73,8 +85,12 @@ export default async function SeoDashboardPage() {
                   <h2>{article.title}</h2>
                   <p>{article.meta_description}</p>
                   <div className="blog-card-footer">
-                    <span>{article.published_at ? new Date(article.published_at).toLocaleDateString("en-US") : "Draft"}</span>
-                    <span className="blog-card-cta">Open article</span>
+                    <span>
+                      {article.published_at
+                        ? new Date(article.published_at).toLocaleDateString("en-US")
+                        : "Needs review"}
+                    </span>
+                    <span className="blog-card-cta">Review article</span>
                   </div>
                 </Link>
               ))}
@@ -88,13 +104,13 @@ export default async function SeoDashboardPage() {
                 <li>
                   <Link href="/admin/seo/articles">
                     <strong>Article list</strong>
-                    <span>See all generated and published articles.</span>
+                    <span>See all drafts and published articles in one review queue.</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="/articles">
                     <strong>Public article view</strong>
-                    <span>Preview the frontend rendering used for published content.</span>
+                    <span>Preview how published articles appear on the live site.</span>
                   </Link>
                 </li>
               </ul>

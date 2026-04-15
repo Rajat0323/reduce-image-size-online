@@ -442,6 +442,26 @@
   padding: 28px;
 }
 
+.admin-login-card {
+  align-items: stretch;
+}
+
+.admin-login-form-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-logout-form {
+  margin-top: 18px;
+}
+
 .admin-action-header {
   display: flex;
   justify-content: space-between;
@@ -466,6 +486,11 @@
 .admin-feedback {
   margin: 16px 0 0;
   color: var(--color-subtle);
+}
+
+.admin-error {
+  margin: 0;
+  color: #fda4af;
 }
 
 .admin-result-shell {
@@ -670,11 +695,19 @@
   padding: 36px;
 }
 
+.article-shell-premium {
+  overflow: hidden;
+}
+
 .article-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
   gap: 28px;
   margin-top: 28px;
+}
+
+.article-layout-premium {
+  align-items: start;
 }
 
 .article-main {
@@ -683,9 +716,41 @@
   gap: 28px;
 }
 
+.article-hero-premium {
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.article-highlight-band {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.article-highlight-card {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 22px;
+}
+
+.article-highlight-card strong,
+.article-highlight-card p {
+  margin: 0;
+}
+
+.article-highlight-card p {
+  margin-top: 10px;
+  color: var(--color-subtle);
+}
+
 .article-prose {
   color: var(--color-text);
   line-height: 1.8;
+}
+
+.article-prose-premium {
+  font-size: 1.05rem;
 }
 
 .article-prose > :first-child {
@@ -760,16 +825,38 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
+.article-prose code {
+  font-family: ui-monospace, SFMono-Regular, SFMono-Regular, Consolas, monospace;
+  font-size: 0.94em;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.15em 0.38em;
+}
+
+.article-prose hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
 .article-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
 
+.article-actions-wrap {
+  align-items: center;
+}
+
 .article-sidebar {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.article-toc-list a[data-level="3"] {
+  padding-left: 10px;
 }
 
 .article-stat {
@@ -918,6 +1005,10 @@
   .blog-grid,
   .article-layout,
   .blog-hero-card {
+    grid-template-columns: 1fr;
+  }
+
+  .article-highlight-band {
     grid-template-columns: 1fr;
   }
 }

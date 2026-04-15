@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from slugify import slugify
@@ -45,11 +45,13 @@ app = FastAPI(title=settings.app_name, lifespan=lifespan)
 allowed_origins = ["http://localhost:3000"]
 if settings.next_frontend_url:
     allowed_origins.append(settings.next_frontend_url.rstrip("/"))
+    if settings.next_frontend_url.startswith("https://") and "www." not in settings.next_frontend_url:
+        allowed_origins.append(settings.next_frontend_url.replace("https://", "https://www.", 1).rstrip("/"))
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=list(dict.fromkeys(allowed_origins)),
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -63,12 +65,21 @@ publishing_service = PublishingService()
 ranking_service = RankingService()
 
 
+def has_valid_admin_secret(secret: str | None) -> bool:
+    return bool(settings.admin_api_secret and secret == settings.admin_api_secret)
+
+
+def require_admin_secret(x_admin_secret: str | None = Header(default=None, alias="x-admin-secret")) -> None:
+    if settings.admin_api_secret and x_admin_secret != settings.admin_api_secret:
+        raise HTTPException(status_code=401, detail="Admin authentication required")
+
+
 @app.get("/health")
 def healthcheck() -> dict:
     return {"status": "ok"}
 
 
-@app.post("/keywords/generate", response_model=list[KeywordResponse])
+@app.post("/keywords/generate", response_model=list[KeywordResponse], dependencies=[Depends(require_admin_secret)])
 def generate_keywords(payload: KeywordGenerateRequest, db: Session = Depends(get_db)):
     generated = keyword_service.generate(
         seed_keyword=payload.seed_keyword,
@@ -92,12 +103,12 @@ def generate_keywords(payload: KeywordGenerateRequest, db: Session = Depends(get
     return created
 
 
-@app.post("/analyze", response_model=CompetitorAnalysisResponse)
+@app.post("/analyze", response_model=CompetitorAnalysisResponse, dependencies=[Depends(require_admin_secret)])
 def analyze_keyword(payload: CompetitorAnalysisRequest):
     return analysis_service.analyze(payload.keyword, payload.country)
 
 
-@app.post("/generate-content", response_model=ContentDraftResponse)
+@app.post("/generate-content", response_model=ContentDraftResponse, dependencies=[Depends(require_admin_secret)])
 def generate_content(payload: ContentGenerationRequest, db: Session = Depends(get_db)):
     analysis = analysis_service.analyze(payload.keyword, payload.country)
     draft = content_service.generate(payload.keyword, analysis, payload.target_word_count)
@@ -121,7 +132,7 @@ def generate_content(payload: ContentGenerationRequest, db: Session = Depends(ge
     }
 
 
-@app.post("/pipeline/manual-run", response_model=ManualPipelineResponse)
+@app.post("/pipeline/manual-run", response_model=ManualPipelineResponse, dependencies=[Depends(require_admin_secret)])
 def manual_run_pipeline(payload: ManualPipelineRequest, db: Session = Depends(get_db)):
     generated = keyword_service.generate(
         seed_keyword=payload.seed_keyword,
@@ -164,7 +175,7 @@ def manual_run_pipeline(payload: ManualPipelineRequest, db: Session = Depends(ge
                 "meta_description": optimized["meta_description"],
                 "content_markdown": optimized["content_markdown"],
                 "schema_json": optimized["schema_json"],
-                "status": "published",
+                "status": "draft",
                 "outline": draft["outline"],
             },
         )
@@ -175,7 +186,7 @@ def manual_run_pipeline(payload: ManualPipelineRequest, db: Session = Depends(ge
         for link in links:
             db.add(InternalLink(source_id=article.id, target_id=link["target_id"], anchor_text=link["anchor_text"]))
 
-        keyword.status = "published"
+        keyword.status = "approved"
         published_articles.append(
             {
                 "keyword": keyword.keyword,
@@ -199,7 +210,7 @@ def manual_run_pipeline(payload: ManualPipelineRequest, db: Session = Depends(ge
     }
 
 
-@app.post("/publish", response_model=ArticleResponse)
+@app.post("/publish", response_model=ArticleResponse, dependencies=[Depends(require_admin_secret)])
 def publish_article(payload: PublishRequest, db: Session = Depends(get_db)):
     slug = slugify(payload.slug or payload.title)
     article = publishing_service.publish(
@@ -247,20 +258,49 @@ def get_rankings(db: Session = Depends(get_db)):
     ]
 
 
-@app.post("/rankings/sync", response_model=RankingSyncResponse)
+@app.post("/rankings/sync", response_model=RankingSyncResponse, dependencies=[Depends(require_admin_secret)])
 def sync_rankings(db: Session = Depends(get_db)):
     return ranking_service.sync_rankings(db)
 
 
 @app.get("/articles", response_model=list[ArticleResponse])
-def list_articles(db: Session = Depends(get_db)):
-    articles = db.scalars(select(Article).order_by(Article.published_at.desc().nullslast())).all()
+def list_articles(
+    include_drafts: bool = Query(default=False),
+    x_admin_secret: str | None = Header(default=None, alias="x-admin-secret"),
+    db: Session = Depends(get_db),
+):
+    query = select(Article).order_by(Article.published_at.desc().nullslast(), Article.updated_at.desc())
+    if not (include_drafts and has_valid_admin_secret(x_admin_secret)):
+        query = query.where(Article.status == "published")
+    articles = db.scalars(query).all()
     return articles
 
 
 @app.get("/articles/{slug}", response_model=ArticleResponse)
-def get_article(slug: str, db: Session = Depends(get_db)):
+def get_article(
+    slug: str,
+    x_admin_secret: str | None = Header(default=None, alias="x-admin-secret"),
+    db: Session = Depends(get_db),
+):
     article = db.scalar(select(Article).where(Article.slug == slug))
     if not article:
         raise HTTPException(status_code=404, detail="Article not found")
+    if article.status != "published" and not has_valid_admin_secret(x_admin_secret):
+        raise HTTPException(status_code=404, detail="Article not found")
+    return article
+
+
+@app.post("/articles/{slug}/publish", response_model=ArticleResponse, dependencies=[Depends(require_admin_secret)])
+def publish_existing_article(slug: str, db: Session = Depends(get_db)):
+    article = db.scalar(select(Article).where(Article.slug == slug))
+    if not article:
+        raise HTTPException(status_code=404, detail="Article not found")
+
+    article.status = "published"
+    article.published_at = datetime.utcnow()
+    if article.keyword:
+        article.keyword.status = "published"
+
+    db.commit()
+    db.refresh(article)
     return article

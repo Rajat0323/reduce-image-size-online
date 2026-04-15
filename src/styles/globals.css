@@ -375,12 +375,74 @@ textarea {
   background: rgba(2, 6, 23, 0.95);
   border-top: 1px solid var(--color-border);
   padding: 40px 20px;
-  text-align: center;
   color: var(--color-subtle);
 }
 
 .footer a {
   color: var(--color-subtle);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+.footer-brand-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 420px;
+}
+
+.footer-intro,
+.footer-note,
+.footer-copyright {
+  margin: 0;
+}
+
+.footer-column h4 {
+  margin: 0 0 14px;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.footer-link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-link-list li {
+  margin: 0;
+}
+
+.footer-link-list a {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.5;
+  color: var(--color-subtle);
+  transition: color 0.25s ease;
+}
+
+.footer-link-list a:hover,
+.footer-link-list a:focus-visible {
+  color: var(--color-text);
+}
+
+.footer-copyright {
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
 }
 
 .sr-only {
@@ -411,6 +473,10 @@ textarea {
 
   .hero-title {
     font-size: clamp(2.2rem, 8vw, 3rem);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
   }
 }
 

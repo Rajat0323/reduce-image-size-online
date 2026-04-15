@@ -1,13 +1,14 @@
 import ReactMarkdown from "react-markdown";
 
-import { getSeoArticle } from "@/lib/seoAutomationApi";
+import SeoArticleAdminActions from "@/components/SeoArticleAdminActions";
+import { getAdminSeoArticle } from "@/lib/seoAdminApi";
 
 type Props = {
   params: { slug: string };
 };
 
 export default async function SeoArticleDetailPage({ params }: Props) {
-  const article = await getSeoArticle(params.slug);
+  const article = await getAdminSeoArticle(params.slug);
 
   return (
     <main className="blog-shell landing">
@@ -17,6 +18,7 @@ export default async function SeoArticleDetailPage({ params }: Props) {
             <span className="eyebrow-link">{article.status}</span>
             <h1 className="article-title">{article.title}</h1>
             <p className="article-summary">{article.meta_description}</p>
+            <SeoArticleAdminActions slug={article.slug} status={article.status} />
           </div>
 
           <div className="article-layout">
@@ -37,6 +39,18 @@ export default async function SeoArticleDetailPage({ params }: Props) {
                   <strong>{article.slug}</strong>
                   <span>Slug</span>
                 </div>
+                <div className="article-stat">
+                  <strong>{article.status}</strong>
+                  <span>Current status</span>
+                </div>
+              </div>
+
+              <div className="article-sidebar-card">
+                <h3>Workflow tip</h3>
+                <p>
+                  Draft-first mode keeps public pages cleaner. Review the copy, polish the keyword
+                  targeting, and publish only when the page feels genuinely useful.
+                </p>
               </div>
             </aside>
           </div>

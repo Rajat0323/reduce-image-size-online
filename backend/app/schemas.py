@@ -51,6 +51,8 @@ class ContentDraftResponse(BaseModel):
     content_markdown: str
     schema_json: dict
 
+    model_config = {"protected_namespaces": ()}
+
 
 class PublishRequest(BaseModel):
     keyword: str
@@ -62,7 +64,9 @@ class PublishRequest(BaseModel):
     schema_json: dict | None = None
     slug: str | None = None
     outline: list[str] = Field(default_factory=list)
-    status: str = "published"
+    status: str = "draft"
+
+    model_config = {"protected_namespaces": ()}
 
 
 class ArticleResponse(BaseModel):

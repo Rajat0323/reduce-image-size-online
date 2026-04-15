@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { getSeoArticles } from "@/lib/seoAutomationApi";
+import { getAdminSeoArticles } from "@/lib/seoAdminApi";
 
 export const metadata = {
   title: "SEO Articles",
@@ -8,15 +8,16 @@ export const metadata = {
 };
 
 export default async function SeoArticlesPage() {
-  const articles = await getSeoArticles().catch(() => []);
+  const articles = await getAdminSeoArticles().catch(() => []);
 
   return (
     <main className="blog-shell landing">
       <div className="section-content blog-stack">
         <div>
-          <p className="section-heading">SEO article list</p>
+          <p className="section-heading">SEO article review queue</p>
           <p className="section-subtitle">
-            Review generated drafts, published pages, and metadata before or after publication.
+            Work through drafts, improve quality, and publish the strongest pages when they are
+            truly ready for the public site.
           </p>
         </div>
 

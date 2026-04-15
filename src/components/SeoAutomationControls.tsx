@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 
-import { runManualSeoPipeline, syncSeoRankingsNow, type SeoPipelineResult } from "@/lib/seoAutomationApi";
+import type { SeoPipelineResult } from "@/lib/seoAutomationApi";
 
 const defaultForm = {
   seed_keyword: "image compressor to 20kb",
@@ -13,6 +13,24 @@ const defaultForm = {
   target_word_count: 2200,
   sync_rankings: false,
 };
+
+async function callAdminApi<T>(path: string, init?: RequestInit): Promise<T> {
+  const response = await fetch(path, {
+    ...init,
+    headers: {
+      "Content-Type": "application/json",
+      ...(init?.headers || {}),
+    },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const error = (await response.json().catch(() => null)) as { detail?: string } | null;
+    throw new Error(error?.detail || "Request failed.");
+  }
+
+  return response.json() as Promise<T>;
+}
 
 export default function SeoAutomationControls() {
   const [form, setForm] = useState(defaultForm);
@@ -28,9 +46,18 @@ export default function SeoAutomationControls() {
     setMessage("");
     startTransition(async () => {
       try {
-        const response = await runManualSeoPipeline(form);
+        const response = await callAdminApi<SeoPipelineResult>("/api/admin/manual-run", {
+          method: "POST",
+          body: JSON.stringify(form),
+        });
         setResult(response);
-        setMessage("Manual pipeline completed.");
+
+        const draftCount = response.published_articles.filter((article) => article.status !== "published").length;
+        if (draftCount > 0) {
+          setMessage(`Manual pipeline completed. ${draftCount} draft${draftCount > 1 ? "s" : ""} ready for review.`);
+        } else {
+          setMessage("Manual pipeline completed.");
+        }
       } catch (error) {
         setMessage(error instanceof Error ? error.message : "Pipeline failed.");
       }
@@ -41,7 +68,12 @@ export default function SeoAutomationControls() {
     setMessage("");
     startTransition(async () => {
       try {
-        const response = await syncSeoRankingsNow();
+        const response = await callAdminApi<{ synced_keywords: number; records_written: number; source: string }>(
+          "/api/admin/sync-rankings",
+          {
+            method: "POST",
+          }
+        );
         setMessage(
           `Ranking sync finished. Checked ${response.synced_keywords} keywords and wrote ${response.records_written} rows.`
         );
@@ -51,20 +83,23 @@ export default function SeoAutomationControls() {
     });
   }
 
+  const draftCount = result?.published_articles.filter((article) => article.status !== "published").length || 0;
+  const publishedCount = result?.published_articles.filter((article) => article.status === "published").length || 0;
+
   return (
     <section className="blog-card admin-action-card">
       <div className="admin-action-header">
         <div>
           <p className="section-heading">Manual trigger</p>
           <p className="section-subtitle">
-            Free-stage workflow: manually trigger keyword discovery, content generation, publishing,
-            and optional rank sync without paid background workers.
+            Free-stage workflow: manually trigger keyword discovery, generate richer draft content,
+            and publish only after review.
           </p>
         </div>
         <div className="blog-chip-row">
           <span className="blog-chip">No worker needed</span>
-          <span className="blog-chip">One-click run</span>
-          <span className="blog-chip">Free-friendly setup</span>
+          <span className="blog-chip">Draft-first flow</span>
+          <span className="blog-chip">Protected admin run</span>
         </div>
       </div>
 
@@ -105,7 +140,7 @@ export default function SeoAutomationControls() {
           />
         </label>
         <label>
-          <span className="field-label">Articles to publish</span>
+          <span className="field-label">Articles to draft</span>
           <input
             className="tool-input"
             type="number"
@@ -135,7 +170,7 @@ export default function SeoAutomationControls() {
           checked={form.sync_rankings}
           onChange={(event) => updateField("sync_rankings", event.target.checked)}
         />
-        <span>Also sync rankings after publishing</span>
+        <span>Also sync rankings after drafting</span>
       </label>
 
       <div className="admin-action-row">
@@ -153,24 +188,31 @@ export default function SeoAutomationControls() {
         <div className="admin-result-shell">
           <div className="blog-chip-row">
             <span className="blog-chip">{result.discovered_keywords.length} keywords discovered</span>
-            <span className="blog-chip">{result.published_articles.length} articles published</span>
+            {draftCount > 0 ? <span className="blog-chip">{draftCount} drafts prepared</span> : null}
+            {publishedCount > 0 ? <span className="blog-chip">{publishedCount} articles published</span> : null}
             {result.rankings_sync ? (
               <span className="blog-chip">{result.rankings_sync.records_written} ranking rows updated</span>
             ) : null}
           </div>
 
           <div className="blog-card-grid">
-            {result.published_articles.map((article) => (
-              <a key={article.article_id} href={`/articles/${article.slug}`} className="blog-card">
-                <span className="eyebrow-link">{article.status}</span>
-                <h3>{article.title}</h3>
-                <p>{article.keyword}</p>
-                <div className="blog-card-footer">
-                  <span>{article.slug}</span>
-                  <span className="blog-card-cta">Open article</span>
-                </div>
-              </a>
-            ))}
+            {result.published_articles.map((article) => {
+              const articleHref =
+                article.status === "published" ? `/articles/${article.slug}` : `/admin/seo/articles/${article.slug}`;
+              const ctaLabel = article.status === "published" ? "Open public page" : "Review draft";
+
+              return (
+                <a key={article.article_id} href={articleHref} className="blog-card">
+                  <span className="eyebrow-link">{article.status}</span>
+                  <h3>{article.title}</h3>
+                  <p>{article.keyword}</p>
+                  <div className="blog-card-footer">
+                    <span>{article.slug}</span>
+                    <span className="blog-card-cta">{ctaLabel}</span>
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
       ) : null}
