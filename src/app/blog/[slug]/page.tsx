@@ -4,7 +4,6 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
 import "../../../styles/hub.css";
-import RelatedPosts from "../RelatedPosts";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 
 const baseUrl = "https://www.reduceimagesizeonline.com";
@@ -131,10 +130,17 @@ export default function BlogPost({ params }: Props) {
       title: "Exact 50KB workflow",
       copy: "Use the 50KB route when you need a slightly higher quality ceiling for forms or profile photos.",
     },
+    {
+      href: "/image-resizer",
+      title: "Image resizer workflow",
+      copy: "Resize before compressing when dimensions matter as much as file size.",
+    },
+    {
+      href: "/image-converter",
+      title: "Image converter workflow",
+      copy: "Switch formats when JPG, PNG, or WebP choice changes the final upload result.",
+    },
   ].filter((item) => item.href !== `/${params.slug}`);
-  const supportingPosts = getAllPosts()
-    .filter((item) => item.slug !== params.slug)
-    .slice(0, 3);
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -278,7 +284,7 @@ export default function BlogPost({ params }: Props) {
                 <h3>More related paths</h3>
                 <p>
                   Add deeper internal links so each guide supports exact-KB pages, conversion
-                  tools, and nearby informational articles.
+                  tools, and the most relevant workflows on the site.
                 </p>
                 <div className="article-link-grid" style={{ marginTop: 20 }}>
                   {relatedToolJourneys.map((item) => (
@@ -326,25 +332,9 @@ export default function BlogPost({ params }: Props) {
                   ))}
                 </ul>
               </div>
-
-              <div className="article-sidebar-card">
-                <h3>Related reading</h3>
-                <ul className="article-link-list">
-                  {supportingPosts.map((item) => (
-                    <li key={item.slug}>
-                      <Link href={`/blog/${item.slug}`}>
-                        <strong>{item.title}</strong>
-                        <span>{item.description}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </aside>
           </div>
         </article>
-
-        <RelatedPosts currentSlug={params.slug} />
       </div>
     </main>
   );
