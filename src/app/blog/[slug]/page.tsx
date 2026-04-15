@@ -59,6 +59,8 @@ export default function BlogPost({ params }: Props) {
   if (!post) return notFound();
 
   const { content, title, description, date } = post;
+  const lowerSlug = params.slug.toLowerCase();
+  const lowerKeywords = post.keywords.map((keyword) => keyword.toLowerCase());
   const toolLinks = [
     {
       href: "/image-compressor",
@@ -80,13 +82,59 @@ export default function BlogPost({ params }: Props) {
       title: "Background remover",
       copy: "Create transparent cutouts for listings, profile photos, and cards.",
     },
+    {
+      href: "/ml-to-oz-calculator",
+      title: "ML to oz calculator",
+      copy: "Convert milliliters to ounces quickly for US recipes, bottle labels, and kitchen prep.",
+    },
   ];
+  const contextualToolLinks = toolLinks.filter((item) => {
+    if (lowerSlug.includes("ml-to-oz")) {
+      return item.href === "/ml-to-oz-calculator";
+    }
+
+    if (lowerSlug.includes("convert") || lowerKeywords.some((keyword) => keyword.includes("png") || keyword.includes("jpg") || keyword.includes("webp"))) {
+      return item.href === "/image-converter" || item.href === "/image-compressor";
+    }
+
+    if (lowerSlug.includes("quality") || lowerSlug.includes("kb") || lowerSlug.includes("compress")) {
+      return item.href === "/image-compressor" || item.href === "/image-resizer";
+    }
+
+    return true;
+  });
+  const activeToolLinks = contextualToolLinks.length > 0 ? contextualToolLinks : toolLinks.slice(0, 4);
   const popularTargets = [
     { href: "/compress-image-to-20kb", title: "Compress to 20KB" },
     { href: "/compress-image-to-50kb", title: "Compress to 50KB" },
     { href: "/compress-image-to-100kb", title: "Compress to 100KB" },
     { href: "/compress-image-to-200kb", title: "Compress to 200KB" },
   ];
+  const relatedToolJourneys = [
+    {
+      href: "/jpg-to-webp-converter",
+      title: "JPG to WEBP converter",
+      copy: "Pair file-size guides with modern format conversion when website speed matters.",
+    },
+    {
+      href: "/png-to-jpg-converter",
+      title: "PNG to JPG converter",
+      copy: "Useful when PNG files stay too large and you need a smaller upload-friendly format.",
+    },
+    {
+      href: "/compress-image-to-20kb",
+      title: "Exact 20KB workflow",
+      copy: "Jump into the preset landing page when your form or portal needs a hard 20KB target.",
+    },
+    {
+      href: "/compress-image-to-50kb",
+      title: "Exact 50KB workflow",
+      copy: "Use the 50KB route when you need a slightly higher quality ceiling for forms or profile photos.",
+    },
+  ].filter((item) => item.href !== `/${params.slug}`);
+  const supportingPosts = getAllPosts()
+    .filter((item) => item.slug !== params.slug)
+    .slice(0, 3);
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -178,6 +226,26 @@ export default function BlogPost({ params }: Props) {
 
           <div className="article-layout">
             <div className="article-main">
+              <section className="article-internal-links">
+                <div className="article-internal-links-header">
+                  <h2>Useful internal links for this topic</h2>
+                  <p>
+                    Keep readers moving between the guide, the live tool, and the next best
+                    supporting workflow without making them search from scratch.
+                  </p>
+                </div>
+
+                <div className="article-link-grid">
+                  {activeToolLinks.slice(0, 3).map((item) => (
+                    <Link key={item.href} href={item.href} className="article-cta">
+                      <span className="eyebrow-link">Tool</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.copy}</p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
               <article className="article-prose">
                 <ReactMarkdown
                   components={{
@@ -196,9 +264,26 @@ export default function BlogPost({ params }: Props) {
                   conversion, or exact-KB targets.
                 </p>
                 <div className="article-link-grid" style={{ marginTop: 20 }}>
-                  {toolLinks.map((item) => (
+                  {activeToolLinks.map((item) => (
                     <Link key={item.href} href={item.href} className="blog-card">
                       <span className="eyebrow-link">Tool</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.copy}</p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              <section className="article-cta">
+                <h3>More related paths</h3>
+                <p>
+                  Add deeper internal links so each guide supports exact-KB pages, conversion
+                  tools, and nearby informational articles.
+                </p>
+                <div className="article-link-grid" style={{ marginTop: 20 }}>
+                  {relatedToolJourneys.map((item) => (
+                    <Link key={item.href} href={item.href} className="blog-card">
+                      <span className="eyebrow-link">Next step</span>
                       <h3>{item.title}</h3>
                       <p>{item.copy}</p>
                     </Link>
@@ -236,6 +321,20 @@ export default function BlogPost({ params }: Props) {
                       <Link href={item.href}>
                         <strong>{item.title}</strong>
                         <span>Open the preset page and start closer to the file size you need.</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="article-sidebar-card">
+                <h3>Related reading</h3>
+                <ul className="article-link-list">
+                  {supportingPosts.map((item) => (
+                    <li key={item.slug}>
+                      <Link href={`/blog/${item.slug}`}>
+                        <strong>{item.title}</strong>
+                        <span>{item.description}</span>
                       </Link>
                     </li>
                   ))}
