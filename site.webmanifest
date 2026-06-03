@@ -1,0 +1,16 @@
+{
+  "name": "JPG to PDF Converter",
+  "short_name": "JPG to PDF",
+  "description": "Convert JPG and JPEG images to PDF online for free.",
+  "start_url": "/jpg-to-pdf-converter/",
+  "display": "standalone",
+  "background_color": "#f7fbff",
+  "theme_color": "#0866a8",
+  "icons": [
+    {
+      "src": "/assets/logo.png",
+      "sizes": "400x400",
+      "type": "image/png"
+    }
+  ]
+}
