@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.reduceimagesizeonline.com/sitemap.xml
+Sitemap: https://www.reduceimagesizeonline.com/sitemap-pages.xml
+Sitemap: https://www.reduceimagesizeonline.com/sitemap-blog.xml

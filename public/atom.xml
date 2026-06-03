@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>JPG to PDF Converter Blog</title>
+  <link href="https://www.reduceimagesizeonline.com/blog/"/>
+  <link href="https://www.reduceimagesizeonline.com/atom.xml" rel="self"/>
+  <updated>2026-06-03T00:00:00+05:30</updated>
+  <id>https://www.reduceimagesizeonline.com/blog/</id>
+  <entry>
+    <title>How to Convert JPG to PDF Online for Free</title>
+    <link href="https://www.reduceimagesizeonline.com/blog/how-to-convert-jpg-to-pdf-online/"/>
+    <id>https://www.reduceimagesizeonline.com/blog/how-to-convert-jpg-to-pdf-online/</id>
+    <updated>2026-06-03T00:00:00+05:30</updated>
+    <summary>Learn the fastest way to turn JPG and JPEG images into a clean PDF without installing software.</summary>
+  </entry>
+  <entry>
+    <title>How to Merge Multiple JPG Files into One PDF</title>
+    <link href="https://www.reduceimagesizeonline.com/blog/merge-multiple-jpg-files-into-one-pdf/"/>
+    <id>https://www.reduceimagesizeonline.com/blog/merge-multiple-jpg-files-into-one-pdf/</id>
+    <updated>2026-06-03T00:00:00+05:30</updated>
+    <summary>Learn how to combine many images into one clean, ordered PDF document.</summary>
+  </entry>
+  <entry>
+    <title>JPG vs PDF for Documents: Which Format Should You Use?</title>
+    <link href="https://www.reduceimagesizeonline.com/blog/jpg-vs-pdf-for-documents/"/>
+    <id>https://www.reduceimagesizeonline.com/blog/jpg-vs-pdf-for-documents/</id>
+    <updated>2026-06-03T00:00:00+05:30</updated>
+    <summary>Compare JPG and PDF for school assignments, business reports, uploads, and printing.</summary>
+  </entry>
+</feed>
