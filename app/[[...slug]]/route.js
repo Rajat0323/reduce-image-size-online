@@ -7,6 +7,7 @@ const routes = new Map([
   ["", "index.html"],
   ["jpg-to-pdf-converter", "jpg-to-pdf-converter/index.html"],
   ["blog", "blog/index.html"],
+  ["blog/jpg-to-pdf-converter-complete-guide", "blog/jpg-to-pdf-converter-complete-guide/index.html"],
   ["blog/how-to-convert-jpg-to-pdf-online", "blog/how-to-convert-jpg-to-pdf-online/index.html"],
   ["blog/merge-multiple-jpg-files-into-one-pdf", "blog/merge-multiple-jpg-files-into-one-pdf/index.html"],
   ["blog/jpg-vs-pdf-for-documents", "blog/jpg-vs-pdf-for-documents/index.html"]

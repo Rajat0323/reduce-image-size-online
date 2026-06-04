@@ -473,6 +473,38 @@ p {
   color: #35485e;
 }
 
+.long-form ul,
+.long-form ol {
+  margin: 14px 0 0;
+  padding-left: 22px;
+  color: #35485e;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 18px;
+}
+
+.table-wrap table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.table-wrap th,
+.table-wrap td {
+  border: 1px solid var(--line);
+  padding: 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.table-wrap th {
+  background: var(--surface-soft);
+  color: var(--text);
+}
+
 .faq-list {
   display: grid;
   gap: 10px;
