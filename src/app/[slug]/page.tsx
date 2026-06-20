@@ -8,6 +8,15 @@ import { SITE_NAME, SITE_URL } from "@/constants";
 import { getIntentPage, intentPages } from "@/lib/intentPages";
 import { getToolPage, toolPages } from "@/lib/toolCatalog";
 import { clampMetaText } from "@/seo/metaUtils";
+import { buildSeoRichContent, buildToolSeoContext, buildIntentSeoContext } from "@/lib/seoRichContent";
+
+const googleBot = {
+  index: true,
+  follow: true,
+  "max-snippet": -1,
+  "max-image-preview": "large" as const,
+  "max-video-preview": -1,
+};
 
 type Props = {
   params: { slug: string };
@@ -47,15 +56,23 @@ export function generateMetadata({ params }: Props): Metadata {
   const tool = getToolPage(params.slug);
 
   if (tool) {
+    const seoContext = buildToolSeoContext(tool);
+    const seoContent = buildSeoRichContent(seoContext);
     const title = clampMetaText(tool.title, 60);
     const description = clampMetaText(tool.description, 155);
+    const keywords = Array.from(new Set([...(tool.keywords || []), ...seoContext.keywords]));
 
     return {
       title,
       description,
-      keywords: tool.keywords,
+      keywords,
       alternates: {
         canonical: `/${tool.slug}`,
+      },
+      robots: {
+        index: true,
+        follow: true,
+        googleBot,
       },
       openGraph: {
         title,
@@ -78,6 +95,9 @@ export function generateMetadata({ params }: Props): Metadata {
         description,
         images: [`${SITE_URL}/og-image.png`],
       },
+      other: {
+        "word-count": String(seoContent.wordCount),
+      },
     };
   }
 
@@ -87,18 +107,22 @@ export function generateMetadata({ params }: Props): Metadata {
     return {};
   }
 
+  const seoContext = buildIntentSeoContext(page);
+  const seoContent = buildSeoRichContent(seoContext);
   const title = clampMetaText(page.title, 60);
   const description = clampMetaText(page.description, 155);
+  const keywords = Array.from(new Set([...seoContext.keywords, page.slug.replace(/-/g, " ")]));
 
   return {
     title,
     description,
+    keywords,
     alternates: {
       canonical: `/${page.slug}`,
     },
     robots: indiaOnlySlugs.has(page.slug)
       ? { index: false, follow: true }
-      : undefined,
+      : { index: true, follow: true, googleBot },
     openGraph: {
       title,
       description,
@@ -119,6 +143,9 @@ export function generateMetadata({ params }: Props): Metadata {
       title,
       description,
       images: [`${SITE_URL}/og-image.png`],
+    },
+    other: {
+      "word-count": String(seoContent.wordCount),
     },
   };
 }

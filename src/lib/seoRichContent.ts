@@ -140,6 +140,7 @@ function platformSections(ctx: SeoPageContext): SeoSection[] {
       level: 3,
       paragraphs: [
         "Hero images and product galleries should typically stay under 200KB when possible. Use WebP for modern browsers and keep JPG fallbacks for older systems. Lazy-load large galleries so the first paint stays fast.",
+        "WordPress users should optimize before upload rather than relying solely on plugins. Pre-sized assets reduce server CPU usage and make CDN caching more effective. Shopify merchants benefit from consistent product image dimensions so collection grids align cleanly across devices.",
       ],
     },
     {
@@ -147,6 +148,7 @@ function platformSections(ctx: SeoPageContext): SeoSection[] {
       level: 3,
       paragraphs: [
         "Social platforms re-compress uploads automatically. Starting with a reasonably optimized file helps preserve detail after platform processing. Square 1080×1080 works for many feeds; use platform-native aspect ratios for ads and cover photos.",
+        "LinkedIn banners and Facebook cover images have unique aspect ratios—crop first, then compress. WhatsApp status images should stay small for fast sending on slow networks; aim for under 300KB when possible.",
       ],
     },
     {
@@ -154,6 +156,7 @@ function platformSections(ctx: SeoPageContext): SeoSection[] {
       level: 3,
       paragraphs: [
         "Email clients often block large attachments. Compress images below 500KB for smooth delivery on mobile networks. For quick chat sharing, smaller files send faster and preview more reliably.",
+        "Marketing teams should also compress inline images in newsletters to improve open-to-click rates. Slow-loading emails frustrate mobile readers and can trigger spam filters when message size balloons.",
       ],
     },
     {
@@ -161,6 +164,7 @@ function platformSections(ctx: SeoPageContext): SeoSection[] {
       level: 3,
       paragraphs: [
         "Government and job portals frequently enforce strict KB limits such as 20KB, 50KB, or 100KB. Use exact-size tools on ReduceImageSize and verify dimensions if the portal specifies width and height in pixels.",
+        "Exam registration systems often require plain backgrounds and specific facial visibility. Prepare photos in good lighting before compression so aggressive KB targets do not destroy important detail.",
       ],
     },
   ];
@@ -234,6 +238,67 @@ function extendedGuideSections(ctx: SeoPageContext): SeoSection[] {
   ];
 }
 
+function deepDiveSections(ctx: SeoPageContext): SeoSection[] {
+  const { topic, toolLabel, slug, keywords } = ctx;
+  const keywordLine = keywords.slice(0, 8).join(", ");
+
+  return [
+    {
+      heading: `How ${topic.toLowerCase()} helps Google indexing and rankings`,
+      level: 2,
+      paragraphs: [
+        `Search engines crawl billions of pages, but they prioritize fast, helpful experiences. When you ${topic.toLowerCase()}, you reduce payload size, improve Largest Contentful Paint, and make pages easier for Googlebot to render on mobile. Those signals matter for competitive keywords such as ${keywordLine}.`,
+        `Dedicated tool pages like /${slug} also create strong topical relevance. Instead of one generic landing page trying to rank for every image query, ReduceImageSize publishes focused URLs that match exact user intent. That structure helps search engines index pages more frequently and surface the right result for each long-tail search.`,
+        `Combine on-page SEO (clear headings, FAQ schema, how-to steps, and 3000+ words of useful guidance) with technical SEO (fast hosting, sitemap.xml, robots.txt, canonical tags, and Open Graph metadata). This page includes all of those elements so crawlers understand what the page does and who it helps.`,
+        `Remember that rankings also depend on backlinks, brand searches, and competition. High-quality content increases the chance users stay on-page, share the tool, and return—engagement patterns that reinforce relevance over time.`,
+      ],
+    },
+    {
+      heading: "Troubleshooting rejected uploads and poor results",
+      level: 2,
+      paragraphs: [
+        `Upload portals reject files for three common reasons: file size exceeds the cap, dimensions are wrong, or the format is unsupported. If ${toolLabel.toLowerCase()} produces a valid file but the portal still rejects it, re-read the instructions for dimension rules, color depth, or metadata requirements.`,
+        `When output quality looks soft or blocky, reduce compression aggressiveness, increase dimensions slightly, or switch from JPG to WebP if the portal accepts it. For passport and ID photos, verify head size ratios and background color rules before compressing—some portals fail images for composition, not KB size alone.`,
+        `If processing feels slow, close unused browser tabs, use a smaller source file, or resize before targeting exact KB limits. Browser tools depend on device CPU; reducing pixel count first often speeds up iteration dramatically.`,
+      ],
+      bullets: [
+        "Rejected for size: lower KB target or reduce width/height first",
+        "Rejected for format: convert to JPG or PNG as specified",
+        "Blurry faces: avoid extreme compression on small dimension targets",
+        "Wrong colors: ensure sRGB export and avoid double conversion",
+        "Transparency issues: use PNG or WebP, not JPG",
+        "Still failing: download file info and compare against portal FAQ",
+      ],
+    },
+    {
+      heading: "Mobile-first workflow guide",
+      level: 2,
+      paragraphs: [
+        `Most image uploads now happen on phones—application forms, marketplace listings, chat attachments, and social posts. ${toolLabel} works in mobile browsers so you can fix a photo immediately before a deadline without transferring files to a laptop.`,
+        `On mobile, start from the original photo in your gallery rather than a forwarded WhatsApp image, which may already be heavily compressed. Use portrait orientation previews to check faces and text legibility. If the upload area feels small, rotate to landscape for easier drag-and-drop on tablets.`,
+        `Save the optimized file to your device, then use the portal's native upload picker. Some mobile browsers rename downloads; verify the final filename extension matches portal requirements before submitting.`,
+      ],
+    },
+    {
+      heading: "Using optimized images in content marketing",
+      level: 2,
+      paragraphs: [
+        `Blog posts, landing pages, and email campaigns all benefit from consistent image optimization. Hero images should load in under a second on 4G networks. Thumbnails should match display size to avoid wasted pixels. Screenshots should use WebP when your CMS supports it.`,
+        `Pair ${topic.toLowerCase()} with descriptive alt text, meaningful file names, and internal links to related tools on ReduceImageSize. That creates a content cluster search engines can follow, improving discoverability across your entire site—not just this page.`,
+        `Track Core Web Vitals in Google Search Console after deploying optimized assets. Improvements often appear within weeks as crawlers recrawl updated pages and users experience faster loads.`,
+      ],
+    },
+    {
+      heading: "Accessibility, alt text, and inclusive design",
+      level: 2,
+      paragraphs: [
+        "Optimized images should remain readable for assistive technology. Never compress text-heavy infographics so aggressively that small type becomes illegible. Provide alt text that describes the image purpose, not just file names.",
+        "High contrast matters for UI screenshots and charts. If compression reduces contrast, adjust levels before export or choose PNG for crisp lines. Accessible pages rank better because they serve broader audiences and reduce bounce rates from frustrated users.",
+      ],
+    },
+  ];
+}
+
 function technicalSections(ctx: SeoPageContext): SeoSection[] {
   const { topic, keywords } = ctx;
   const keywordLine = keywords.slice(0, 6).join(", ");
@@ -289,39 +354,39 @@ function buildExtendedFaqs(ctx: SeoPageContext) {
   return [
     {
       question: `Is ${topic.toLowerCase()} free on ReduceImageSize?`,
-      answer: `Yes. ${toolLabel} is free to use with no sign-up required. Processing happens in your browser.`,
+      answer: `Yes. ${toolLabel} is completely free to use with no sign-up, subscription, or watermark. Processing happens locally in your browser, so you can optimize personal, commercial, and confidential images without creating an account.`,
     },
     {
       question: "Are my images stored on your servers?",
-      answer: "No. Files are processed locally on your device. ReduceImageSize does not upload your images for storage.",
+      answer: "No. Files are processed locally on your device using browser APIs and Web Workers. ReduceImageSize does not upload your images for storage or training. Close the tab when finished if you are working with sensitive documents.",
     },
     {
       question: "Which formats can I upload?",
-      answer: "Most tools accept JPG, PNG, and WebP. HEIC conversion is supported on converter workflows for iPhone and iPad photos.",
+      answer: "Most tools accept JPG, JPEG, PNG, and WebP. HEIC conversion is supported on compatible converter workflows for iPhone and iPad photos. Choose output format based on whether you need transparency, smallest size, or maximum compatibility.",
     },
     {
       question: "Will compression ruin image quality?",
-      answer: "Moderate compression preserves detail for web and form use. Use the preview panel and adjust quality until the output looks acceptable.",
+      answer: "Moderate compression preserves detail for web and form use. Aggressive compression can introduce banding or blur, especially on low-resolution sources. Use the preview panel, zoom to 100%, and adjust quality until faces, text, and edges look acceptable before downloading.",
     },
     {
       question: "Can I use the output commercially?",
-      answer: "You retain rights to your own images. ReduceImageSize provides the tool only; content rights depend on your source assets.",
+      answer: "You retain rights to your own images. ReduceImageSize provides the processing tool only; content rights depend on your source assets, licenses, and model releases. Optimized files are yours to use in stores, ads, and client deliverables.",
     },
     {
       question: "Does this work on mobile phones?",
-      answer: "Yes. The tools are responsive and work in modern mobile browsers for quick uploads on the go.",
+      answer: "Yes. The tools are responsive and work in modern mobile browsers including Chrome and Safari on iOS and Android. Upload directly from your gallery before submitting forms, listings, or chat attachments on the go.",
     },
     {
       question: "What if my file is still too large?",
-      answer: "Try reducing dimensions first, switching to WebP or JPG, or lowering quality slightly. Exact-KB tools iterate toward your target automatically.",
+      answer: "Try reducing dimensions first, switching to WebP or JPG, or lowering quality slightly. Exact-KB tools iterate toward your target automatically. If still over limit, crop empty background areas or remove unnecessary metadata before compressing again.",
     },
     {
       question: "How is this different from desktop software?",
-      answer: "Browser tools start instantly, require no installation, and are ideal for one-off uploads. Desktop apps may offer more batch control for power users.",
+      answer: "Browser tools start instantly, require no installation, and are ideal for one-off uploads and portal deadlines. Desktop apps may offer batch automation, layers, and advanced retouching. Many professionals use both depending on the task.",
     },
     {
       question: "Can I process multiple images at once?",
-      answer: "Use the bulk image compressor for batches. Single-file tools focus on precise controls for one asset at a time.",
+      answer: "Use the bulk image compressor for batches. Single-file tools focus on precise controls for one asset at a time, which is better for passport photos, hero images, and strict KB targets that need individual review.",
     },
     {
       question: "How does ReduceImageSize help Google rankings?",
@@ -338,6 +403,22 @@ function buildExtendedFaqs(ctx: SeoPageContext) {
     {
       question: "How can I verify my file meets portal limits?",
       answer: "Check file properties on your device after download. Compare both KB size and pixel dimensions against the portal instructions. If rejected, reduce dimensions first, then re-run the target KB tool rather than lowering quality alone.",
+    },
+    {
+      question: `How long does ${topic.toLowerCase()} take?`,
+      answer: "Most single images process in a few seconds on modern devices. Very large files or strict KB targets may require multiple passes. Resize oversized photos first to speed up iteration and improve quality.",
+    },
+    {
+      question: "Does ReduceImageSize add watermarks?",
+      answer: "No. Downloaded files are clean without branding overlays. The tool is free to use without forcing watermarks or sign-up walls.",
+    },
+    {
+      question: "Can search engines index this tool page?",
+      answer: `Yes. This page is designed for indexing with canonical URLs, sitemap entries, structured FAQ and HowTo schema, Open Graph tags, and comprehensive ${topic.toLowerCase()} content so Google and Bing can understand and rank it for relevant queries.`,
+    },
+    {
+      question: "What browsers are supported?",
+      answer: "Latest versions of Chrome, Edge, Firefox, and Safari are recommended. Enable JavaScript and use updated browsers for best Web Worker and Canvas performance.",
     },
   ];
 }
@@ -364,6 +445,7 @@ export function buildSeoRichContent(ctx: SeoPageContext): SeoRichContent & { wor
     ...platformSections(ctx),
     ...technicalSections(ctx),
     ...extendedGuideSections(ctx),
+    ...deepDiveSections(ctx),
     relatedSection(ctx),
     {
       heading: `Start using ${ctx.toolLabel} now`,

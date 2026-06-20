@@ -25,6 +25,8 @@ type ImageToolWorkspaceProps = {
   initialHeight?: number;
   initialFormat?: string;
   workspaceId?: string;
+  toolTitle?: string;
+  toolBadge?: string;
 };
 
 const formatOptions = [
@@ -113,6 +115,8 @@ export default function ImageToolWorkspace({
   initialHeight,
   initialFormat,
   workspaceId = "tool-workspace",
+  toolTitle,
+  toolBadge,
 }: ImageToolWorkspaceProps) {
   const searchParams = useSearchParams();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -397,9 +401,16 @@ export default function ImageToolWorkspace({
 
   return (
     <div className="tool-workspace" id={workspaceId}>
+      {toolTitle && (
+        <div className="tool-workspace-header">
+          {toolBadge && <span className="badge-pill">{toolBadge}</span>}
+          <h1 className="tool-page-title">{toolTitle}</h1>
+        </div>
+      )}
+
       <div className="tool-main">
         <section
-          className={`tool-surface upload-surface ${items.length > 0 ? "upload-surface-compact" : ""} ${isDragging ? "is-dragging" : ""}`}
+          className={`tool-surface upload-surface upload-surface-prominent ${items.length > 0 ? "upload-surface-compact" : ""} ${isDragging ? "is-dragging" : ""}`}
           onDrop={onDrop}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
@@ -414,14 +425,14 @@ export default function ImageToolWorkspace({
           />
 
           <div className="upload-copy">
-            <p className="eyebrow">Drag and drop your images</p>
-            <h2>Upload image files for this tool</h2>
+            <p className="eyebrow upload-eyebrow">Start here — upload your image</p>
+            <h2>Drop files or click to browse</h2>
             <p>
-              Drop JPG, PNG, and WebP files here or browse from your device. Files are processed
-              locally and never stored.
+              JPG, PNG, WebP, and HEIC supported. Files stay on your device and are never uploaded to
+              our servers.
             </p>
             <div className="hero-cta">
-              <button type="button" className="btn btn-primary" onClick={() => inputRef.current?.click()}>
+              <button type="button" className="btn btn-primary btn-upload" onClick={() => inputRef.current?.click()}>
                 Select Images
               </button>
               <button type="button" className="btn btn-ghost" onClick={() => void onShare()}>

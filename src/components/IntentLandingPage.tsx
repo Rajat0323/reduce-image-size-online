@@ -111,25 +111,9 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
         {JSON.stringify(articleSchema)}
       </Script>
 
-      <main className="landing tool-page">
-        <section className="tool-page-header intent-tool-header">
-          <div className="section-content">
-            <span className="badge-pill">Intent-focused image tool</span>
-            <h1 className="tool-page-title">{page.heroTitle}</h1>
-            <p className="tool-page-lead">{page.heroCopy}</p>
-            <div className="hero-stats intent-highlight-row">
-              {page.highlights.map((highlight) => (
-                <div key={highlight} className="hero-stat compact-stat">
-                  <strong>{SITE_NAME}</strong>
-                  <p>{highlight}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
+      <main className="landing tool-page tool-page-upload-first">
         {parsedTool && (
-          <section className="tool-first-section">
+          <section className="tool-upload-hero" aria-label={`${page.heroTitle} upload workspace`}>
             <div className="section-content">
               <Suspense fallback={<div className="tool-surface">Loading workspace...</div>}>
                 <ImageToolWorkspace
@@ -138,8 +122,31 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
                   initialWidth={parsedTool.initialWidth}
                   initialHeight={parsedTool.initialHeight}
                   initialFormat={parsedTool.initialFormat}
+                  toolTitle={page.heroTitle}
+                  toolBadge="Intent-focused image tool"
                 />
               </Suspense>
+              <div className="tool-page-meta-below">
+                <p className="tool-page-lead">{page.heroCopy}</p>
+                <div className="hero-stats intent-highlight-row">
+                  {page.highlights.map((highlight) => (
+                    <div key={highlight} className="hero-stat compact-stat">
+                      <strong>{SITE_NAME}</strong>
+                      <p>{highlight}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {!parsedTool && (
+          <section className="tool-page-header intent-tool-header">
+            <div className="section-content">
+              <span className="badge-pill">Intent-focused image tool</span>
+              <h1 className="tool-page-title">{page.heroTitle}</h1>
+              <p className="tool-page-lead">{page.heroCopy}</p>
             </div>
           </section>
         )}
@@ -185,11 +192,14 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section section-compact">
           <div className="section-content">
             <h2 className="section-heading">Frequently asked questions</h2>
+            <p className="section-subtitle">
+              {allFaqs.length} answers about {page.heroTitle.toLowerCase()}, privacy, and upload tips.
+            </p>
             <div className="grid faq-grid">
-              {page.faqList.map((faq) => (
+              {allFaqs.map((faq) => (
                 <article key={faq.question} className="faq-card">
                   <h3>{faq.question}</h3>
                   <p>{faq.answer}</p>
