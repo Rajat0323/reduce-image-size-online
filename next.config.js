@@ -18,6 +18,14 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/8f3c2a1e9d4b7c6f5a0e.txt",
+        destination: "/api/indexnow-key",
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
