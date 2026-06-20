@@ -3,7 +3,21 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     unoptimized: true
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: "/ml-to-oz-calculator",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/blog/ml-to-oz-calculator-guide",
+        destination: "/blog",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

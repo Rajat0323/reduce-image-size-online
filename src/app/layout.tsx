@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ReduceImageSize | Fast Image Tool Hub",
     description:
-      "Use a complete tool hub to compress, resize, convert, crop, enhance images online, and convert ml to oz.",
+      "Use a complete tool hub to compress, resize, convert, crop, and enhance images online.",
     url: siteUrl,
     siteName: "ReduceImageSize",
     images: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ReduceImageSize | Fast Image Tool Hub",
-    description: "Compress, resize, convert, crop, enhance images, and convert ml to oz in your browser.",
+    description: "Compress, resize, convert, crop, and enhance images in your browser.",
     images: [`${siteUrl}/og-image.png`],
   },
 };

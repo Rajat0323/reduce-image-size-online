@@ -119,8 +119,6 @@ function iconForTool(slug: string) {
       return "BG";
     case "image-upscaler":
       return "UP";
-    case "ml-to-oz-calculator":
-      return "OZ";
     default:
       return "IM";
   }

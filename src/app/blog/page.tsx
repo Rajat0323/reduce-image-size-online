@@ -8,14 +8,14 @@ import { homeTools } from "@/lib/toolCatalog";
 export const metadata: Metadata = {
   title: "Image Compression Blog India",
   description:
-    "Read practical guides for image compression, exact-KB uploads, website speed, and ml to oz calculator searches.",
+    "Read practical guides for image compression, exact-KB uploads, format conversion, and website speed.",
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
     title: "Image Compression Blog India | ReduceImageSize",
     description:
-      "Practical guides for image compressor to 20KB, exact-size uploads, format conversion, faster web images, and ml to oz.",
+      "Practical guides for image compressor to 20KB, exact-size uploads, format conversion, and faster web images.",
     url: "https://www.reduceimagesizeonline.com/blog",
     siteName: "ReduceImageSize",
     images: [
@@ -58,9 +58,9 @@ export default function BlogPage() {
       copy: "Useful for web-ready profile photos, avatars, and lightweight assets.",
     },
     {
-      href: "/ml-to-oz-calculator",
-      title: "Use the ML to oz calculator",
-      copy: "Convert milliliters to ounces fast for US recipes, bottles, and packaging.",
+      href: "/remove-image-metadata",
+      title: "Remove image metadata",
+      copy: "Strip EXIF and GPS data from photos privately in your browser.",
     },
   ];
 

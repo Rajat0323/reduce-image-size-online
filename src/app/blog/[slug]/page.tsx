@@ -82,16 +82,12 @@ export default function BlogPost({ params }: Props) {
       copy: "Create transparent cutouts for listings, profile photos, and cards.",
     },
     {
-      href: "/ml-to-oz-calculator",
-      title: "ML to oz calculator",
-      copy: "Convert milliliters to ounces quickly for US recipes, bottle labels, and kitchen prep.",
+      href: "/remove-image-metadata",
+      title: "Remove image metadata",
+      copy: "Strip EXIF and GPS data from photos before sharing or uploading.",
     },
   ];
   const contextualToolLinks = toolLinks.filter((item) => {
-    if (lowerSlug.includes("ml-to-oz")) {
-      return item.href === "/ml-to-oz-calculator";
-    }
-
     if (lowerSlug.includes("convert") || lowerKeywords.some((keyword) => keyword.includes("png") || keyword.includes("jpg") || keyword.includes("webp"))) {
       return item.href === "/image-converter" || item.href === "/image-compressor";
     }
