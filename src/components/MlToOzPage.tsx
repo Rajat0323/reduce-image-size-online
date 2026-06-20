@@ -94,7 +94,7 @@ export default function MlToOzPage() {
 
         <section className="section section-alt">
           <div className="section-content seo-block">
-            <p className="section-heading">How to convert ml to oz</p>
+            <h2 className="section-heading">How to convert ml to oz</h2>
             <p>
               Multiply milliliters by 0.033814 to get US fluid ounces. This is the most useful
               formula for US recipes, drink measurements, supplement bottles, and product labels.
@@ -109,7 +109,7 @@ export default function MlToOzPage() {
 
         <section className="section">
           <div className="section-content">
-            <p className="section-heading">Frequently asked questions</p>
+            <h2 className="section-heading">Frequently asked questions</h2>
             <div className="grid faq-grid">
               {faqList.map((faq) => (
                 <article key={faq.question} className="faq-card">

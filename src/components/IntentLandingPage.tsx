@@ -78,14 +78,14 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
 
         <section className="section section-alt">
           <div className="section-content seo-block">
-            <p className="section-heading">{page.introTitle}</p>
+            <h2 className="section-heading">{page.introTitle}</h2>
             <p>{page.introCopy}</p>
           </div>
         </section>
 
         <section className="section">
           <div className="section-content">
-            <p className="section-heading">Why this workflow works</p>
+            <h2 className="section-heading">Why this workflow works</h2>
             <div className="grid features-grid">
               {page.benefits.map((benefit) => (
                 <article key={benefit.title} className="feature-card">
@@ -99,7 +99,7 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
 
         <section className="section section-alt">
           <div className="section-content">
-            <p className="section-heading">Common scenarios</p>
+            <h2 className="section-heading">Common scenarios</h2>
             <div className="use-cases-grid">
               {page.useCases.map((useCase) => (
                 <article key={useCase.title} className="use-case-card">
@@ -113,7 +113,7 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
 
         <section className="section">
           <div className="section-content">
-            <p className="section-heading">Frequently asked questions</p>
+            <h2 className="section-heading">Frequently asked questions</h2>
             <div className="grid faq-grid">
               {page.faqList.map((faq) => (
                 <article key={faq.question} className="faq-card">
@@ -127,7 +127,7 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
 
         <section className="section trust-section">
           <div className="section-content">
-            <p className="section-heading">Related tools and guides</p>
+            <h2 className="section-heading">Related tools and guides</h2>
             <div className="intent-link-grid">
               {page.relatedLinks.map((link) => (
                 <Link key={link.href} href={link.href} className="intent-link-card">

@@ -19,15 +19,7 @@ const legacyRedirects: Record<string, string> = {
   "compress-to-200kb": "/compress-image-to-200kb",
 };
 
-function clampMetaText(value: string, maxLength: number) {
-  if (value.length <= maxLength) {
-    return value;
-  }
-
-  const trimmed = value.slice(0, maxLength - 1);
-  const lastSpace = trimmed.lastIndexOf(" ");
-  return `${trimmed.slice(0, lastSpace > 40 ? lastSpace : trimmed.length).trim()}...`;
-}
+import { clampMetaText } from "@/seo/metaUtils";
 
 export function generateStaticParams() {
   return [...intentPages, ...toolPages].map((page) => ({

@@ -14,26 +14,14 @@ export const metadata: Metadata = {
     template: "%s | ReduceImageSize",
   },
   description:
-    "ReduceImageSize is a tool hub for image compression, resizing, conversion, background removal, and ml to oz conversion.",
-  keywords: [
-    "image compressor to 20kb",
-    "compress image to 20kb online india",
-    "reduce image size online",
-    "compress image online",
-    "jpg to png",
-    "png to jpg high quality",
-    "webp to jpg",
-    "compress image to 50kb",
-    "compress image to 100kb",
-    "compress image to 200kb",
-    "ml to oz",
-  ],
+    "Free online image tools for India — compress to 20KB, 50KB, 100KB, resize, convert JPG/PNG/WebP, crop, and remove backgrounds in your browser.",
+  manifest: "/site.webmanifest",
   icons: {
     icon: [
       { url: "/images/logo.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico" },
+      { url: "/favicon.ico", sizes: "32x32" },
     ],
-    shortcut: "/images/logo.svg",
+    shortcut: "/favicon.ico",
     apple: "/images/logo.svg",
   },
   openGraph: {
@@ -66,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         <script
           type="application/ld+json"

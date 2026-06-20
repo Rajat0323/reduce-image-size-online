@@ -6,7 +6,7 @@ import { getAllPosts } from "@/lib/blog";
 import { homeTools } from "@/lib/toolCatalog";
 
 export const metadata: Metadata = {
-  title: "Image Compression Blog India | ReduceImageSize",
+  title: "Image Compression Blog India",
   description:
     "Read practical guides for image compression, exact-KB uploads, website speed, and ml to oz calculator searches.",
   alternates: {
@@ -112,7 +112,7 @@ export default function BlogPage() {
         <section className="blog-grid">
           <div className="blog-stack">
             <div>
-              <p className="section-heading">Latest image guides</p>
+              <h2 className="section-heading">Latest image guides</h2>
               <p className="section-subtitle">
                 Every article is written to help visitors choose the right tool quickly and move
                 through exact-size uploads with fewer retries and more confidence about quality

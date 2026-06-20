@@ -27,17 +27,17 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: 60 }}>
-      <h1>About Reduce Image Size Online</h1>
+    <main style={{ maxWidth: 900, margin: "0 auto", padding: 60 }}>
+      <h1>About ReduceImageSize</h1>
       <p>
-        Reduce Image Size Online is a browser-based image compression tool designed to help
-        website owners, marketers, developers, and everyday users prepare lighter image files.
+        ReduceImageSize is a browser-based image tool hub designed to help website owners,
+        marketers, developers, and everyday users in India prepare lighter image files.
       </p>
 
       <p>
         The product focuses on exact-KB targets, format conversion, resizing, and private
         processing so files stay on your device while you work.
       </p>
-    </div>
+    </main>
   );
 }

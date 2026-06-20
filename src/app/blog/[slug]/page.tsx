@@ -5,8 +5,8 @@ import ReactMarkdown from "react-markdown";
 
 import "../../../styles/hub.css";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
-
-const baseUrl = "https://www.reduceimagesizeonline.com";
+import { buildMetaDescription } from "@/seo/metaUtils";
+import { SITE_NAME, SITE_URL } from "@/constants";
 
 type Props = {
   params: { slug: string };
@@ -18,31 +18,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: post.title,
-    description: post.description,
-    keywords: post.keywords,
+    description: buildMetaDescription(post.description),
     alternates: {
       canonical: `/blog/${params.slug}`,
     },
     openGraph: {
-      title: post.title,
-      description: post.description,
-      url: `${baseUrl}/blog/${params.slug}`,
-      siteName: "Reduce Image Size Online",
+      title: `${post.title} | ${SITE_NAME}`,
+      description: buildMetaDescription(post.description),
+      url: `${SITE_URL}/blog/${params.slug}`,
+      siteName: SITE_NAME,
       images: [
         {
-          url: `${baseUrl}/og-image.png`,
+          url: `${SITE_URL}/og-image.png`,
           width: 1200,
           height: 630,
-          alt: `${post.title} | ReduceImageSize`,
+          alt: post.title,
         },
       ],
       type: "article",
+      publishedTime: post.date,
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      images: [`${baseUrl}/og-image.png`],
+      title: `${post.title} | ${SITE_NAME}`,
+      description: buildMetaDescription(post.description),
+      images: [`${SITE_URL}/og-image.png`],
     },
   };
 }
@@ -146,21 +146,29 @@ export default function BlogPost({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: title,
-    description,
+    description: buildMetaDescription(description),
+    image: `${SITE_URL}/og-image.png`,
     author: {
       "@type": "Organization",
-      name: "Reduce Image Size Online",
+      name: SITE_NAME,
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
-      name: "Reduce Image Size Online",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/images/logo.svg`,
+      },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${baseUrl}/blog/${params.slug}`,
+      "@id": `${SITE_URL}/blog/${params.slug}`,
     },
     datePublished: date,
     dateModified: date,
+    inLanguage: "en-IN",
   };
 
   const breadcrumbSchema = {
@@ -171,19 +179,19 @@ export default function BlogPost({ params }: Props) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: baseUrl,
+        item: SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: `${baseUrl}/blog`,
+        item: `${SITE_URL}/blog`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: title,
-        item: `${baseUrl}/blog/${params.slug}`,
+        item: `${SITE_URL}/blog/${params.slug}`,
       },
     ],
   };

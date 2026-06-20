@@ -1,0 +1,25 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1222"/>
+      <stop offset="0.5" stop-color="#151B33"/>
+      <stop offset="1" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="200" y1="100" x2="1000" y2="530" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B5CF6"/>
+      <stop offset="0.55" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="980" cy="120" r="180" fill="#6366F1" fill-opacity="0.12"/>
+  <circle cx="180" cy="520" r="140" fill="#0EA5E9" fill-opacity="0.1"/>
+  <rect x="80" y="80" width="120" height="120" rx="32" fill="url(#accent)"/>
+  <text x="140" y="155" text-anchor="middle" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700">R</text>
+  <text x="240" y="175" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="700">ReduceImageSize</text>
+  <text x="240" y="240" fill="#C7D2FE" font-family="Arial, Helvetica, sans-serif" font-size="32">Free Online Image Tools for India</text>
+  <text x="240" y="310" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="24">Compress · Resize · Convert · Crop · Background Remove</text>
+  <rect x="240" y="360" width="280" height="56" rx="28" fill="url(#accent)"/>
+  <text x="380" y="397" text-anchor="middle" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600">Compress to 20KB Free</text>
+  <text x="240" y="480" fill="#64748B" font-family="Arial, Helvetica, sans-serif" font-size="20">reduceimagesizeonline.com</text>
+</svg>

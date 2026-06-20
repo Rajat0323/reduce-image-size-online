@@ -97,7 +97,7 @@ export default function ToolPageTemplate({ tool }: ToolPageTemplateProps) {
 
         <section className="section section-alt">
           <div className="section-content">
-            <p className="section-heading">More image tools</p>
+            <h2 className="section-heading">More image tools</h2>
             <div className="intent-link-grid">
               {relatedLinks
                 .filter((link) => link.href !== `/${tool.slug}`)
@@ -114,7 +114,7 @@ export default function ToolPageTemplate({ tool }: ToolPageTemplateProps) {
 
         <section className="section">
           <div className="section-content">
-            <p className="section-heading">Frequently asked questions</p>
+            <h2 className="section-heading">Frequently asked questions</h2>
             <div className="grid faq-grid">
               {tool.faqList.map((faq) => (
                 <article key={faq.question} className="faq-card">

@@ -79,7 +79,7 @@ export const toolPages: ToolPage[] = [
     shortName: "20KB",
     category: "image",
     mode: "compressor",
-    title: "Compress Image to 20KB Online Free | ReduceImageSize",
+    title: "Compress Image to 20KB Online Free",
     description:
       "Compress image to 20KB online free for signatures, forms, and strict upload portals with private browser-based processing.",
     heroTitle: "Compress Image to 20KB Online",
@@ -114,7 +114,7 @@ export const toolPages: ToolPage[] = [
     shortName: "30KB",
     category: "image",
     mode: "compressor",
-    title: "Compress Image to 30KB Online Free | ReduceImageSize",
+    title: "Compress Image to 30KB Online Free",
     description:
       "Compress image to 30KB online free for small photo uploads, application forms, and profile-image requirements.",
     heroTitle: "Compress Image to 30KB Online",
@@ -149,7 +149,7 @@ export const toolPages: ToolPage[] = [
     shortName: "Compressor",
     category: "image",
     mode: "compressor",
-    title: "Compress Image Online Free | ReduceImageSize",
+    title: "Compress Image Online Free",
     description:
       "Compress image online for JPG, PNG, and WebP. Adjust quality, compare before and after, and download lighter files fast.",
     heroTitle: "Compress Image Online - Free, Fast, and Secure",
@@ -429,7 +429,7 @@ export const toolPages: ToolPage[] = [
     shortName: "50KB",
     category: "image",
     mode: "compressor",
-    title: "Compress Image to 50KB Online Free | ReduceImageSize",
+    title: "Compress Image to 50KB Online Free",
     description:
       "Compress image to 50KB online free for forms, passport photos, and application portals. Fast browser-based compression.",
     heroTitle: "Compress Image to 50KB Online",
@@ -464,7 +464,7 @@ export const toolPages: ToolPage[] = [
     shortName: "100KB",
     category: "image",
     mode: "compressor",
-    title: "Compress Image to 100KB Online Free | ReduceImageSize",
+    title: "Compress Image to 100KB Online Free",
     description:
       "Compress image to 100KB online free for forms, profile pictures, and website uploads with fast browser-based processing.",
     heroTitle: "Compress Image to 100KB Online",
@@ -499,7 +499,7 @@ export const toolPages: ToolPage[] = [
     shortName: "200KB",
     category: "image",
     mode: "compressor",
-    title: "Compress Image to 200KB Online Free | ReduceImageSize",
+    title: "Compress Image to 200KB Online Free",
     description:
       "Compress image to 200KB online free for websites, blogs, stores, and lightweight publishing workflows.",
     heroTitle: "Compress Image to 200KB Online",

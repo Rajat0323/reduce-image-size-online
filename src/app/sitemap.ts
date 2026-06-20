@@ -1,12 +1,13 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { intentPages } from "@/lib/intentPages";
+import { getSeoArticles } from "@/lib/seoAutomationApi";
 import { toolPages } from "@/lib/toolCatalog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.reduceimagesizeonline.com";
-  const blogSlugs = getAllPosts().map((post) => post.slug);
-  const lastModified = new Date("2026-04-02");
+const baseUrl = "https://www.reduceimagesizeonline.com";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogPosts = getAllPosts();
   const excludedLegacyIntentSlugs = new Set([
     "compress-to-20kb",
     "compress-to-50kb",
@@ -14,47 +15,55 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "compress-to-200kb",
   ]);
 
-  const staticPages = [
-    "",
-    "/image-compressor",
-    "/image-resizer",
-    "/image-converter",
-    "/background-remover",
-    "/blog",
-    "/about",
-    "/contact",
-    "/privacy-policy",
-    "/terms",
+  const staticPages: { route: string; priority: number; changeFrequency: "daily" | "weekly" | "monthly" }[] = [
+    { route: "", priority: 1, changeFrequency: "daily" },
+    { route: "/image-compressor", priority: 0.9, changeFrequency: "weekly" },
+    { route: "/image-resizer", priority: 0.9, changeFrequency: "weekly" },
+    { route: "/image-converter", priority: 0.9, changeFrequency: "weekly" },
+    { route: "/background-remover", priority: 0.9, changeFrequency: "weekly" },
+    { route: "/compress-image-to-20kb", priority: 0.95, changeFrequency: "weekly" },
+    { route: "/blog", priority: 0.85, changeFrequency: "weekly" },
+    { route: "/articles", priority: 0.75, changeFrequency: "weekly" },
+    { route: "/about", priority: 0.6, changeFrequency: "monthly" },
+    { route: "/contact", priority: 0.6, changeFrequency: "monthly" },
+    { route: "/privacy-policy", priority: 0.4, changeFrequency: "monthly" },
+    { route: "/terms", priority: 0.4, changeFrequency: "monthly" },
   ];
 
+  const publishedArticles = await getSeoArticles().catch(() => []);
+
   return [
-    ...staticPages.map((route) => ({
+    ...staticPages.map(({ route, priority, changeFrequency }) => ({
       url: `${baseUrl}${route}`,
-      lastModified,
-      changeFrequency: route === "" ? ("daily" as const) : ("weekly" as const),
-      priority:
-        route === ""
-          ? 1
-          : ["/image-compressor", "/image-resizer", "/image-converter", "/background-remover", "/blog"].includes(route)
-            ? 0.9
-            : 0.7,
+      lastModified: new Date(),
+      changeFrequency,
+      priority,
     })),
 
-    ...blogSlugs.map((slug) => ({
-      url: `${baseUrl}/blog/${slug}`,
-      lastModified,
+    ...blogPosts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
       changeFrequency: "weekly" as const,
-      priority: slug === "complete-guide-to-image-tools-india" ? 0.85 : 0.72,
+      priority: post.slug === "complete-guide-to-image-tools-india" ? 0.85 : 0.72,
     })),
 
     ...[
       ...intentPages.filter((page) => !excludedLegacyIntentSlugs.has(page.slug)),
-      ...toolPages,
+      ...toolPages.filter((page) => page.slug !== "compress-image-to-20kb"),
     ].map((page) => ({
       url: `${baseUrl}/${page.slug}`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency: "weekly" as const,
-      priority: page.slug === "compress-image-to-20kb" ? 0.95 : 0.8,
+      priority: 0.8,
     })),
+
+    ...publishedArticles
+      .filter((article) => article.status === "published")
+      .map((article) => ({
+        url: `${baseUrl}/articles/${article.slug}`,
+        lastModified: article.published_at ? new Date(article.published_at) : new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      })),
   ];
 }

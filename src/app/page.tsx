@@ -7,16 +7,16 @@ import AdSlot from "@/components/AdSlot";
 import { homeTools } from "@/lib/toolCatalog";
 
 export const metadata: Metadata = {
-  title: "Image Compressor to 20KB Online India | ReduceImageSize",
+  title: "Image Compressor to 20KB Online India",
   description:
-    "Use an image compressor to 20KB online for forms, KYC, passport photos, mobile uploads, and ml to oz conversions.",
+    "Free image compressor to 20KB online for Indian forms, KYC, passport photos, SSC/UPSC uploads, and mobile-friendly image workflows.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Image Compressor to 20KB Online India | ReduceImageSize",
     description:
-      "Compress images to 20KB online for Indian forms, exam portals, KYC uploads, and mobile-friendly image workflows.",
+      "Free image compressor to 20KB online for Indian forms, exam portals, KYC uploads, and mobile-friendly image workflows.",
     url: "https://www.reduceimagesizeonline.com/",
     siteName: "ReduceImageSize",
     type: "website",
@@ -157,7 +157,7 @@ export default function Home() {
 
         <section className="section">
           <div className="section-content">
-            <p className="section-heading">Popular Tools</p>
+            <h2 className="section-heading">Popular Tools</h2>
             <div className="hub-grid">
               {imageTools.map((tool) => (
                 <Link key={tool.slug} href={`/${tool.slug}`} className="hub-card">
@@ -181,7 +181,7 @@ export default function Home() {
 
         <section className="section section-alt">
           <div className="section-content">
-            <p className="section-heading">Background Remover and AI Tools</p>
+            <h2 className="section-heading">Background Remover and AI Tools</h2>
             <div className="hub-grid">
               {aiTools.map((tool) => (
                 <Link key={tool.slug} href={`/${tool.slug}`} className="hub-card">
@@ -199,7 +199,7 @@ export default function Home() {
 
         <section className="section">
           <div className="section-content">
-            <p className="section-heading">Benefits</p>
+            <h2 className="section-heading">Benefits</h2>
             <div className="hub-benefit-grid">
               {benefits.map((benefit) => (
                 <article key={benefit.title} className="hub-benefit-card">
@@ -213,7 +213,7 @@ export default function Home() {
 
         <section className="section section-alt">
           <div className="section-content">
-            <p className="section-heading">Built for real India upload workflows</p>
+            <h2 className="section-heading">Built for real India upload workflows</h2>
             <div className="hub-benefit-grid">
               {indiaUseCases.map((item) => (
                 <article key={item.title} className="hub-benefit-card reveal-fade">
@@ -227,7 +227,7 @@ export default function Home() {
 
         <section className="section section-alt">
           <div className="section-content">
-            <p className="section-heading">Popular exact-size pages</p>
+            <h2 className="section-heading">Popular exact-size pages</h2>
             <div className="intent-link-grid">
               <Link href="/compress-image-to-20kb" className="intent-link-card">
                 <strong>Compress image to 20KB</strong>
@@ -255,7 +255,7 @@ export default function Home() {
 
         <section className="section">
           <div className="section-content">
-            <p className="section-heading">Frequently asked questions</p>
+            <h2 className="section-heading">Frequently asked questions</h2>
             <div className="grid faq-grid">
               {homeFaq.map((faq) => (
                 <article key={faq.question} className="faq-card">

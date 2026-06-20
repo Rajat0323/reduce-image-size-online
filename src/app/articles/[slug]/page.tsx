@@ -4,6 +4,8 @@ import { Children, isValidElement, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 
 import { getSeoArticle } from "@/lib/seoAutomationApi";
+import { buildMetaDescription } from "@/seo/metaUtils";
+import { SITE_NAME, SITE_URL } from "@/constants";
 
 type Props = {
   params: { slug: string };
@@ -108,25 +110,29 @@ function flattenNodeText(children: ReactNode): string {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await getSeoArticle(params.slug);
+  const title = article.meta_title;
+  const description = buildMetaDescription(article.meta_description);
+
   return {
-    title: article.meta_title,
-    description: article.meta_description,
+    title,
+    description,
     alternates: {
       canonical: `/articles/${article.slug}`,
     },
     openGraph: {
-      title: article.meta_title,
-      description: article.meta_description,
-      url: `https://www.reduceimagesizeonline.com/articles/${article.slug}`,
-      siteName: "ReduceImageSize",
-      images: ["https://www.reduceimagesizeonline.com/og-image.png"],
+      title: `${title} | ${SITE_NAME}`,
+      description,
+      url: `${SITE_URL}/articles/${article.slug}`,
+      siteName: SITE_NAME,
+      images: [`${SITE_URL}/og-image.png`],
       type: "article",
+      publishedTime: article.published_at || undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: article.meta_title,
-      description: article.meta_description,
-      images: ["https://www.reduceimagesizeonline.com/og-image.png"],
+      title: `${title} | ${SITE_NAME}`,
+      description,
+      images: [`${SITE_URL}/og-image.png`],
     },
   };
 }
@@ -138,12 +144,51 @@ export default async function PublicSeoArticlePage({ params }: Props) {
   const readTime = Math.max(4, Math.round(getWordCount(cleanedMarkdown) / 220));
   const primaryCta = getPrimaryCta(article.slug);
   const publishedLabel = article.published_at
-    ? new Date(article.published_at).toLocaleDateString("en-US", {
+    ? new Date(article.published_at).toLocaleDateString("en-IN", {
         year: "numeric",
         month: "short",
         day: "numeric",
       })
     : "Fresh draft";
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.meta_description,
+    image: `${SITE_URL}/og-image.png`,
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/images/logo.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/articles/${article.slug}`,
+    },
+    datePublished: article.published_at || undefined,
+    dateModified: article.published_at || undefined,
+    inLanguage: "en-IN",
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Guides", item: `${SITE_URL}/articles` },
+      { "@type": "ListItem", position: 3, name: article.title, item: `${SITE_URL}/articles/${article.slug}` },
+    ],
+  };
 
   const markdownComponents: Components = {
     h1: ({ children }) => {
@@ -162,6 +207,14 @@ export default async function PublicSeoArticlePage({ params }: Props) {
 
   return (
     <main className="blog-shell landing">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="section-content blog-stack">
         <article className="article-shell article-shell-premium">
           <div className="article-layout article-layout-premium">

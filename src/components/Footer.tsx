@@ -67,8 +67,8 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand-block">
             <p className="footer-intro">
-              ReduceImageSizeOnline delivers a privacy-first image platform that helps with exact-KB
-              compression, converter workflows, document uploads, and mobile-friendly optimization.
+              ReduceImageSize delivers a privacy-first image platform for exact-KB compression,
+              format conversion, Indian form uploads, and mobile-friendly optimization.
             </p>
             <p className="footnote footer-note">
               Need support? Use the contact page and we will help you out. We are honest about
@@ -83,7 +83,7 @@ export default function Footer() {
         </div>
 
         <p className="footnote footer-copyright">
-          (c) {new Date().getFullYear()} ReduceImageSizeOnline. All rights reserved.
+          (c) {new Date().getFullYear()} ReduceImageSize. All rights reserved.
         </p>
       </div>
     </footer>

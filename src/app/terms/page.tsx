@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms | ReduceImageSize",
+  title: "Terms of Service",
   description:
     "Review the ReduceImageSize terms and conditions for using the site's browser-based tools and content.",
   alternates: {
     canonical: "/terms",
   },
   openGraph: {
-    title: "Terms | ReduceImageSize",
+    title: "Terms of Service",
     description:
       "Review the ReduceImageSize terms and conditions for using the site's browser-based tools and content.",
     url: "https://www.reduceimagesizeonline.com/terms",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terms | ReduceImageSize",
+    title: "Terms of Service",
     description:
       "Review the ReduceImageSize terms and conditions for using the site's browser-based tools and content.",
     images: ["https://www.reduceimagesizeonline.com/og-image.png"],
