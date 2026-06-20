@@ -474,8 +474,8 @@
 }
 
 .chip.active {
-  background: rgba(99, 102, 241, 0.2);
-  border-color: rgba(99, 102, 241, 0.7);
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.65);
 }
 
 .double-field {
