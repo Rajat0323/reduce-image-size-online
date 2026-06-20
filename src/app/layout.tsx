@@ -15,6 +15,20 @@ export const metadata: Metadata = {
   },
   description:
     "Free online image tools worldwide — compress to exact KB, convert JPG PNG WebP HEIC, resize for social media, and optimize for websites.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
   manifest: "/site.webmanifest",
   icons: {
     icon: [

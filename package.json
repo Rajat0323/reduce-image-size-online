@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "index:submit": "npx --yes tsx scripts/submit-indexing.ts"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
