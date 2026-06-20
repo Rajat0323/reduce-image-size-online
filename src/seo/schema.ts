@@ -6,7 +6,7 @@ export const websiteSchema = {
   "@id": `${siteUrl}/#website`,
   name: "ReduceImageSize",
   url: siteUrl,
-  inLanguage: "en-IN",
+  inLanguage: "en",
 };
 
 export const organizationSchema = {

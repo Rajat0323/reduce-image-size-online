@@ -41,6 +41,21 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
     ],
   };
 
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: page.title.split("|")[0].trim(),
+    applicationCategory: "MultimediaApplication",
+    operatingSystem: "Web Browser",
+    url: `${SITE_URL}/${page.slug}`,
+    description: page.description,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+  };
+
   return (
     <>
       <Script id={`${page.slug}-faq`} type="application/ld+json" strategy="afterInteractive">
@@ -48,6 +63,9 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
       </Script>
       <Script id={`${page.slug}-breadcrumbs`} type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(breadcrumbSchema)}
+      </Script>
+      <Script id={`${page.slug}-software`} type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(softwareSchema)}
       </Script>
 
       <main className="landing">

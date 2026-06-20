@@ -4,28 +4,29 @@ import type { Metadata } from "next";
 
 import "../styles/landing.css";
 import AdSlot from "@/components/AdSlot";
-import { homeTools } from "@/lib/toolCatalog";
+import { homeTools, toolPages } from "@/lib/toolCatalog";
+import { intentPages } from "@/lib/intentPages";
 
 export const metadata: Metadata = {
-  title: "Image Compressor to 20KB Online India",
+  title: "Free Online Image Compressor, Converter & Resizer",
   description:
-    "Free image compressor to 20KB online for Indian forms, KYC, passport photos, SSC/UPSC uploads, and mobile-friendly image workflows.",
+    "Free online image tools for global users — compress to exact KB sizes, convert JPG PNG WebP HEIC, resize for social media, and remove backgrounds in your browser.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Image Compressor to 20KB Online India | ReduceImageSize",
+    title: "Free Online Image Compressor, Converter & Resizer | ReduceImageSize",
     description:
-      "Free image compressor to 20KB online for Indian forms, exam portals, KYC uploads, and mobile-friendly image workflows.",
+      "Compress, convert, and resize images online for websites, email, Instagram, WhatsApp, Shopify, WordPress, and more.",
     url: "https://www.reduceimagesizeonline.com/",
     siteName: "ReduceImageSize",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Compressor to 20KB Online India | ReduceImageSize",
+    title: "Free Online Image Compressor, Converter & Resizer | ReduceImageSize",
     description:
-      "Compress, resize, and convert images with exact-KB workflows for Indian uploads, plus ml to oz conversion.",
+      "50+ free image tools — compress to exact KB, convert formats, resize for social platforms, and optimize for the web.",
     images: ["https://www.reduceimagesizeonline.com/og-image.png"],
   },
 };
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 const benefits = [
   {
     title: "Free to use",
-    description: "Use the image tools without sign-up friction or gated workflows.",
+    description: "Use every image tool without sign-up friction or gated workflows.",
   },
   {
     title: "No sign-up required",
@@ -41,7 +42,7 @@ const benefits = [
   },
   {
     title: "Fast browser processing",
-    description: "Most tools run directly in the browser for quick results and lighter infrastructure.",
+    description: "Most tools run directly in the browser for quick results worldwide.",
   },
   {
     title: "Secure files",
@@ -49,33 +50,33 @@ const benefits = [
   },
 ];
 
-const indiaUseCases = [
+const globalUseCases = [
   {
-    title: "Government forms and exam portals",
-    description: "Target exact KB sizes for applications, hall tickets, and portal photo uploads.",
+    title: "Website and CMS publishing",
+    description: "Compress hero images, blog visuals, and product photos before WordPress or Shopify upload.",
   },
   {
-    title: "KYC and mobile document uploads",
-    description: "Prepare lighter images that upload faster on mobile data and lower-bandwidth connections.",
+    title: "Social media workflows",
+    description: "Prepare Instagram, Facebook, LinkedIn, WhatsApp, and Discord images with exact sizes.",
   },
   {
-    title: "Passport photos and job applications",
-    description: "Resize and compress profile images while keeping the subject clear and readable.",
+    title: "Email and messaging",
+    description: "Reduce attachment size for Gmail, Outlook, and mobile chat apps.",
   },
 ];
 
 const homeFaq = [
   {
-    question: "What tools are available in ReduceImageSize?",
-    answer: "ReduceImageSize includes image compressor, resizer, converter, crop, bulk compression, rotate and flip, background remover, image upscaler, and ml to oz calculator pages.",
+    question: "What tools are available on ReduceImageSize?",
+    answer: "ReduceImageSize includes image compressor, resizer, converter, crop, bulk compression, rotate and flip, background remover, image upscaler, metadata remover, and 50+ SEO-friendly workflow pages.",
   },
   {
-    question: "Can I compress image files to 50KB, 100KB, or 200KB?",
-    answer: "Yes. The hub includes dedicated SEO-friendly pages and presets for common exact-KB image targets.",
+    question: "Can I compress images to exact KB sizes?",
+    answer: "Yes. Dedicated pages cover 10KB through 1MB targets including 20KB, 50KB, 100KB, 200KB, 500KB, and more.",
   },
   {
     question: "Does ReduceImageSize store uploaded files?",
-    answer: "No. The tools are designed around browser-based processing and do not store images on a server.",
+    answer: "No. The tools use browser-based processing and do not store images on a server.",
   },
 ];
 
@@ -91,6 +92,11 @@ const faqSchema = {
     },
   })),
 };
+
+const exactKbPages = toolPages.filter((tool) => tool.slug.startsWith("compress-image-to-"));
+const converterPages = intentPages.filter((page) => page.slug.includes("converter"));
+const platformPages = intentPages.filter((page) => page.slug.startsWith("compress-image-for-"));
+const resizePages = intentPages.filter((page) => page.slug.startsWith("resize-image"));
 
 const imageTools = homeTools.filter((tool) => tool.category === "image");
 const aiTools = homeTools.filter((tool) => tool.category === "ai");
@@ -130,19 +136,19 @@ export default function Home() {
       <main className="landing hub-page">
         <section className="hero">
           <div className="hero-inner section-content">
-            <span className="badge-pill">ReduceImageSize tool hub</span>
-            <h1 className="hero-title">Image Compressor to 20KB Online for India - Free and Fast</h1>
+            <span className="badge-pill">50+ free image tools worldwide</span>
+            <h1 className="hero-title">Free Online Image Compressor, Converter and Resizer</h1>
             <p className="hero-subtitle">
-              Use one professional image platform for Indian form uploads, KYC photos, passport
-              images, website optimization, and everyday compression, resizing, conversion,
-              cropping, background removal, and upscaling.
+              Compress images to exact KB sizes, convert JPG PNG WebP HEIC, resize for Instagram,
+              WhatsApp, WordPress, Shopify, and optimize photos for websites, email, and social
+              media — all in your browser.
             </p>
             <div className="hero-cta">
-              <Link href="/compress-image-to-20kb" className="btn btn-primary">
-                Compress to 20KB
+              <Link href="/image-compressor" className="btn btn-primary">
+                Open Image Compressor
               </Link>
-              <Link href="/image-resizer" className="btn btn-ghost">
-                Try Image Resizer
+              <Link href="/image-converter" className="btn btn-ghost">
+                Try Image Converter
               </Link>
             </div>
           </div>
@@ -157,7 +163,7 @@ export default function Home() {
 
         <section className="section">
           <div className="section-content">
-            <h2 className="section-heading">Popular Tools</h2>
+            <h2 className="section-heading">Core Image Tools</h2>
             <div className="hub-grid">
               {imageTools.map((tool) => (
                 <Link key={tool.slug} href={`/${tool.slug}`} className="hub-card">
@@ -173,6 +179,34 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="section section-alt">
+          <div className="section-content">
+            <h2 className="section-heading">Exact KB Compression Pages</h2>
+            <div className="intent-link-grid">
+              {exactKbPages.map((page) => (
+                <Link key={page.slug} href={`/${page.slug}`} className="intent-link-card">
+                  <strong>{page.name}</strong>
+                  <span>{page.heroCopy}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="section-content">
+            <h2 className="section-heading">Format Converters</h2>
+            <div className="intent-link-grid">
+              {converterPages.map((page) => (
+                <Link key={page.slug} href={`/${page.slug}`} className="intent-link-card">
+                  <strong>{page.title.split("|")[0].trim()}</strong>
+                  <span>{page.description}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="section section-alt ad-band">
           <div className="section-content">
             <AdSlot label="Mid-page ad slot" compact />
@@ -181,7 +215,35 @@ export default function Home() {
 
         <section className="section section-alt">
           <div className="section-content">
-            <h2 className="section-heading">Background Remover and AI Tools</h2>
+            <h2 className="section-heading">Platform and Use-Case Tools</h2>
+            <div className="intent-link-grid">
+              {platformPages.map((page) => (
+                <Link key={page.slug} href={`/${page.slug}`} className="intent-link-card">
+                  <strong>{page.title.split("|")[0].trim()}</strong>
+                  <span>{page.description}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="section-content">
+            <h2 className="section-heading">Resize by Pixel Size</h2>
+            <div className="intent-link-grid">
+              {resizePages.map((page) => (
+                <Link key={page.slug} href={`/${page.slug}`} className="intent-link-card">
+                  <strong>{page.title.split("|")[0].trim()}</strong>
+                  <span>{page.description}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section section-alt">
+          <div className="section-content">
+            <h2 className="section-heading">AI and Specialty Tools</h2>
             <div className="hub-grid">
               {aiTools.map((tool) => (
                 <Link key={tool.slug} href={`/${tool.slug}`} className="hub-card">
@@ -193,6 +255,14 @@ export default function Home() {
                   <span className="hub-card-footer">Open AI tool</span>
                 </Link>
               ))}
+              <Link href="/remove-image-metadata" className="hub-card">
+                <span className="hub-card-icon">EX</span>
+                <div>
+                  <h3>Remove Image Metadata</h3>
+                  <p>Strip EXIF and GPS data from photos privately in your browser.</p>
+                </div>
+                <span className="hub-card-footer">Open tool</span>
+              </Link>
             </div>
           </div>
         </section>
@@ -213,42 +283,14 @@ export default function Home() {
 
         <section className="section section-alt">
           <div className="section-content">
-            <h2 className="section-heading">Built for real India upload workflows</h2>
+            <h2 className="section-heading">Built for global upload workflows</h2>
             <div className="hub-benefit-grid">
-              {indiaUseCases.map((item) => (
+              {globalUseCases.map((item) => (
                 <article key={item.title} className="hub-benefit-card reveal-fade">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </article>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section section-alt">
-          <div className="section-content">
-            <h2 className="section-heading">Popular exact-size pages</h2>
-            <div className="intent-link-grid">
-              <Link href="/compress-image-to-20kb" className="intent-link-card">
-                <strong>Compress image to 20KB</strong>
-                <span>Helpful for signatures, IDs, and strict upload limits</span>
-              </Link>
-              <Link href="/compress-image-to-30kb" className="intent-link-card">
-                <strong>Compress image to 30KB</strong>
-                <span>Useful for compact profile photos and portal uploads</span>
-              </Link>
-              <Link href="/compress-image-to-50kb" className="intent-link-card">
-                <strong>Compress image to 50KB</strong>
-                <span>For forms, profile photos, and compact uploads</span>
-              </Link>
-              <Link href="/compress-image-to-100kb" className="intent-link-card">
-                <strong>Compress image to 100KB</strong>
-                <span>Great for avatars, portals, and lightweight images</span>
-              </Link>
-              <Link href="/compress-image-to-200kb" className="intent-link-card">
-                <strong>Compress image to 200KB</strong>
-                <span>Useful for blogs, stores, and web publishing</span>
-              </Link>
             </div>
           </div>
         </section>

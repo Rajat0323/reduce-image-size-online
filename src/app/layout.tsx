@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | ReduceImageSize",
   },
   description:
-    "Free online image tools for India — compress to 20KB, 50KB, 100KB, resize, convert JPG/PNG/WebP, crop, and remove backgrounds in your browser.",
+    "Free online image tools worldwide — compress to exact KB, convert JPG PNG WebP HEIC, resize for social media, and optimize for websites.",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -54,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-IN">
+    <html lang="en">
       <head>
         <script
           type="application/ld+json"

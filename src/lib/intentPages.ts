@@ -1,3 +1,9 @@
+import {
+  converterIntentPages,
+  platformIntentPages,
+  resizeIntentPages,
+} from "./pageBuilders";
+
 export type LandingFAQ = {
   question: string;
   answer: string;
@@ -546,6 +552,9 @@ export const intentPages: IntentPage[] = [
       { href: "/jpg-to-webp-converter", label: "JPG to WEBP converter" },
     ],
   },
+  ...converterIntentPages,
+  ...platformIntentPages,
+  ...resizeIntentPages,
 ];
 
 export function getIntentPage(slug: string) {

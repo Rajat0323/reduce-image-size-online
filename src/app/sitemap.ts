@@ -8,11 +8,13 @@ const baseUrl = "https://www.reduceimagesizeonline.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = getAllPosts();
-  const excludedLegacyIntentSlugs = new Set([
+  const excludedSlugs = new Set([
     "compress-to-20kb",
     "compress-to-50kb",
     "compress-to-100kb",
     "compress-to-200kb",
+    "compress-image-for-ssc-form",
+    "compress-image-for-upsc-form",
   ]);
 
   const staticPages: { route: string; priority: number; changeFrequency: "daily" | "weekly" | "monthly" }[] = [
@@ -48,8 +50,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
 
     ...[
-      ...intentPages.filter((page) => !excludedLegacyIntentSlugs.has(page.slug)),
-      ...toolPages.filter((page) => page.slug !== "compress-image-to-20kb"),
+      ...intentPages.filter((page) => !excludedSlugs.has(page.slug)),
+      ...toolPages,
     ].map((page) => ({
       url: `${baseUrl}/${page.slug}`,
       lastModified: new Date(),

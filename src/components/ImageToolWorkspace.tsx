@@ -51,6 +51,32 @@ const backgroundOptions = [
   { label: "Brand", value: "#6d5efc" },
 ];
 
+async function normalizeUploadFile(file: File) {
+  const lowerName = file.name.toLowerCase();
+  const isHeic =
+    file.type === "image/heic" ||
+    file.type === "image/heif" ||
+    lowerName.endsWith(".heic") ||
+    lowerName.endsWith(".heif");
+
+  if (!isHeic) {
+    return file;
+  }
+
+  const { default: heic2any } = await import("heic2any");
+  const converted = await heic2any({
+    blob: file,
+    toType: "image/jpeg",
+    quality: 0.92,
+  });
+
+  const blob = Array.isArray(converted) ? converted[0] : converted;
+  return new File([blob], file.name.replace(/\.heic?$/i, ".jpg"), {
+    type: "image/jpeg",
+    lastModified: Date.now(),
+  });
+}
+
 async function readImageDimensions(file: File) {
   const url = URL.createObjectURL(file);
 
@@ -114,6 +140,8 @@ export default function ImageToolWorkspace({
   useEffect(() => {
     const queryFormat = searchParams.get("format");
     const queryTarget = searchParams.get("target");
+    const queryWidth = searchParams.get("width");
+    const queryHeight = searchParams.get("height");
 
     if (queryFormat && formatOptions.some((option) => option.value === queryFormat)) {
       setFormat(queryFormat);
@@ -132,6 +160,23 @@ export default function ImageToolWorkspace({
       setTargetKB(Number.isFinite(parsedTarget) && parsedTarget > 0 ? parsedTarget : "");
     } else {
       setTargetKB(defaultTargetKB || "");
+    }
+
+    if (mode === "resizer") {
+      const parsedWidth = queryWidth ? Number(queryWidth) : NaN;
+      const parsedHeight = queryHeight ? Number(queryHeight) : NaN;
+
+      if (Number.isFinite(parsedWidth) && parsedWidth > 0) {
+        setResizeWidth(parsedWidth);
+      }
+
+      if (Number.isFinite(parsedHeight) && parsedHeight > 0) {
+        setResizeHeight(parsedHeight);
+      }
+
+      if (Number.isFinite(parsedWidth) && parsedWidth > 0) {
+        setResizePreset("");
+      }
     }
   }, [defaultTargetKB, mode, searchParams]);
 
@@ -190,11 +235,12 @@ export default function ImageToolWorkspace({
 
     const hydrated = await Promise.all(
       validFiles.map(async (file) => {
-        const dimensions = await readImageDimensions(file);
+        const normalizedFile = await normalizeUploadFile(file);
+        const dimensions = await readImageDimensions(normalizedFile);
 
         return {
-          file,
-          originalUrl: URL.createObjectURL(file),
+          file: normalizedFile,
+          originalUrl: URL.createObjectURL(normalizedFile),
           width: dimensions.width,
           height: dimensions.height,
         };
@@ -351,7 +397,7 @@ export default function ImageToolWorkspace({
           <input
             ref={inputRef}
             type="file"
-            accept="image/*"
+            accept="image/*,.heic,.heif"
             multiple={multipleAllowed}
             onChange={onInputChange}
             className="hidden-input"

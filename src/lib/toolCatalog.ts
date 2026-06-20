@@ -1,3 +1,8 @@
+import {
+  extraExactKbTools,
+  metadataStripperTool,
+} from "./pageBuilders";
+
 export type ToolMode =
   | "compressor"
   | "resizer"
@@ -528,6 +533,8 @@ export const toolPages: ToolPage[] = [
     ],
     defaultTargetKB: 200,
   },
+  ...extraExactKbTools,
+  metadataStripperTool,
 ];
 
 export const homeTools = toolPages.filter((tool) => tool.homeFeatured);

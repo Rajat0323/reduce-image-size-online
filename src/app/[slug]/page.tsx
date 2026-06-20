@@ -7,6 +7,7 @@ import ToolPageTemplate from "@/components/ToolPageTemplate";
 import { SITE_NAME, SITE_URL } from "@/constants";
 import { getIntentPage, intentPages } from "@/lib/intentPages";
 import { getToolPage, toolPages } from "@/lib/toolCatalog";
+import { clampMetaText } from "@/seo/metaUtils";
 
 type Props = {
   params: { slug: string };
@@ -19,7 +20,10 @@ const legacyRedirects: Record<string, string> = {
   "compress-to-200kb": "/compress-image-to-200kb",
 };
 
-import { clampMetaText } from "@/seo/metaUtils";
+const indiaOnlySlugs = new Set([
+  "compress-image-for-ssc-form",
+  "compress-image-for-upsc-form",
+]);
 
 export function generateStaticParams() {
   return [...intentPages, ...toolPages].map((page) => ({
@@ -92,6 +96,9 @@ export function generateMetadata({ params }: Props): Metadata {
     alternates: {
       canonical: `/${page.slug}`,
     },
+    robots: indiaOnlySlugs.has(page.slug)
+      ? { index: false, follow: true }
+      : undefined,
     openGraph: {
       title,
       description,
