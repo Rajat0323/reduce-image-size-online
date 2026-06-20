@@ -277,73 +277,104 @@ async function removeBackgroundBitmap(bitmap, options) {
 
   ctx.drawImage(bitmap, 0, 0);
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const background = sampleBackgroundColor(imageData.data, canvas.width, canvas.height);
-  const threshold = Math.max(10, options.tolerance);
-  const visited = new Uint8Array(canvas.width * canvas.height);
-  const queue = [];
+  const { width, height } = canvas;
+  const data = imageData.data;
+  const background = sampleBackgroundColor(data, width, height);
+  const cornerColors = sampleCornerColors(data, width, height);
+  const threshold = Math.max(8, options.tolerance);
+  const softRange = threshold * 0.85;
+  const visited = new Uint8Array(width * height);
+  const queue = new Uint32Array(width * height);
+  let queueHead = 0;
+  let queueTail = 0;
+
+  function backgroundDistance(pixelIdx) {
+    let minDistance = colorDistance(data, pixelIdx, background);
+    for (const corner of cornerColors) {
+      minDistance = Math.min(minDistance, colorDistance(data, pixelIdx, corner));
+    }
+    return minDistance;
+  }
 
   function enqueue(x, y) {
-    const idx = y * canvas.width + x;
+    const idx = y * width + x;
     if (visited[idx]) {
       return;
     }
 
     const pixelIdx = idx * 4;
-    if (colorDistance(imageData.data, pixelIdx, background) > threshold) {
+    if (backgroundDistance(pixelIdx) > threshold) {
       return;
     }
 
     visited[idx] = 1;
-    queue.push(idx);
+    queue[queueTail++] = idx;
   }
 
-  for (let x = 0; x < canvas.width; x += 1) {
+  for (let x = 0; x < width; x += 1) {
     enqueue(x, 0);
-    enqueue(x, canvas.height - 1);
+    enqueue(x, height - 1);
   }
 
-  for (let y = 0; y < canvas.height; y += 1) {
+  for (let y = 0; y < height; y += 1) {
     enqueue(0, y);
-    enqueue(canvas.width - 1, y);
+    enqueue(width - 1, y);
   }
 
-  while (queue.length > 0) {
-    const current = queue.shift();
-    const x = current % canvas.width;
-    const y = Math.floor(current / canvas.width);
+  while (queueHead < queueTail) {
+    const current = queue[queueHead++];
+    const x = current % width;
+    const y = Math.floor(current / width);
     const pixelIdx = current * 4;
 
-    imageData.data[pixelIdx + 3] = 0;
+    data[pixelIdx + 3] = 0;
 
     if (x > 0) enqueue(x - 1, y);
-    if (x < canvas.width - 1) enqueue(x + 1, y);
+    if (x < width - 1) enqueue(x + 1, y);
     if (y > 0) enqueue(x, y - 1);
-    if (y < canvas.height - 1) enqueue(x, y + 1);
+    if (y < height - 1) enqueue(x, y + 1);
   }
 
-  for (let y = 1; y < canvas.height - 1; y += 1) {
-    for (let x = 1; x < canvas.width - 1; x += 1) {
-      const idx = y * canvas.width + x;
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const idx = y * width + x;
+      const pixelIdx = idx * 4;
+      const distance = backgroundDistance(pixelIdx);
+
       if (visited[idx]) {
         continue;
       }
 
-      const pixelIdx = idx * 4;
-      const nearBackground =
-        visited[idx - 1] ||
-        visited[idx + 1] ||
-        visited[idx - canvas.width] ||
-        visited[idx + canvas.width];
-
-      if (nearBackground) {
-        const distance = colorDistance(imageData.data, pixelIdx, background);
-        if (distance < threshold + 18) {
-          imageData.data[pixelIdx + 3] = Math.max(
-            88,
-            Math.round((distance / (threshold + 18)) * 255)
-          );
-        }
+      if (distance <= threshold) {
+        data[pixelIdx + 3] = 0;
+        continue;
       }
+
+      if (distance <= threshold + softRange) {
+        const alpha = Math.round(((distance - threshold) / softRange) * 255);
+        data[pixelIdx + 3] = Math.min(data[pixelIdx + 3], alpha);
+      }
+    }
+  }
+
+  for (let y = 1; y < height - 1; y += 1) {
+    for (let x = 1; x < width - 1; x += 1) {
+      const idx = y * width + x;
+      const pixelIdx = idx * 4;
+      const alpha = data[pixelIdx + 3];
+
+      if (alpha === 0 || alpha === 255) {
+        continue;
+      }
+
+      const spillStrength = 1 - alpha / 255;
+      data[pixelIdx] = Math.round(data[pixelIdx] * (1 - spillStrength * 0.35) + background.r * spillStrength * 0.35);
+      data[pixelIdx + 1] = Math.round(
+        data[pixelIdx + 1] * (1 - spillStrength * 0.35) + background.g * spillStrength * 0.35
+      );
+      data[pixelIdx + 2] = Math.round(
+        data[pixelIdx + 2] * (1 - spillStrength * 0.35) + background.b * spillStrength * 0.35
+      );
     }
   }
 
@@ -372,6 +403,21 @@ async function removeBackgroundBitmap(bitmap, options) {
     height: outputCanvas.height,
     quality: 0.92,
   };
+}
+
+function sampleCornerColors(data, width, height) {
+  const points = [
+    0,
+    (width - 1) * 4,
+    width * (height - 1) * 4,
+    (width * height - 1) * 4,
+  ];
+
+  return points.map((point) => ({
+    r: data[point],
+    g: data[point + 1],
+    b: data[point + 2],
+  }));
 }
 
 function applySharpen(ctx, width, height) {

@@ -326,25 +326,25 @@ export const toolPages: ToolPage[] = [
     heroTitle: "Remove Backgrounds with a Fast Browser-Based Tool",
     heroCopy:
       "Remove simple backgrounds, keep the main subject clearer, and export either a transparent cutout or a solid-color background in one workflow.",
-    badge: "AI tool",
+    badge: "Cutout tool",
     featureList: [
-      "Edge-aware background removal",
+      "Smart edge flood-fill removal",
       "Transparent or solid-color background export",
-      "Tolerance controls",
-      "No upload required",
+      "Adjustable tolerance controls",
+      "Private browser-based processing",
     ],
     faqList: [
       {
         question: "Can I remove image backgrounds online?",
-        answer: "Yes. The background remover creates a transparent PNG directly in the browser and can also add a clean solid-color background.",
+        answer: "Yes. The tool removes solid or studio-style backgrounds in your browser and exports PNG with transparency or a solid fill.",
       },
       {
         question: "What images work best for background removal?",
-        answer: "Images with clean or contrasting backgrounds produce the strongest results.",
+        answer: "Photos with plain white, gray, or solid-color backgrounds and clear subject separation produce the best cutouts.",
       },
       {
-        question: "Do I need to upload the image to use background removal?",
-        answer: "No. The background remover works locally in your browser.",
+        question: "Do I need to upload the image to a server?",
+        answer: "No. Background removal runs locally in your browser for better privacy.",
       },
     ],
     homeFeatured: true,

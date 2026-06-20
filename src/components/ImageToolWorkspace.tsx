@@ -21,6 +21,10 @@ type WorkspaceItem = {
 type ImageToolWorkspaceProps = {
   mode: ToolMode;
   defaultTargetKB?: number;
+  initialWidth?: number;
+  initialHeight?: number;
+  initialFormat?: string;
+  workspaceId?: string;
 };
 
 const formatOptions = [
@@ -105,6 +109,10 @@ function formatFileSize(size: number) {
 export default function ImageToolWorkspace({
   mode,
   defaultTargetKB,
+  initialWidth,
+  initialHeight,
+  initialFormat,
+  workspaceId = "tool-workspace",
 }: ImageToolWorkspaceProps) {
   const searchParams = useSearchParams();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -123,7 +131,7 @@ export default function ImageToolWorkspace({
   const [rotation, setRotation] = useState(0);
   const [flipX, setFlipX] = useState(false);
   const [flipY, setFlipY] = useState(false);
-  const [backgroundTolerance, setBackgroundTolerance] = useState(60);
+  const [backgroundTolerance, setBackgroundTolerance] = useState(42);
   const [backgroundColor, setBackgroundColor] = useState("transparent");
   const [upscaleFactor, setUpscaleFactor] = useState(2);
   const [sharpen, setSharpen] = useState(true);
@@ -145,6 +153,8 @@ export default function ImageToolWorkspace({
 
     if (queryFormat && formatOptions.some((option) => option.value === queryFormat)) {
       setFormat(queryFormat);
+    } else if (initialFormat && formatOptions.some((option) => option.value === initialFormat)) {
+      setFormat(initialFormat);
     } else if (mode === "background-remover") {
       setFormat("image/png");
     } else if (mode === "upscaler") {
@@ -163,8 +173,8 @@ export default function ImageToolWorkspace({
     }
 
     if (mode === "resizer") {
-      const parsedWidth = queryWidth ? Number(queryWidth) : NaN;
-      const parsedHeight = queryHeight ? Number(queryHeight) : NaN;
+      const parsedWidth = queryWidth ? Number(queryWidth) : initialWidth ?? NaN;
+      const parsedHeight = queryHeight ? Number(queryHeight) : initialHeight ?? NaN;
 
       if (Number.isFinite(parsedWidth) && parsedWidth > 0) {
         setResizeWidth(parsedWidth);
@@ -178,7 +188,7 @@ export default function ImageToolWorkspace({
         setResizePreset("");
       }
     }
-  }, [defaultTargetKB, mode, searchParams]);
+  }, [defaultTargetKB, initialFormat, initialHeight, initialWidth, mode, searchParams]);
 
   useEffect(() => {
     if (!resizePreset) {
@@ -386,10 +396,10 @@ export default function ImageToolWorkspace({
   }
 
   return (
-    <div className="tool-workspace">
+    <div className="tool-workspace" id={workspaceId}>
       <div className="tool-main">
         <section
-          className={`tool-surface upload-surface ${isDragging ? "is-dragging" : ""}`}
+          className={`tool-surface upload-surface ${items.length > 0 ? "upload-surface-compact" : ""} ${isDragging ? "is-dragging" : ""}`}
           onDrop={onDrop}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
@@ -565,16 +575,16 @@ export default function ImageToolWorkspace({
                 <label className="field-label">Background tolerance: {backgroundTolerance}</label>
                 <input
                   type="range"
-                  min="12"
-                  max="110"
-                  step="5"
+                  min="8"
+                  max="90"
+                  step="2"
                   value={backgroundTolerance}
                   onChange={(event) => setBackgroundTolerance(Number(event.target.value))}
                 />
 
                 <p className="control-help">
-                  Lower values protect the subject more. Increase only when some of the background
-                  still remains.
+                  Start around 35–45 for studio or white backgrounds. Increase slowly if edges
+                  remain. Decrease if the subject is being removed.
                 </p>
 
                 <label className="field-label">Background fill</label>
@@ -736,7 +746,7 @@ export default function ImageToolWorkspace({
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ delay: idx * 0.1 }}
                   >
-                    <div className="result-preview">
+                    <div className={`result-preview ${mode === "background-remover" ? "checkerboard-bg" : ""}`}>
                       {item.result ? (
                         <div className="comparison-frame">
                           <img src={item.originalUrl} alt="Original" />

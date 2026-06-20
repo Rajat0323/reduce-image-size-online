@@ -55,8 +55,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ].map((page) => ({
       url: `${baseUrl}/${page.slug}`,
       lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
+      changeFrequency: "daily" as const,
+      priority: page.slug.includes("compress") ? 0.9 : 0.85,
     })),
 
     ...publishedArticles

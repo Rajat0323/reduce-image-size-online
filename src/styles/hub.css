@@ -95,6 +95,194 @@
   padding-bottom: 70px;
 }
 
+.tool-page-header {
+  padding: 72px 20px 16px;
+  background:
+    radial-gradient(circle at top right, rgba(99, 102, 241, 0.22), transparent 38%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.04), transparent);
+}
+
+.intent-tool-header {
+  padding-bottom: 8px;
+}
+
+.tool-page-title {
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  margin: 8px 0 8px;
+  line-height: 1.15;
+}
+
+.tool-page-lead {
+  max-width: 720px;
+  color: var(--color-subtle);
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.tool-feature-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tool-feature-chip {
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.88rem;
+  color: var(--color-text);
+}
+
+.tool-first-section {
+  padding: 0 20px 24px;
+  margin-top: -4px;
+}
+
+.tool-first-section .section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tool-layout-priority {
+  align-items: start;
+}
+
+.tool-layout-sidebar-sticky {
+  position: sticky;
+  top: 88px;
+}
+
+.upload-surface-compact {
+  min-height: 120px;
+  padding: 18px 24px;
+}
+
+.upload-surface-compact .upload-copy h2 {
+  font-size: 1.1rem;
+}
+
+.checkerboard-bg {
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e5e7eb 75%),
+    linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+.comparison-frame {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.comparison-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.comparison-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.comparison-handle {
+  position: absolute;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--color-accent);
+  cursor: col-resize;
+}
+
+.comparison-labels {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.comparison-slider {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.seo-rich-section-wrap {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.seo-rich-article {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 860px;
+}
+
+.seo-rich-section p {
+  color: var(--color-subtle);
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+
+.seo-rich-h3 {
+  font-size: 1.25rem;
+  margin: 0 0 12px;
+}
+
+.seo-rich-list,
+.seo-rich-steps {
+  margin: 0 0 18px;
+  padding-left: 22px;
+  color: var(--color-subtle);
+  line-height: 1.7;
+}
+
+.seo-rich-steps li {
+  margin-bottom: 14px;
+}
+
+.seo-rich-steps p {
+  margin-top: 6px;
+}
+
+.seo-rich-cta {
+  margin-top: 8px;
+}
+
+.seo-inline-link {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.intent-highlight-row {
+  margin-top: 16px;
+}
+
+.compact-stat {
+  padding: 14px 16px;
+}
+
+.compact-stat p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
 .tool-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
@@ -140,7 +328,7 @@
   justify-content: space-between;
   gap: 20px;
   align-items: center;
-  min-height: 240px;
+  min-height: 180px;
 }
 
 .upload-surface.is-dragging {

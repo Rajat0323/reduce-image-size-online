@@ -1,18 +1,28 @@
 import Link from "next/link";
 import Script from "next/script";
+import { Suspense } from "react";
 
+import ImageToolWorkspace from "@/components/ImageToolWorkspace";
+import SeoRichContentBlock from "@/components/SeoRichContent";
 import { SITE_NAME, SITE_URL } from "@/constants";
+import { parseToolHref } from "@/lib/parseToolHref";
 import type { IntentPage } from "@/lib/intentPages";
+import { buildIntentSeoContext, buildSeoRichContent } from "@/lib/seoRichContent";
 
 type IntentLandingPageProps = {
   page: IntentPage;
 };
 
 export default function IntentLandingPage({ page }: IntentLandingPageProps) {
+  const parsedTool = parseToolHref(page.toolHref);
+  const seoContext = buildIntentSeoContext(page);
+  const seoContent = buildSeoRichContent(seoContext);
+  const allFaqs = [...page.faqList, ...seoContent.extendedFaqs];
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: page.faqList.map((faq) => ({
+    mainEntity: allFaqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
       acceptedAnswer: {
@@ -56,6 +66,33 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
     },
   };
 
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: page.heroTitle,
+    description: page.description,
+    step: seoContent.sections
+      .flatMap((section) => section.steps || [])
+      .map((step, index) => ({
+        "@type": "HowToStep",
+        position: index + 1,
+        name: step.title,
+        text: step.body,
+      })),
+  };
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: page.title,
+    description: page.description,
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+    },
+    wordCount: seoContent.wordCount,
+  };
+
   return (
     <>
       <Script id={`${page.slug}-faq`} type="application/ld+json" strategy="afterInteractive">
@@ -67,32 +104,45 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
       <Script id={`${page.slug}-software`} type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(softwareSchema)}
       </Script>
+      <Script id={`${page.slug}-howto`} type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(howToSchema)}
+      </Script>
+      <Script id={`${page.slug}-article`} type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(articleSchema)}
+      </Script>
 
-      <main className="landing">
-        <section className="hero">
-          <div className="hero-inner section-content">
+      <main className="landing tool-page">
+        <section className="tool-page-header intent-tool-header">
+          <div className="section-content">
             <span className="badge-pill">Intent-focused image tool</span>
-            <h1 className="hero-title">{page.heroTitle}</h1>
-            <p className="hero-subtitle">{page.heroCopy}</p>
-            <div className="hero-cta">
-              <Link href={page.toolHref} className="btn btn-primary">
-                {page.ctaLabel}
-              </Link>
-              <Link href="/image-compressor" className="btn btn-ghost">
-                Open full compressor
-              </Link>
-            </div>
-            <div className="hero-stats">
+            <h1 className="tool-page-title">{page.heroTitle}</h1>
+            <p className="tool-page-lead">{page.heroCopy}</p>
+            <div className="hero-stats intent-highlight-row">
               {page.highlights.map((highlight) => (
-                <div key={highlight} className="hero-stat">
+                <div key={highlight} className="hero-stat compact-stat">
                   <strong>{SITE_NAME}</strong>
                   <p>{highlight}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="hero-illustration" aria-hidden="true" />
         </section>
+
+        {parsedTool && (
+          <section className="tool-first-section">
+            <div className="section-content">
+              <Suspense fallback={<div className="tool-surface">Loading workspace...</div>}>
+                <ImageToolWorkspace
+                  mode={parsedTool.mode}
+                  defaultTargetKB={parsedTool.defaultTargetKB}
+                  initialWidth={parsedTool.initialWidth}
+                  initialHeight={parsedTool.initialHeight}
+                  initialFormat={parsedTool.initialFormat}
+                />
+              </Suspense>
+            </div>
+          </section>
+        )}
 
         <section className="section section-alt">
           <div className="section-content seo-block">
@@ -126,6 +176,12 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="section seo-rich-section-wrap">
+          <div className="section-content">
+            <SeoRichContentBlock content={seoContent} />
           </div>
         </section>
 
