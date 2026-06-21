@@ -37,7 +37,9 @@ export default function PrivacyPolicyPage() {
         We do not upload, store, or share your images on our servers.
       </p>
       <p>
-        No personal data is collected while using our tools.
+        We use Google Analytics to understand site usage (pages visited, device type,
+        approximate location). Image files you upload are still processed locally in your
+        browser and are not sent to our servers for editing.
       </p>
     </main>
   );

@@ -1,7 +1,10 @@
 import "../styles/globals.css";
 import "../styles/hub.css";
+import { Suspense } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import GoogleAnalytics from "../components/GoogleAnalytics";
+import GoogleAnalyticsRouteTracker from "../components/GoogleAnalyticsRouteTracker";
 import type { Metadata } from "next";
 import { organizationSchema, softwareSchema, websiteSchema } from "../seo/schema";
 
@@ -79,6 +82,10 @@ export default function RootLayout({
       </head>
 
       <body>
+        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalyticsRouteTracker />
+        </Suspense>
         <Header />
         {children}
         <Footer />
