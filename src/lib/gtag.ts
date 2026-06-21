@@ -1,3 +1,5 @@
+import { GA_MEASUREMENT_ID as DEFAULT_GA_ID } from "@/constants";
+
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -5,7 +7,7 @@ declare global {
   }
 }
 
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || DEFAULT_GA_ID;
 
 export function isGoogleAnalyticsEnabled() {
   return Boolean(GA_MEASUREMENT_ID);
