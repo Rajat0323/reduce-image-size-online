@@ -8,7 +8,7 @@ import { homeTools } from "@/lib/toolCatalog";
 export const metadata: Metadata = {
   title: "Image Compression Blog India",
   description:
-    "Read practical guides for image compression, exact-KB uploads, format conversion, and website speed.",
+    "Read practical guides for image compression, exact-KB uploads, format conversion, and website speed optimization.",
   alternates: {
     canonical: "/blog",
   },
@@ -58,9 +58,15 @@ export default function BlogPage() {
       copy: "Useful for web-ready profile photos, avatars, and lightweight assets.",
     },
     {
+<<<<<<< HEAD
       href: "/remove-image-metadata",
       title: "Remove image metadata",
       copy: "Strip EXIF and GPS data from photos privately in your browser.",
+=======
+      href: "/image-converter",
+      title: "Convert image formats",
+      copy: "Switch between JPG, PNG, WebP, and HEIC before uploading.",
+>>>>>>> cursor/seo-inpage-fixes-ed66
     },
   ];
 
