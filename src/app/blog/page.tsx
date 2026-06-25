@@ -58,15 +58,9 @@ export default function BlogPage() {
       copy: "Useful for web-ready profile photos, avatars, and lightweight assets.",
     },
     {
-<<<<<<< HEAD
-      href: "/remove-image-metadata",
-      title: "Remove image metadata",
-      copy: "Strip EXIF and GPS data from photos privately in your browser.",
-=======
       href: "/image-converter",
       title: "Convert image formats",
       copy: "Switch between JPG, PNG, WebP, and HEIC before uploading.",
->>>>>>> cursor/seo-inpage-fixes-ed66
     },
   ];
 
