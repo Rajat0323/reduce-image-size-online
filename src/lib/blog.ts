@@ -2,12 +2,18 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
+export type BlogFaq = {
+  question: string;
+  answer: string;
+};
+
 export type BlogPostMeta = {
   slug: string;
   title: string;
   description: string;
   keywords: string[];
   date: string;
+  faqs?: BlogFaq[];
 };
 
 export type BlogPost = BlogPostMeta & {
@@ -27,6 +33,30 @@ function parseKeywords(rawKeywords: unknown) {
     .filter(Boolean);
 }
 
+function parseFaqs(rawFaqs: unknown): BlogFaq[] {
+  if (!Array.isArray(rawFaqs)) {
+    return [];
+  }
+
+  return rawFaqs
+    .map((item) => {
+      if (!item || typeof item !== "object") {
+        return null;
+      }
+
+      const faq = item as { question?: unknown; answer?: unknown };
+      const question = String(faq.question || "").trim();
+      const answer = String(faq.answer || "").trim();
+
+      if (!question || !answer) {
+        return null;
+      }
+
+      return { question, answer };
+    })
+    .filter((faq): faq is BlogFaq => faq !== null);
+}
+
 function normalizeMeta(slug: string, data: Record<string, unknown>): BlogPostMeta {
   return {
     slug,
@@ -34,6 +64,7 @@ function normalizeMeta(slug: string, data: Record<string, unknown>): BlogPostMet
     description: String(data.description || ""),
     keywords: parseKeywords(data.keywords),
     date: String(data.date || "2026-01-01"),
+    faqs: parseFaqs(data.faqs),
   };
 }
 

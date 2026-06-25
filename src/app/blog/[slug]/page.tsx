@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: buildMetaDescription(post.description),
+    keywords: post.keywords,
     alternates: {
       canonical: `/blog/${params.slug}`,
     },
@@ -57,7 +58,8 @@ export default function BlogPost({ params }: Props) {
   const post = getPostBySlug(params.slug);
   if (!post) return notFound();
 
-  const { content, title, description, date } = post;
+  const { content, title, description, date, faqs = [] } = post;
+  const wordCount = content.split(/\s+/).filter(Boolean).length;
   const lowerSlug = params.slug.toLowerCase();
   const lowerKeywords = post.keywords.map((keyword) => keyword.toLowerCase());
   const toolLinks = [
@@ -81,17 +83,8 @@ export default function BlogPost({ params }: Props) {
       title: "Background remover",
       copy: "Create transparent cutouts for listings, profile photos, and cards.",
     },
-    {
-      href: "/ml-to-oz-calculator",
-      title: "ML to oz calculator",
-      copy: "Convert milliliters to ounces quickly for US recipes, bottle labels, and kitchen prep.",
-    },
   ];
   const contextualToolLinks = toolLinks.filter((item) => {
-    if (lowerSlug.includes("ml-to-oz")) {
-      return item.href === "/ml-to-oz-calculator";
-    }
-
     if (lowerSlug.includes("convert") || lowerKeywords.some((keyword) => keyword.includes("png") || keyword.includes("jpg") || keyword.includes("webp"))) {
       return item.href === "/image-converter" || item.href === "/image-compressor";
     }
@@ -168,7 +161,57 @@ export default function BlogPost({ params }: Props) {
     },
     datePublished: date,
     dateModified: date,
-    inLanguage: "en-IN",
+    wordCount,
+    inLanguage: "en",
+  };
+
+  const faqSchema =
+    faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: `How to use free online image tools on ${SITE_NAME}`,
+    description: buildMetaDescription(description),
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Choose the right tool",
+        text: "Match your goal to the compressor, resizer, converter, or exact-KB page on ReduceImageSize.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Upload your image",
+        text: "Use the upload area at the top of the tool page. Files stay in your browser during processing.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Adjust settings and preview",
+        text: "Resize or convert first if needed, then compress. Preview at full zoom before downloading.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 4,
+        name: "Download and verify",
+        text: "Check file size and dimensions against portal requirements before submitting.",
+      },
+    ],
   };
 
   const breadcrumbSchema = {
@@ -209,6 +252,22 @@ export default function BlogPost({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema),
+          }}
+        />
+      )}
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(howToSchema),
         }}
       />
 
@@ -304,6 +363,23 @@ export default function BlogPost({ params }: Props) {
                   ))}
                 </div>
               </section>
+
+              {faqs.length > 0 && (
+                <section className="article-cta">
+                  <h2>Frequently asked questions</h2>
+                  <p className="article-summary">
+                    {faqs.length} answers about free online image tools, privacy, formats, and SEO.
+                  </p>
+                  <div className="grid faq-grid" style={{ marginTop: 20 }}>
+                    {faqs.map((faq) => (
+                      <article key={faq.question} className="faq-card">
+                        <h3>{faq.question}</h3>
+                        <p>{faq.answer}</p>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
 
             <aside className="article-sidebar">
