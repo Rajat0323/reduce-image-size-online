@@ -88,6 +88,9 @@ export default function BlogPage() {
                 <Link href="/image-compressor" className="btn btn-ghost">
                   Open compressor
                 </Link>
+                <Link href="/blog/publish-log" className="btn btn-ghost">
+                  Daily publish log
+                </Link>
               </div>
             </div>
 
