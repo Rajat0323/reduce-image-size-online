@@ -29,7 +29,7 @@ export default function BlogPublishLogPage() {
         <section className="blog-hero-card">
           <h1 className="blog-title">Daily Blog Publish Log</h1>
           <p className="blog-summary">
-            Auto-published at 10:00 AM IST. Use the Search Console links below when you have time
+            Auto-published at 10:00 AM IST via Cursor. Use the Search Console links below when you have time
             to request manual indexing.
           </p>
           <Link href="/blog" className="btn btn-ghost">

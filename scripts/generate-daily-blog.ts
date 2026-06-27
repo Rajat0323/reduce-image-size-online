@@ -1,12 +1,10 @@
 #!/usr/bin/env npx tsx
 /**
- * Daily blog generator — run via GitHub Actions at 10:00 AM IST or manually:
+ * Daily blog generator — run via Cursor Automations at 10:00 AM IST or manually:
  *   npm run blog:daily
  */
 import fs from "fs";
 import path from "path";
-
-import matter from "gray-matter";
 
 import {
   appendPublishRecord,
@@ -80,13 +78,6 @@ async function main() {
   };
 
   console.log(JSON.stringify(summary, null, 2));
-
-  if (process.env.GITHUB_STEP_SUMMARY) {
-    fs.appendFileSync(
-      process.env.GITHUB_STEP_SUMMARY,
-      `\n## Daily blog published\n\n- **Title:** ${post.title}\n- **URL:** ${summary.url}\n- **Words:** ${post.totalWordCount}\n- **FAQs:** ${post.faqs.length}\n- **Manual index:** ${record.searchConsoleInspectUrl}\n- **History:** [BLOG_PUBLISH_HISTORY.md](./BLOG_PUBLISH_HISTORY.md)\n`
-    );
-  }
 }
 
 main().catch((error) => {

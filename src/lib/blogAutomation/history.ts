@@ -43,7 +43,7 @@ function writeHistoryMarkdown(history: BlogPublishRecord[]) {
   const lines = [
     "# Blog Publish History — Manual Indexing Links",
     "",
-    "Daily SEO blogs auto-published at **10:00 AM IST** via GitHub Actions.",
+    "Daily SEO blogs auto-published at **10:00 AM IST** via Cursor Automations.",
     "When you have time, request indexing in [Google Search Console](https://search.google.com/search-console).",
     "",
     "| Date | Title | Live URL | Words | FAQs | Index me |",
