@@ -3,6 +3,7 @@ import matter from "gray-matter";
 import { SITE_NAME, SITE_URL } from "@/constants";
 import type { BlogFaq } from "@/lib/blog";
 import { blogTopicQueue, blogUrl, toolUrl, type BlogTopic } from "@/lib/blogAutomation/topics";
+import { assertSiteToolSlug, validateBlogTopicTools } from "@/lib/blogAutomation/siteTools";
 
 const MIN_TOTAL_WORDS = 2600;
 const MIN_FAQ_COUNT = 12;
@@ -28,7 +29,14 @@ const globalExactKbLinks = [
   "compress-image-to-100kb",
   "compress-image-to-200kb",
   "compress-image-to-500kb",
-];
+].filter((slug) => {
+  try {
+    assertSiteToolSlug(slug, "globalExactKbLinks");
+    return true;
+  } catch {
+    return false;
+  }
+});
 
 function countWords(text: string) {
   return text.split(/\s+/).filter(Boolean).length;
@@ -367,6 +375,7 @@ export type GeneratedBlogPost = {
 };
 
 export function generateBlogPost(topic: BlogTopic, date: string): GeneratedBlogPost {
+  validateBlogTopicTools(topic);
   const faqs = buildFaqs(topic);
   let body = buildBody(topic, faqs);
   let bodyWordCount = countWords(body);

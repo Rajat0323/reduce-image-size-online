@@ -1,4 +1,5 @@
 import { SITE_URL } from "@/constants";
+import { validateBlogTopicTools } from "@/lib/blogAutomation/siteTools";
 
 export type BlogTopic = {
   slug: string;
@@ -314,7 +315,211 @@ export const blogTopicQueue: BlogTopic[] = [
     searchIntent: "Applicants preparing digital passport photos",
     audience: "Travelers, immigrants, and appointment schedulers",
   },
+  {
+    slug: "facebook-photo-compress-usa-uk-guide",
+    title: "Compress Photos for Facebook USA & UK | Free Online Guide 2026",
+    description:
+      "Compress images for Facebook posts, pages, and Marketplace in the USA and UK. Free browser tools, SEO tips, and upload workflows.",
+    keywords: [
+      "compress image for facebook",
+      "facebook photo size limit",
+      "facebook image compressor",
+      "reduce photo size facebook uk",
+      "facebook post image optimization",
+    ],
+    h1: "Compress Photos for Facebook: USA and UK Upload Guide",
+    primaryTool: { slug: "compress-image-for-facebook", label: "Compress for Facebook" },
+    relatedTools: [
+      { slug: "compress-image-for-instagram", label: "Compress for Instagram" },
+      { slug: "resize-image-to-1920x1080", label: "Resize to 1920×1080" },
+      { slug: "compress-image-to-200kb", label: "Compress to 200KB" },
+      { slug: "image-compressor", label: "Image Compressor" },
+      { slug: "crop-image", label: "Crop Image" },
+    ],
+    regions: ["USA", "UK", "Global"],
+    searchIntent: "Page owners and sellers optimizing Facebook feed and Marketplace photos",
+    audience: "Small businesses, social managers, and Marketplace sellers",
+  },
+  {
+    slug: "twitter-x-image-compress-usa-global-guide",
+    title: "Compress Images for Twitter / X USA | Free Post & Header Guide",
+    description:
+      "Compress photos for Twitter and X posts, headers, and threads. Free USA and global guide with browser-based tools.",
+    keywords: [
+      "compress image for twitter",
+      "x post image size",
+      "twitter photo compressor",
+      "reduce image size x upload",
+      "social media image compressor usa",
+    ],
+    h1: "Compress Images for Twitter and X: USA and Global Creator Guide",
+    primaryTool: { slug: "compress-image-for-twitter", label: "Compress for Twitter / X" },
+    relatedTools: [
+      { slug: "compress-image-for-linkedin", label: "Compress for LinkedIn" },
+      { slug: "resize-image-to-1920x1080", label: "Resize to 1920×1080" },
+      { slug: "compress-image-to-200kb", label: "Compress to 200KB" },
+      { slug: "image-compressor", label: "Image Compressor" },
+      { slug: "compress-image-for-facebook", label: "Compress for Facebook" },
+    ],
+    regions: ["USA", "UK", "Global"],
+    searchIntent: "Creators and brands posting images on X with size limits",
+    audience: "Creators, marketers, and news publishers",
+  },
+  {
+    slug: "email-image-compress-usa-uk-guide",
+    title: "Compress Images for Email USA & UK | Smaller Attachments Guide",
+    description:
+      "Compress photos for email attachments in the USA, UK, and worldwide. Stay under provider limits with free browser tools.",
+    keywords: [
+      "compress image for email",
+      "email attachment size limit",
+      "reduce photo size email",
+      "compress image outlook gmail",
+      "email image optimizer",
+    ],
+    h1: "Compress Images for Email Attachments: USA and UK Guide",
+    primaryTool: { slug: "compress-image-for-email", label: "Compress for Email" },
+    relatedTools: [
+      { slug: "compress-image-to-200kb", label: "Compress to 200KB" },
+      { slug: "compress-image-to-500kb", label: "Compress to 500KB" },
+      { slug: "heic-to-jpg-converter", label: "HEIC to JPG" },
+      { slug: "webp-to-jpg-converter", label: "WebP to JPG" },
+      { slug: "image-compressor", label: "Image Compressor" },
+    ],
+    regions: ["USA", "UK", "Global"],
+    searchIntent: "Professionals sending photo attachments through Gmail and Outlook",
+    audience: "Remote workers, recruiters, and customer support teams",
+  },
+  {
+    slug: "background-remover-product-photo-usa-guide",
+    title: "Background Remover for Product Photos USA | Free Online Guide",
+    description:
+      "Remove backgrounds from product photos for Amazon, Shopify, and eBay in the USA. Free browser cutout tool guide with SEO tips.",
+    keywords: [
+      "background remover online free",
+      "remove background product photo",
+      "transparent png product image",
+      "amazon white background photo",
+      "ecommerce background remover usa",
+    ],
+    h1: "Background Remover for Product Photos: USA Ecommerce Guide",
+    primaryTool: { slug: "background-remover", label: "Background Remover" },
+    relatedTools: [
+      { slug: "compress-image-for-amazon", label: "Compress for Amazon" },
+      { slug: "compress-image-for-shopify", label: "Compress for Shopify" },
+      { slug: "png-to-jpg-converter", label: "PNG to JPG" },
+      { slug: "compress-image-to-200kb", label: "Compress to 200KB" },
+      { slug: "image-resizer", label: "Image Resizer" },
+    ],
+    regions: ["USA", "UK", "Global"],
+    searchIntent: "Ecommerce sellers preparing white-background listing photos",
+    audience: "Amazon sellers, Shopify merchants, and product photographers",
+  },
+  {
+    slug: "bulk-image-compressor-ecommerce-usa-guide",
+    title: "Bulk Image Compressor for Ecommerce USA | Free Online Guide",
+    description:
+      "Compress hundreds of product images at once for USA and global stores. Free bulk compressor guide with ZIP download workflow.",
+    keywords: [
+      "bulk image compressor online",
+      "compress multiple images",
+      "batch image compression ecommerce",
+      "shopify bulk photo optimizer",
+      "product catalog image compression",
+    ],
+    h1: "Bulk Image Compression for Ecommerce Stores in the USA",
+    primaryTool: { slug: "bulk-image-compressor", label: "Bulk Image Compressor" },
+    relatedTools: [
+      { slug: "compress-image-for-shopify", label: "Compress for Shopify" },
+      { slug: "compress-image-for-amazon", label: "Compress for Amazon" },
+      { slug: "compress-image-to-200kb", label: "Compress to 200KB" },
+      { slug: "compress-image-to-500kb", label: "Compress to 500KB" },
+      { slug: "jpg-to-webp-converter", label: "JPG to WebP" },
+    ],
+    regions: ["USA", "UK", "Global"],
+    searchIntent: "Catalog managers batch-compressing large product image sets",
+    audience: "Ecommerce ops teams, agencies, and marketplace sellers",
+  },
+  {
+    slug: "remove-image-metadata-privacy-usa-guide",
+    title: "Remove Image Metadata & EXIF USA | Privacy Guide 2026",
+    description:
+      "Strip EXIF, GPS, and camera metadata from photos before sharing online. Free USA and global privacy guide with browser tools.",
+    keywords: [
+      "remove image metadata online",
+      "strip exif data",
+      "remove gps from photo",
+      "clean image metadata before upload",
+      "photo privacy exif remover",
+    ],
+    h1: "Remove Image Metadata and EXIF Before Uploading: USA Privacy Guide",
+    primaryTool: { slug: "remove-image-metadata", label: "Remove Image Metadata" },
+    relatedTools: [
+      { slug: "image-compressor", label: "Image Compressor" },
+      { slug: "compress-image-for-email", label: "Compress for Email" },
+      { slug: "heic-to-jpg-converter", label: "HEIC to JPG" },
+      { slug: "compress-image-for-linkedin", label: "Compress for LinkedIn" },
+      { slug: "compress-image-to-100kb", label: "Compress to 100KB" },
+    ],
+    regions: ["USA", "UK", "Global"],
+    searchIntent: "Users removing GPS and EXIF before posting or emailing photos",
+    audience: "Privacy-conscious users, journalists, and remote workers",
+  },
+  {
+    slug: "discord-avatar-image-compress-global-guide",
+    title: "Compress Images for Discord Avatars & Servers | Free Guide",
+    description:
+      "Compress Discord avatars, banners, and server images for USA, UK, and global communities. Free browser tool workflows.",
+    keywords: [
+      "compress image for discord",
+      "discord avatar size",
+      "discord banner compressor",
+      "reduce image size discord upload",
+      "discord server image optimizer",
+    ],
+    h1: "Compress Images for Discord Avatars and Server Branding",
+    primaryTool: { slug: "compress-image-for-discord", label: "Compress for Discord" },
+    relatedTools: [
+      { slug: "compress-image-to-500kb", label: "Compress to 500KB" },
+      { slug: "resize-image-to-400x400", label: "Resize to 400×400" },
+      { slug: "background-remover", label: "Background Remover" },
+      { slug: "png-to-jpg-converter", label: "PNG to JPG" },
+      { slug: "image-compressor", label: "Image Compressor" },
+    ],
+    regions: ["USA", "UK", "Global"],
+    searchIntent: "Community admins optimizing avatars and server assets",
+    audience: "Gamers, community managers, and Discord server owners",
+  },
+  {
+    slug: "image-upscaler-profile-photo-usa-guide",
+    title: "Image Upscaler for Profile Photos USA | Free Online Guide",
+    description:
+      "Upscale small profile photos and digital assets for LinkedIn, resumes, and websites in the USA and worldwide.",
+    keywords: [
+      "image upscaler online free",
+      "upscale profile photo",
+      "enhance image quality online",
+      "2x image upscaler browser",
+      "linkedin photo enhancer",
+    ],
+    h1: "Image Upscaler for Profile Photos and Digital Assets in the USA",
+    primaryTool: { slug: "image-upscaler", label: "Image Upscaler" },
+    relatedTools: [
+      { slug: "compress-image-for-linkedin", label: "Compress for LinkedIn" },
+      { slug: "resize-image-to-400x400", label: "Resize to 400×400" },
+      { slug: "background-remover", label: "Background Remover" },
+      { slug: "compress-image-to-100kb", label: "Compress to 100KB" },
+      { slug: "image-resizer", label: "Image Resizer" },
+    ],
+    regions: ["USA", "UK", "Global"],
+    searchIntent: "Users enlarging small avatars without desktop software",
+    audience: "Job seekers, designers, and social media users",
+  },
 ];
+
+for (const topic of blogTopicQueue) {
+  validateBlogTopicTools(topic);
+}
 
 export function toolUrl(slug: string) {
   return `${SITE_URL}/${slug}`;

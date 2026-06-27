@@ -25,7 +25,9 @@ GOAL: Publish one new 2600+ word SEO blog post with FAQ schema to main (producti
 
 STEPS:
 1. Run: npm run blog:daily
-   - Picks the next topic from src/lib/blogAutomation/topics.ts (USA, UK/London, global high-click tools: Amazon, LinkedIn, WordPress, Instagram, HEIC, Shopify, YouTube, Core Web Vitals, eBay, WhatsApp, passport photos)
+   - Picks the next topic from src/lib/blogAutomation/topics.ts — every topic maps to a REAL tool page on reduceimagesizeonline.com (validated in src/lib/blogAutomation/siteTools.ts)
+   - USA, UK/London, global high-click tools only: Amazon, LinkedIn, WordPress, Instagram, Facebook, Twitter/X, Email, HEIC, Shopify, YouTube, Core Web Vitals, eBay, WhatsApp, Discord, passport photos, background remover, bulk compressor, metadata stripper, image upscaler, and more
+   - NEVER invent tool URLs — only link to slugs from src/lib/toolCatalog.ts and src/lib/intentPages.ts
    - Generates markdown in src/content/blog/ with 14 FAQs in frontmatter (FAQPage schema)
    - Adds 8–15 internal links to live tools and evergreen blog guides
    - Updates BLOG_PUBLISH_HISTORY.md and public/blog-publish-history.json with Search Console inspect URLs
