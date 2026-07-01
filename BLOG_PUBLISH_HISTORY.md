@@ -5,6 +5,7 @@ When you have time, request indexing in [Google Search Console](https://search.g
 
 | Date | Title | Live URL | Words | FAQs | Index me |
 |------|-------|----------|-------|------|----------|
+| 2026-07-01 | JPG to WebP Converter Guide \| Website Speed & Google SEO 2026 | [Open blog](https://www.reduceimagesizeonline.com/blog/jpg-to-webp-converter-seo-performance-guide) | 2771 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fjpg-to-webp-converter-seo-performance-guide) |
 | 2026-06-30 | WordPress Image Compression SEO Guide \| Faster Sites USA & Global | [Open blog](https://www.reduceimagesizeonline.com/blog/wordpress-image-compression-seo-guide-global) | 2757 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fwordpress-image-compression-seo-guide-global) |
 | 2026-06-29 | LinkedIn Profile Photo Size Guide \| Compress for UK & USA Uploads | [Open blog](https://www.reduceimagesizeonline.com/blog/linkedin-profile-photo-compress-guide-uk-usa) | 2761 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Flinkedin-profile-photo-compress-guide-uk-usa) |
 | 2026-06-28 | Compress Images for Amazon Listings USA \| Free Online Guide 2026 | [Open blog](https://www.reduceimagesizeonline.com/blog/compress-image-for-amazon-listings-usa-guide) | 2757 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fcompress-image-for-amazon-listings-usa-guide) |
@@ -16,4 +17,4 @@ When you have time, request indexing in [Google Search Console](https://search.g
 3. Confirm sitemap is submitted: https://www.reduceimagesizeonline.com/sitemap.xml
 4. Check GA4 Realtime after 30 minutes to verify traffic tracking.
 
-_Last updated: 2026-06-30T04:30:42.276Z_
+_Last updated: 2026-07-01T04:30:48.743Z_
