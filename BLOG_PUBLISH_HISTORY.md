@@ -5,6 +5,7 @@ When you have time, request indexing in [Google Search Console](https://search.g
 
 | Date | Title | Live URL | Words | FAQs | Index me |
 |------|-------|----------|-------|------|----------|
+| 2026-07-04 | Shopify Product Image Compression Guide \| USA & Global Stores | [Open blog](https://www.reduceimagesizeonline.com/blog/shopify-product-image-compress-global-guide) | 2734 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fshopify-product-image-compress-global-guide) |
 | 2026-07-03 | HEIC to JPG Converter Guide for iPhone Users in the USA | [Open blog](https://www.reduceimagesizeonline.com/blog/heic-to-jpg-iphone-usa-upload-guide) | 2754 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fheic-to-jpg-iphone-usa-upload-guide) |
 | 2026-07-02 | Compress Photos for Instagram USA & UK \| Free Online Guide | [Open blog](https://www.reduceimagesizeonline.com/blog/instagram-photo-compress-usa-uk-guide) | 2750 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Finstagram-photo-compress-usa-uk-guide) |
 | 2026-07-01 | JPG to WebP Converter Guide \| Website Speed & Google SEO 2026 | [Open blog](https://www.reduceimagesizeonline.com/blog/jpg-to-webp-converter-seo-performance-guide) | 2771 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fjpg-to-webp-converter-seo-performance-guide) |
@@ -19,4 +20,4 @@ When you have time, request indexing in [Google Search Console](https://search.g
 3. Confirm sitemap is submitted: https://www.reduceimagesizeonline.com/sitemap.xml
 4. Check GA4 Realtime after 30 minutes to verify traffic tracking.
 
-_Last updated: 2026-07-03T04:30:51.267Z_
+_Last updated: 2026-07-04T04:30:46.442Z_
