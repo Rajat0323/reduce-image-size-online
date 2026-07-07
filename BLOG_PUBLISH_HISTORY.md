@@ -5,6 +5,7 @@ When you have time, request indexing in [Google Search Console](https://search.g
 
 | Date | Title | Live URL | Words | FAQs | Index me |
 |------|-------|----------|-------|------|----------|
+| 2026-07-07 | Compress Photos for eBay Listings USA \| Free Seller Guide | [Open blog](https://www.reduceimagesizeonline.com/blog/ebay-listing-photo-compress-usa-guide) | 2704 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Febay-listing-photo-compress-usa-guide) |
 | 2026-07-06 | Core Web Vitals Image Optimization USA \| Compress for Google SEO | [Open blog](https://www.reduceimagesizeonline.com/blog/core-web-vitals-image-compress-usa-guide) | 2750 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fcore-web-vitals-image-compress-usa-guide) |
 | 2026-07-05 | YouTube Thumbnail Size & Compression Guide \| USA Creators 2026 | [Open blog](https://www.reduceimagesizeonline.com/blog/youtube-thumbnail-resize-compress-guide) | 2733 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fyoutube-thumbnail-resize-compress-guide) |
 | 2026-07-04 | Shopify Product Image Compression Guide \| USA & Global Stores | [Open blog](https://www.reduceimagesizeonline.com/blog/shopify-product-image-compress-global-guide) | 2734 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fshopify-product-image-compress-global-guide) |
@@ -22,4 +23,4 @@ When you have time, request indexing in [Google Search Console](https://search.g
 3. Confirm sitemap is submitted: https://www.reduceimagesizeonline.com/sitemap.xml
 4. Check GA4 Realtime after 30 minutes to verify traffic tracking.
 
-_Last updated: 2026-07-06T04:30:45.720Z_
+_Last updated: 2026-07-07T04:31:05.438Z_
