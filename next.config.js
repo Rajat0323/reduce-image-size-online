@@ -17,7 +17,7 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/reduce-image-size-to-50kb",
+        source: "/blog/reduce-image-size-to-50kb",
         destination: "/blog/reduce-image-size-to-50kb-online",
         permanent: true,
       },
