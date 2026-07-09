@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin/", "/api/admin/", "/api/indexing/"],
+      disallow: ["/admin/", "/api/admin/", "/api/indexing/", "/blog/publish-log"],
     },
     sitemap: getSitemapUrl(),
     host: "https://www.reduceimagesizeonline.com",

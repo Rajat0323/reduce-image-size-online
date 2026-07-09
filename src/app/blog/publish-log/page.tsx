@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Blog Publish History — Manual Indexing Links",
   description:
     "Daily auto-published SEO blog history with live URLs and Google Search Console inspect links for manual indexing.",
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 };
 
 type HistoryRow = {

@@ -6,14 +6,14 @@ import { getSeoArticles } from "@/lib/seoAutomationApi";
 export const metadata: Metadata = {
   title: "Image Guides & Tips",
   description:
-    "Browse practical image compression guides, exact-KB upload tips, and format conversion articles for Indian forms, KYC, and website optimization.",
+    "Browse practical image compression guides, exact-KB upload tips, and format conversion articles for USA, UK, and global workflows.",
   alternates: {
     canonical: "/articles",
   },
   openGraph: {
     title: "Image Guides & Tips | ReduceImageSize",
     description:
-      "Practical image compression guides and exact-KB upload tips for Indian forms, KYC, passport photos, and website optimization.",
+      "Practical image compression guides and exact-KB upload tips for websites, social media, and document portals.",
     url: "https://www.reduceimagesizeonline.com/articles",
     siteName: "ReduceImageSize",
     images: ["https://www.reduceimagesizeonline.com/og-image.png"],
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Image Guides & Tips | ReduceImageSize",
     description:
-      "Practical image compression guides and exact-KB upload tips for Indian forms, KYC, and website optimization.",
+      "Practical image compression guides and exact-KB upload tips for global upload workflows.",
     images: ["https://www.reduceimagesizeonline.com/og-image.png"],
   },
 };
@@ -38,7 +38,7 @@ export default async function PublicSeoArticlesPage() {
           <h1 className="blog-title">Image Guides & Tips</h1>
           <p className="blog-summary">
             Practical guides for image compression, exact-KB uploads, format conversion, and
-            mobile-friendly workflows for Indian government forms, KYC, and website optimization.
+            mobile-friendly workflows for USA, UK, and global upload portals.
           </p>
         </header>
 

@@ -16,6 +16,11 @@ const nextConfig = {
         destination: "/blog",
         permanent: true,
       },
+      {
+        source: "/reduce-image-size-to-50kb",
+        destination: "/blog/reduce-image-size-to-50kb-online",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

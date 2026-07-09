@@ -1,7 +1,7 @@
 {
   "name": "ReduceImageSize",
   "short_name": "ReduceImageSize",
-  "description": "India-focused image tools for compression, conversion, resizing, and exact-KB uploads.",
+  "description": "Free online image tools for compression, conversion, resizing, and exact-KB uploads worldwide.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b1222",

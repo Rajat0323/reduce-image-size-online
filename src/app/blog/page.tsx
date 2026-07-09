@@ -6,16 +6,16 @@ import { getAllPosts } from "@/lib/blog";
 import { homeTools } from "@/lib/toolCatalog";
 
 export const metadata: Metadata = {
-  title: "Image Compression Blog India",
+  title: "Image Compression & SEO Blog",
   description:
-    "Read practical guides for image compression, exact-KB uploads, format conversion, and website speed optimization.",
+    "Read practical guides for image compression, exact-KB uploads, format conversion, and website speed optimization for USA, UK, and global users.",
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
-    title: "Image Compression Blog India | ReduceImageSize",
+    title: "Image Compression & SEO Blog | ReduceImageSize",
     description:
-      "Practical guides for image compressor to 20KB, exact-size uploads, format conversion, and faster web images.",
+      "Practical guides for exact-KB compression, format conversion, platform uploads, and faster web images.",
     url: "https://www.reduceimagesizeonline.com/blog",
     siteName: "ReduceImageSize",
     images: [
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Compression Blog India | ReduceImageSize",
+    title: "Image Compression & SEO Blog | ReduceImageSize",
     description:
-      "Learn exact-KB compression, image conversion, and mobile-friendly upload workflows for India-focused use cases.",
+      "Learn exact-KB compression, image conversion, and platform upload workflows for USA, UK, and global audiences.",
     images: ["https://www.reduceimagesizeonline.com/og-image.png"],
   },
 };
@@ -73,8 +73,8 @@ export default function BlogPage() {
               <span className="eyebrow-link">Featured guide</span>
               <h1 className="blog-title">Image Optimization Blog</h1>
               <p className="blog-summary">
-                Learn how to compress, resize, convert, and prepare images for Indian government
-                forms, KYC uploads, passport photos, exams, mobile uploads, and fast websites.
+                Learn how to compress, resize, convert, and prepare images for Amazon, LinkedIn,
+                Instagram, passport photos, website SEO, mobile uploads, and fast global websites.
               </p>
               <div className="blog-chip-row">
                 <span className="blog-chip">Exact-KB workflows</span>

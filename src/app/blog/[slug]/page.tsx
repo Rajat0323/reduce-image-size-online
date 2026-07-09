@@ -296,7 +296,7 @@ export default function BlogPost({ params }: Props) {
               <span>{post.keywords.slice(0, 3).join(" | ")}</span>
             </div>
             <div className="article-chip-row">
-              <span className="article-chip">India-focused use cases</span>
+              <span className="article-chip">USA, UK & global workflows</span>
               <span className="article-chip">Internal tool links</span>
               <span className="article-chip">Honest quality guidance</span>
             </div>
@@ -403,8 +403,8 @@ export default function BlogPost({ params }: Props) {
                   <span>Internal-tool focused journey</span>
                 </div>
                 <div className="article-stat">
-                  <strong>India</strong>
-                  <span>Use cases like forms, KYC, and mobile uploads</span>
+                  <strong>Global</strong>
+                  <span>USA, UK, and worldwide upload workflows</span>
                 </div>
               </div>
 

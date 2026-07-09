@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Children, isValidElement, type ReactNode } from "react";
@@ -109,7 +110,14 @@ function flattenNodeText(children: ReactNode): string {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = await getSeoArticle(params.slug);
+  const article = await getSeoArticle(params.slug).catch(() => null);
+  if (!article) {
+    return {
+      title: "Article not found",
+      robots: { index: false, follow: false },
+    };
+  }
+
   const title = article.meta_title;
   const description = buildMetaDescription(article.meta_description);
 
@@ -138,7 +146,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PublicSeoArticlePage({ params }: Props) {
-  const article = await getSeoArticle(params.slug);
+  const article = await getSeoArticle(params.slug).catch(() => null);
+  if (!article) {
+    notFound();
+  }
+
   const cleanedMarkdown = stripLeadingTitle(article.content_markdown);
   const headings = extractHeadings(cleanedMarkdown);
   const readTime = Math.max(4, Math.round(getWordCount(cleanedMarkdown) / 220));
@@ -177,7 +189,7 @@ export default async function PublicSeoArticlePage({ params }: Props) {
     },
     datePublished: article.published_at || undefined,
     dateModified: article.published_at || undefined,
-    inLanguage: "en-IN",
+    inLanguage: "en",
   };
 
   const breadcrumbSchema = {

@@ -31,14 +31,15 @@ export const softwareSchema = {
   url: siteUrl,
   image: `${siteUrl}/og-image.png`,
   description:
-    "ReduceImageSize is an India-focused image tool hub for compression, resizing, conversion, cropping, rotate and flip edits, background removal, and image upscaling.",
+    "ReduceImageSize is a global image tool hub for compression, resizing, conversion, cropping, background removal, metadata stripping, HEIC conversion, and platform-specific uploads.",
   offers: {
     "@type": "Offer",
     price: "0",
     priceCurrency: "USD",
   },
   featureList: [
-    "Compress JPG, PNG, and WEBP images",
+    "Compress JPG, PNG, and WebP images",
+    "Convert HEIC to JPG in the browser",
     "Resize by dimensions, percentage, and presets",
     "Convert between JPG, PNG, and WebP",
     "Crop image with aspect presets",
@@ -46,8 +47,8 @@ export const softwareSchema = {
     "Rotate and flip image",
     "Background remover",
     "Image upscaler",
-    "Download single image or ZIP file",
-    "Browser-based processing",
-    "Image compressor to 20KB online",
+    "Remove image metadata and EXIF",
+    "Platform presets for Instagram, WhatsApp, Shopify, and more",
+    "Browser-based private processing",
   ],
 };
