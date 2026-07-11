@@ -5,6 +5,7 @@ When you have time, request indexing in [Google Search Console](https://search.g
 
 | Date | Title | Live URL | Words | FAQs | Index me |
 |------|-------|----------|-------|------|----------|
+| 2026-07-11 | Compress Images for Twitter / X USA \| Free Post & Header Guide | [Open blog](https://www.reduceimagesizeonline.com/blog/twitter-x-image-compress-usa-global-guide) | 2797 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Ftwitter-x-image-compress-usa-global-guide) |
 | 2026-07-10 | Compress Photos for Facebook USA & UK \| Free Online Guide 2026 | [Open blog](https://www.reduceimagesizeonline.com/blog/facebook-photo-compress-usa-uk-guide) | 2765 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Ffacebook-photo-compress-usa-uk-guide) |
 | 2026-07-09 | Passport Photo Size & Compression USA & UK \| Free Online Guide | [Open blog](https://www.reduceimagesizeonline.com/blog/passport-photo-compress-usa-uk-guide) | 2718 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fpassport-photo-compress-usa-uk-guide) |
 | 2026-07-08 | Compress Images for WhatsApp UK & Global \| Free Online Guide | [Open blog](https://www.reduceimagesizeonline.com/blog/whatsapp-image-compress-uk-global-guide) | 2758 | 14 | [Search Console inspect](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.reduceimagesizeonline.com&id=https%3A%2F%2Fwww.reduceimagesizeonline.com%2Fblog%2Fwhatsapp-image-compress-uk-global-guide) |
@@ -26,4 +27,4 @@ When you have time, request indexing in [Google Search Console](https://search.g
 3. Confirm sitemap is submitted: https://www.reduceimagesizeonline.com/sitemap.xml
 4. Check GA4 Realtime after 30 minutes to verify traffic tracking.
 
-_Last updated: 2026-07-10T04:30:49.337Z_
+_Last updated: 2026-07-11T04:30:52.002Z_
