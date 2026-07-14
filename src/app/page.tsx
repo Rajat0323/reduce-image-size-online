@@ -3,7 +3,6 @@ import Script from "next/script";
 import type { Metadata } from "next";
 
 import "../styles/landing.css";
-import AdSlot from "@/components/AdSlot";
 import { homeTools, toolPages } from "@/lib/toolCatalog";
 import { intentPages } from "@/lib/intentPages";
 
@@ -153,12 +152,6 @@ export default function Home() {
           <div className="hero-illustration" aria-hidden="true" />
         </section>
 
-        <section className="section section-alt ad-band">
-          <div className="section-content">
-            <AdSlot label="Top banner ad slot" compact />
-          </div>
-        </section>
-
         <section className="section">
           <div className="section-content">
             <h2 className="section-heading">Core Image Tools</h2>
@@ -202,12 +195,6 @@ export default function Home() {
                 </Link>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="section section-alt ad-band">
-          <div className="section-content">
-            <AdSlot label="Mid-page ad slot" compact />
           </div>
         </section>
 

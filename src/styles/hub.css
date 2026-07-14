@@ -7,41 +7,6 @@
   cursor: pointer;
 }
 
-.ad-band {
-  padding-top: 30px;
-  padding-bottom: 0;
-}
-
-.ad-slot {
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  background: var(--color-card);
-  color: var(--color-subtle);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.ad-slot span {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.ad-slot strong {
-  color: var(--color-text);
-}
-
-.ad-slot p {
-  margin: 0;
-}
-
-.ad-slot-compact {
-  min-height: 120px;
-  justify-content: center;
-}
-
 .hub-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

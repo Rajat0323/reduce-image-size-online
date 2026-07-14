@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
 
-import AdSlot from "@/components/AdSlot";
 import ImageToolWorkspace from "@/components/ImageToolWorkspace";
 import SeoRichContentBlock from "@/components/SeoRichContent";
 import ToolPageSchemas from "@/components/ToolPageSchemas";
@@ -75,7 +74,6 @@ export default function ToolPageTemplate({ tool }: ToolPageTemplateProps) {
                     ))}
                   </ul>
                 </div>
-                <AdSlot label="Sidebar ad slot" compact />
               </aside>
             </div>
 
@@ -105,12 +103,6 @@ export default function ToolPageTemplate({ tool }: ToolPageTemplateProps) {
         <section className="section seo-rich-section-wrap">
           <div className="section-content">
             <SeoRichContentBlock content={seoContent} />
-          </div>
-        </section>
-
-        <section className="section section-alt ad-band">
-          <div className="section-content">
-            <AdSlot label="Footer banner ad" compact />
           </div>
         </section>
 
