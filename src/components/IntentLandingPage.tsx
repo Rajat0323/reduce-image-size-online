@@ -3,8 +3,10 @@ import Script from "next/script";
 import { Suspense } from "react";
 
 import ImageToolWorkspace from "@/components/ImageToolWorkspace";
+import AuthorBio from "@/components/AuthorBio";
 import SeoRichContentBlock from "@/components/SeoRichContent";
 import { SITE_NAME, SITE_URL } from "@/constants";
+import { buildArticleAuthorSchema, buildPublisherSchema } from "@/seo/author";
 import { parseToolHref } from "@/lib/parseToolHref";
 import type { IntentPage } from "@/lib/intentPages";
 import { buildIntentSeoContext, buildSeoRichContent } from "@/lib/seoRichContent";
@@ -86,10 +88,8 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
     "@type": "Article",
     headline: page.title,
     description: page.description,
-    author: {
-      "@type": "Organization",
-      name: SITE_NAME,
-    },
+    author: buildArticleAuthorSchema(),
+    publisher: buildPublisherSchema(),
     wordCount: seoContent.wordCount,
   };
 
@@ -189,6 +189,12 @@ export default function IntentLandingPage({ page }: IntentLandingPageProps) {
         <section className="section seo-rich-section-wrap">
           <div className="section-content">
             <SeoRichContentBlock content={seoContent} />
+          </div>
+        </section>
+
+        <section className="section section-compact">
+          <div className="section-content">
+            <AuthorBio />
           </div>
         </section>
 

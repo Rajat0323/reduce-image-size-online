@@ -1,6 +1,7 @@
 import Script from "next/script";
 
 import { SITE_NAME, SITE_URL } from "@/constants";
+import { buildArticleAuthorSchema, buildPublisherSchema } from "@/seo/author";
 import type { SeoRichContent } from "@/lib/seoRichContent";
 
 type FaqItem = { question: string; answer: string };
@@ -87,12 +88,8 @@ export default function ToolPageSchemas({
     headline: title,
     description,
     url: pageUrl,
-    author: { "@type": "Organization", name: SITE_NAME },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+    author: buildArticleAuthorSchema(),
+    publisher: buildPublisherSchema(),
     wordCount: seoContent.wordCount,
     inLanguage: "en",
   };

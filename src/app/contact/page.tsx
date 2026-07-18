@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { SITE_AUTHOR } from "@/seo/author";
+
 export const metadata: Metadata = {
   title: "Contact ReduceImageSize",
   description:
@@ -31,7 +33,10 @@ export default function Contact() {
       <h1>Contact Us</h1>
       <p>For support or business inquiries, please contact us at:</p>
 
-      <p>Email: rajat0323@gmail.com</p>
+      <p>Email: {SITE_AUTHOR.email}</p>
+      <p>
+        Author: <a href="/about">{SITE_AUTHOR.name}</a>, {SITE_AUTHOR.jobTitle} at ReduceImageSize
+      </p>
     </main>
   );
 }

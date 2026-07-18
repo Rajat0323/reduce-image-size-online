@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import GoogleAnalytics from "../components/GoogleAnalytics";
 import GoogleAnalyticsRouteTracker from "../components/GoogleAnalyticsRouteTracker";
 import type { Metadata } from "next";
-import { organizationSchema, softwareSchema, websiteSchema } from "../seo/schema";
+import { organizationSchema, personSchema, softwareSchema, websiteSchema } from "../seo/schema";
 
 const siteUrl = "https://www.reduceimagesizeonline.com";
 
@@ -76,7 +76,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([websiteSchema, organizationSchema, softwareSchema]),
+            __html: JSON.stringify([websiteSchema, organizationSchema, personSchema, softwareSchema]),
           }}
         />
       </head>

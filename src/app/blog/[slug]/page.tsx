@@ -4,8 +4,10 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
 import "../../../styles/hub.css";
+import AuthorBio from "@/components/AuthorBio";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { buildMetaDescription } from "@/seo/metaUtils";
+import { buildArticleAuthorSchema, buildPublisherSchema, SITE_AUTHOR } from "@/seo/author";
 import { SITE_NAME, SITE_URL } from "@/constants";
 
 type Props = {
@@ -157,20 +159,8 @@ export default function BlogPost({ params }: Props) {
     headline: title,
     description: buildMetaDescription(description),
     image: `${SITE_URL}/og-image.png`,
-    author: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/images/logo.svg`,
-      },
-    },
+    author: buildArticleAuthorSchema(),
+    publisher: buildPublisherSchema(),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE_URL}/blog/${params.slug}`,
@@ -297,19 +287,21 @@ export default function BlogPost({ params }: Props) {
             <p className="article-summary">{description}</p>
             <div className="article-meta">
               <span>
-                Published{" "}
+                By{" "}
+                <Link href="/about">{SITE_AUTHOR.name}</Link>
+                {" · "}
                 {new Date(date).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
                 })}
               </span>
-              <span>{post.keywords.slice(0, 3).join(" | ")}</span>
+              <span>{post.keywords.slice(0, 3).join(" · ")}</span>
             </div>
             <div className="article-chip-row">
-              <span className="article-chip">USA, UK & global workflows</span>
-              <span className="article-chip">Internal tool links</span>
-              <span className="article-chip">Honest quality guidance</span>
+              <span className="article-chip">Practical upload guides</span>
+              <span className="article-chip">Tested in the browser</span>
+              <span className="article-chip">Written by {SITE_AUTHOR.name.split(" ")[0]}</span>
             </div>
           </div>
 
@@ -384,7 +376,7 @@ export default function BlogPost({ params }: Props) {
                 <section className="article-cta">
                   <h2>Frequently asked questions</h2>
                   <p className="article-summary">
-                    {faqs.length} answers about free online image tools, privacy, formats, and SEO.
+                    Common questions about this workflow, file privacy, and upload tips.
                   </p>
                   <div className="grid faq-grid" style={{ marginTop: 20 }}>
                     {faqs.map((faq) => (
@@ -396,26 +388,28 @@ export default function BlogPost({ params }: Props) {
                   </div>
                 </section>
               )}
+
+              <AuthorBio />
             </div>
 
             <aside className="article-sidebar">
               <div className="article-sidebar-card">
-                <h3>Article snapshot</h3>
+                <AuthorBio variant="compact" className="author-bio-compact" />
+              </div>
+
+              <div className="article-sidebar-card">
+                <h3>About this guide</h3>
                 <div className="article-stat">
-                  <strong>{post.keywords.length}</strong>
-                  <span>SEO keywords covered</span>
+                  <strong>{wordCount.toLocaleString()}</strong>
+                  <span>Words — written for real upload problems</span>
                 </div>
                 <div className="article-stat">
-                  <strong>4</strong>
-                  <span>Exact-KB shortcuts</span>
+                  <strong>{faqs.length || "—"}</strong>
+                  <span>FAQ answers from hands-on testing</span>
                 </div>
                 <div className="article-stat">
-                  <strong>100%</strong>
-                  <span>Internal-tool focused journey</span>
-                </div>
-                <div className="article-stat">
-                  <strong>Global</strong>
-                  <span>USA, UK, and worldwide upload workflows</span>
+                  <strong>{SITE_AUTHOR.name.split(" ")[0]}</strong>
+                  <span>Author — founder of {SITE_NAME}</span>
                 </div>
               </div>
 

@@ -1,3 +1,5 @@
+import { buildPersonAuthorSchema, SITE_AUTHOR } from "./author";
+
 const siteUrl = "https://www.reduceimagesizeonline.com";
 
 export const websiteSchema = {
@@ -19,6 +21,20 @@ export const organizationSchema = {
     "@type": "ImageObject",
     url: `${siteUrl}/images/logo.svg`,
   },
+  founder: buildPersonAuthorSchema({ url: `${siteUrl}/about` }),
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    email: SITE_AUTHOR.email,
+    availableLanguage: "English",
+  },
+};
+
+export const personSchema = {
+  "@context": "https://schema.org",
+  ...buildPersonAuthorSchema({ url: `${siteUrl}/about` }),
+  description: SITE_AUTHOR.bioLong,
+  knowsAbout: SITE_AUTHOR.expertise,
 };
 
 export const softwareSchema = {

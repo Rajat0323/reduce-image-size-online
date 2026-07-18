@@ -56,11 +56,11 @@ function introSections(ctx: SeoPageContext): SeoSection[] {
       ],
     },
     {
-      heading: `Why ${topic} matters for SEO, speed, and conversions`,
+      heading: `Why ${topic} matters for everyday uploads`,
       level: 2,
       paragraphs: [
-        `Heavy images are one of the biggest reasons pages load slowly. Slow pages hurt search rankings, increase bounce rates, and reduce conversions on stores and landing pages. ${topic} directly improves Core Web Vitals by reducing transfer size before images ever reach your server or CDN.`,
-        `Search engines also reward helpful, task-focused pages that match intent. A dedicated page for ${topic.toLowerCase()} helps users land on exactly the workflow they need instead of forcing them through a generic editor. That improves engagement signals such as time on page, scroll depth, and return visits.`,
+        `Heavy images are one of the biggest reasons pages load slowly. Slow pages frustrate visitors and hurt conversions on stores and landing pages. ${topic} directly improves load time by reducing file size before images reach your server or CDN.`,
+        `A dedicated page for ${topic.toLowerCase()} also saves time — you land on the exact workflow you need instead of clicking through a generic editor. That is why I publish separate pages for each common task on ReduceImageSize.`,
         `For creators and businesses, smaller images mean faster uploads on mobile data, fewer rejected submissions, and cleaner galleries. The same photo can be reused across Instagram, WhatsApp, WordPress, Shopify, email, and PDF workflows once it is compressed, converted, or resized correctly.`,
       ],
       bullets: [
@@ -244,13 +244,13 @@ function deepDiveSections(ctx: SeoPageContext): SeoSection[] {
 
   return [
     {
-      heading: `How ${topic.toLowerCase()} helps Google indexing and rankings`,
+      heading: `Practical notes on ${topic.toLowerCase()} and page speed`,
       level: 2,
       paragraphs: [
-        `Search engines crawl billions of pages, but they prioritize fast, helpful experiences. When you ${topic.toLowerCase()}, you reduce payload size, improve Largest Contentful Paint, and make pages easier for Googlebot to render on mobile. Those signals matter for competitive keywords such as ${keywordLine}.`,
-        `Dedicated tool pages like /${slug} also create strong topical relevance. Instead of one generic landing page trying to rank for every image query, ReduceImageSize publishes focused URLs that match exact user intent. That structure helps search engines index pages more frequently and surface the right result for each long-tail search.`,
-        `Combine on-page SEO (clear headings, FAQ schema, how-to steps, and 3000+ words of useful guidance) with technical SEO (fast hosting, sitemap.xml, robots.txt, canonical tags, and Open Graph metadata). This page includes all of those elements so crawlers understand what the page does and who it helps.`,
-        `Remember that rankings also depend on backlinks, brand searches, and competition. High-quality content increases the chance users stay on-page, share the tool, and return—engagement patterns that reinforce relevance over time.`,
+        `Large images slow down page loads — especially when a hero or product shot is the first thing visitors see. When you ${topic.toLowerCase()}, you reduce transfer size and make pages easier to render on mobile. That matters for competitive searches such as ${keywordLine}.`,
+        `Focused tool pages like /${slug} also answer one question well instead of mixing every image task on a single screen. I built ReduceImageSize this way because upload rules differ by platform — compression for Amazon is not the same workflow as a passport photo or a LinkedIn headshot.`,
+        `Good pages combine clear steps, honest FAQs, and working tools. This page follows that pattern so you can read the guidance and try the fix in the same visit.`,
+        `Rankings still depend on competition and how helpful the page is in practice. I optimize for real upload problems first — speed and discoverability follow when the workflow actually works.`,
       ],
     },
     {
@@ -284,8 +284,8 @@ function deepDiveSections(ctx: SeoPageContext): SeoSection[] {
       level: 2,
       paragraphs: [
         `Blog posts, landing pages, and email campaigns all benefit from consistent image optimization. Hero images should load in under a second on 4G networks. Thumbnails should match display size to avoid wasted pixels. Screenshots should use WebP when your CMS supports it.`,
-        `Pair ${topic.toLowerCase()} with descriptive alt text, meaningful file names, and internal links to related tools on ReduceImageSize. That creates a content cluster search engines can follow, improving discoverability across your entire site—not just this page.`,
-        `Track Core Web Vitals in Google Search Console after deploying optimized assets. Improvements often appear within weeks as crawlers recrawl updated pages and users experience faster loads.`,
+        `Pair ${topic.toLowerCase()} with descriptive alt text, meaningful file names, and links to related tools on ReduceImageSize. That helps readers find the next step — resize, convert, or hit an exact KB target — without searching the site from scratch.`,
+        `After deploying optimized assets, check Core Web Vitals in Google Search Console if you manage a website. Improvements often show up within a few weeks as pages get recrawled.`,
       ],
     },
     {

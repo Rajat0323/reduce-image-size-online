@@ -12,7 +12,22 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/ml-to-oz",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/ml-oz-converter",
+        destination: "/",
+        permanent: true,
+      },
+      {
         source: "/blog/ml-to-oz-calculator-guide",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/blog/ml-to-oz",
         destination: "/blog",
         permanent: true,
       },

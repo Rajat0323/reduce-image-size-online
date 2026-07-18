@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import ImageToolWorkspace from "@/components/ImageToolWorkspace";
+import AuthorBio from "@/components/AuthorBio";
 import SeoRichContentBlock from "@/components/SeoRichContent";
 import ToolPageSchemas from "@/components/ToolPageSchemas";
 import type { ToolPage } from "@/lib/toolCatalog";
@@ -103,6 +104,12 @@ export default function ToolPageTemplate({ tool }: ToolPageTemplateProps) {
         <section className="section seo-rich-section-wrap">
           <div className="section-content">
             <SeoRichContentBlock content={seoContent} />
+          </div>
+        </section>
+
+        <section className="section section-compact">
+          <div className="section-content">
+            <AuthorBio />
           </div>
         </section>
 

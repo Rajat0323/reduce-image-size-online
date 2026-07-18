@@ -1,5 +1,6 @@
 import matter from "gray-matter";
 
+import { SITE_AUTHOR } from "@/seo/author";
 import { SITE_NAME, SITE_URL } from "@/constants";
 import type { BlogFaq } from "@/lib/blog";
 import { blogTopicQueue, blogUrl, toolUrl, type BlogTopic } from "@/lib/blogAutomation/topics";
@@ -54,12 +55,12 @@ function buildFaqs(topic: BlogTopic): BlogFaq[] {
   const primary = topic.primaryTool;
   return [
     {
-      question: `${topic.h1}?`,
-      answer: `Open the ${primary.label} page on ReduceImageSize, upload your image at the top of the tool, adjust settings, preview the result, and download. Processing stays in your browser for privacy.`,
+      question: `How do I ${primary.label.toLowerCase()} step by step?`,
+      answer: `Open ${link(primary.slug, primary.label)}, upload your image at the top of the page, adjust settings, preview the result, and download. Processing stays in your browser — your file is not sent to our servers for editing.`,
     },
     {
       question: `Is ${primary.label.toLowerCase()} free for users in the USA and UK?`,
-      answer: `Yes. ReduceImageSize tools are free for ${topic.regions.join(", ")} users with no account required. Files are processed locally in your browser.`,
+      answer: `Yes. ${SITE_NAME} tools are free for ${topic.regions.join(", ")} users with no account required. Files are processed locally in your browser.`,
     },
     {
       question: "Are my images uploaded to ReduceImageSize servers?",
@@ -70,8 +71,8 @@ function buildFaqs(topic: BlogTopic): BlogFaq[] {
       answer: `Start with ${link(primary.slug, primary.label)}. Related workflows include ${topic.relatedTools.slice(0, 3).map((t) => link(t.slug, t.label)).join(", ")}.`,
     },
     {
-      question: "Does image compression help Google rankings?",
-      answer: "Yes. Smaller images improve page speed and Core Web Vitals, which Google uses as quality signals. Faster pages often rank better and convert more visitors in the USA, UK, and worldwide.",
+      question: "Does compressing images help page speed?",
+      answer: "Yes. Smaller images load faster, which helps Core Web Vitals and keeps visitors on your site. I notice the biggest wins when hero images and product photos are optimized before upload.",
     },
     {
       question: "What is the best format for web uploads?",
@@ -82,28 +83,28 @@ function buildFaqs(topic: BlogTopic): BlogFaq[] {
       answer: "Yes when targeting strict KB limits or large camera originals. Resize to the required pixel box first, then compress with the main compressor or an exact-KB preset.",
     },
     {
-      question: "Can I use these tools on mobile phones?",
-      answer: "Yes. ReduceImageSize works in modern mobile browsers for quick uploads before submitting forms, listings, or chat attachments.",
+      question: "Can I use these tools on my phone?",
+      answer: "Yes. I test most workflows on mobile browsers. Upload from your gallery, preview, download, and submit — no app install needed.",
     },
     {
-      question: `How does this guide help ${topic.regions.join(" and ")} search intent?`,
-      answer: `This page targets ${topic.keywords.slice(0, 3).join(", ")} with step-by-step workflows, internal links to live tools, and FAQ schema so Google understands the topic deeply.`,
+      question: `What should ${topic.audience} do when an upload keeps failing?`,
+      answer: `Check pixel dimensions, format, and background rules — not just file size. I usually resize first with ${link("image-resizer", "Image Resizer")}, then compress with ${link(primary.slug, primary.label)} or an exact-KB preset.`,
     },
     {
-      question: "How many internal links should a SEO blog include?",
-      answer: "Strong topical pages link to 8–15 relevant tool URLs plus related guides. ReduceImageSize blogs connect compressors, converters, resizers, and platform pages to build trust and crawl depth.",
+      question: "Who writes these guides?",
+      answer: `${SITE_AUTHOR.name}, founder of ${SITE_NAME}, writes and tests each guide against the live tools. See the full profile at ${SITE_URL}/about.`,
     },
     {
-      question: "When should I request indexing in Google Search Console?",
-      answer: "After publishing, open Search Console URL Inspection for this blog post and click Request Indexing. Also submit your sitemap and monitor Coverage reports weekly.",
+      question: "How do I know my file is private?",
+      answer: "Standard tools process images locally in your browser. Your photos are not stored on our servers while you edit.",
     },
     {
       question: "What if my file is still rejected after compression?",
-      answer: "Verify pixel dimensions, format, and background rules—not just KB size. Try cropping, converting format, or a lower exact-KB preset before re-uploading.",
+      answer: "Verify pixel dimensions, format, and background rules — not just KB size. Try cropping, converting format, or a lower exact-KB preset before re-uploading.",
     },
     {
-      question: `Why is ${primary.label} popular in high-click regions?`,
-      answer: `Users in the USA, UK, and global markets search for practical upload fixes. ${primary.label} matches real intent with a fast, private, browser-based workflow and no sign-up friction.`,
+      question: `When would I pick ${primary.label} over a desktop editor?`,
+      answer: `When you need a quick result on any device without installing software. ${primary.label} is built for one-off uploads — forms, listings, and chat attachments — not layered design work.`,
     },
     {
       question: "Can I batch process many images?",
@@ -125,22 +126,24 @@ function buildBody(topic: BlogTopic, faqs: BlogFaq[]): string {
 
   return `# ${topic.h1}
 
-${topic.audience} across ${topic.regions.join(", ")} repeatedly hit the same wall: uploads fail, pages load slowly, or Google Search Console flags image weight. ${topic.searchIntent}. ReduceImageSize solves this with **free browser-based tools** — upload at the top of each page, preview locally, and download without sending files to unknown servers.
+If you work with ${topic.audience.toLowerCase()} in ${topic.regions.join(", ")}, you have probably seen an upload fail at the last minute — wrong file size, wrong dimensions, or a format the portal does not accept. ${topic.searchIntent} I built ${SITE_NAME} for exactly these moments: open a tool in your browser, fix the file locally, and download without installing software.
 
-This guide connects **${topic.keywords[0]}** intent to live workflows on ${SITE_NAME}. You will learn which tool to open first, how to combine resize + convert + compress, and how strong internal links help Google trust your site cluster.
+This guide walks through **${topic.keywords[0]}** using tools I maintain and test myself. You will see which page to open first, when to resize before compressing, and which related tools save time on repeat uploads.
 
-## Why ${primary.label} matters in the USA, UK, and global markets
+*Written by ${SITE_AUTHOR.name}, founder of ${SITE_NAME}.*
 
-High-click regions like the United States, London and the wider UK, Canada, Australia, and Western Europe share demanding upload rules. Marketplaces, professional networks, CMS platforms, and mobile chat apps all re-compress images — starting with an optimized file preserves quality.
+## Why ${primary.label} comes up so often
 
-**${topic.audience}** benefit when they:
+Marketplaces, job boards, CMS dashboards, and mobile apps all have different rules. A photo that looks fine on your phone can still fail a strict portal. Starting with ${link(primary.slug, primary.label)} usually fixes the problem faster than guessing in a generic editor.
 
-- open ${link(primary.slug, primary.label)} before deadlines
-- match pixel dimensions portals publish
-- choose JPG, WebP, or PNG deliberately
-- monitor Core Web Vitals after publishing web assets
+**${topic.audience}** typically need to:
 
-Search demand for **${topic.keywords.slice(0, 4).join(", ")}** is intent-rich: users want a result now, not a desktop install. ReduceImageSize pages match that intent with 3000+ word tool guides, FAQ schema, and HowTo markup sitewide.
+- open ${link(primary.slug, primary.label)} before a deadline
+- match pixel dimensions the portal publishes
+- pick JPG, WebP, or PNG on purpose
+- check the result at 100% zoom before submitting
+
+People search for **${topic.keywords.slice(0, 4).join(", ")}** because they need a working file today — not a tutorial that sends them to desktop software they do not have installed.
 
 ## Start here: ${primary.label}
 
@@ -151,7 +154,7 @@ The fastest path is the dedicated tool page:
 - **Resize dimensions:** ${link("image-resizer", "Image Resizer")}
 - **Format changes:** ${link("image-converter", "Image Converter")}
 
-Upload areas sit **above the fold** on every tool page so you never hunt for the workspace. That UX pattern reduces bounce rate — a positive engagement signal for SEO.
+Every tool page puts the upload area at the top. You should not scroll past a long intro to find the workspace — I designed it that way on purpose.
 
 ## Step-by-step workflow
 
@@ -163,8 +166,7 @@ Upload areas sit **above the fold** on every tool page so you never hunt for the
 6. Compress to target size — ${link("image-compressor", "Image Compressor")} or exact-KB presets below.
 7. Preview at 100% zoom; check faces, text, and edges.
 8. Download and verify file properties before submitting.
-9. Add descriptive alt text and filename if publishing on a website.
-10. Request indexing in Search Console when publishing supporting blog content.
+9. Add descriptive alt text and a sensible filename if publishing on a website.
 
 ## Related tools for this topic
 
@@ -198,25 +200,24 @@ UK professionals and London-based remote workers often use LinkedIn, gov.uk serv
 - use ${link("compress-image-for-whatsapp", "WhatsApp compression")} before sharing large albums on mobile data
 - prefer sRGB exports for consistent color on web
 
-## Global SEO: Core Web Vitals and internal linking
+## Faster pages and useful links
 
-Google evaluates **page experience** alongside content relevance. Images affect **Largest Contentful Paint** when heroes or product shots are the LCP element. Optimize above-the-fold assets first:
+Heavy images slow down websites — especially hero shots and product galleries. If you publish on WordPress or Shopify, optimize before upload:
 
 - ${link("compress-image-for-website", "Compress for Website")}
 - ${link("compress-image-for-wordpress", "Compress for WordPress")}
 - ${link("compress-image-to-200kb", "Compress to 200KB")}
 
-Internal links matter as much as file size. This blog connects to live tools so crawlers discover related URLs. Your own site should link **from** high-traffic posts **to** tool pages and **between** guides — mirroring the ReduceImageSize hub pattern.
+I link related tools inside each guide so you can jump straight to the next step without searching the site.
 
-### Suggested internal link cluster
+### Quick reference
 
-| Page type | Example URL |
-|-----------|-------------|
+| What you need | Where to go |
+|---------------|-------------|
 | Primary tool | ${toolUrl(primary.slug)} |
-| Compressor hub | ${toolUrl("image-compressor")} |
-| Converter hub | ${toolUrl("image-converter")} |
-| This blog | ${blogUrl(topic.slug)} |
-| Sitemap | ${SITE_URL}/sitemap.xml |
+| General compressor | ${toolUrl("image-compressor")} |
+| Format converter | ${toolUrl("image-converter")} |
+| This guide | ${blogUrl(topic.slug)} |
 
 ## Format guide: JPG, PNG, WebP, HEIC
 
@@ -227,7 +228,7 @@ Internal links matter as much as file size. This blog connects to live tools so 
 
 Never convert PNG to JPG when transparency is required. For listings, ${link("png-to-jpg-converter", "PNG to JPG")} helps when alpha is unnecessary.
 
-## Platform quick links (high click intent)
+## Platform quick links
 
 - Instagram: ${link("compress-image-for-instagram", "Compress for Instagram")} + ${link("resize-image-to-1080x1080", "1080×1080 resize")}
 - Facebook: ${link("compress-image-for-facebook", "Compress for Facebook")}
@@ -247,18 +248,6 @@ Catalog teams processing dozens of SKUs should use ${link("bulk-image-compressor
 - Ignoring pixel dimensions when KB is correct
 - Using screenshots when originals are available
 - Skipping alt text on informative images
-- Linking only to the homepage instead of specific tool URLs
-
-## How to request Google indexing (manual step)
-
-After this post is live:
-
-1. Open [Google Search Console](https://search.google.com/search-console)
-2. Paste: \`${blogUrl(topic.slug)}\`
-3. Click **Request Indexing**
-4. Confirm \`${SITE_URL}/sitemap.xml\` is submitted
-
-Indexing is not instant, but manual requests help new daily blogs enter the crawl queue faster.
 
 ## Related guides on ${SITE_NAME}
 
@@ -279,51 +268,27 @@ When portals reject files:
 5. Aim 5–10% below published KB caps
 6. Try ${link("compress-image-to-50kb", "50KB")} or ${link("compress-image-to-100kb", "100KB")} presets
 
-## Build trust with Google over time
-
-Daily SEO-rich blogs only work when the site graph is coherent. ReduceImageSize publishes:
-
-- tool pages with 3000+ words and FAQ schema
-- platform intent pages for Instagram, WordPress, Amazon, and more
-- blogs with HowTo + BlogPosting + FAQPage JSON-LD
-
-Your rankings improve when users find answers quickly, click through to working tools, and return — not when pages are thin or disconnected.
-
 ## Deep workflow for ${topic.primaryTool.label}
 
 When ${topic.audience} open ${link(primary.slug, primary.label)}, they should expect a predictable sequence. First, the upload surface appears immediately at the top of the page — no hunting through long intros. Second, format and quality controls reflect the destination: JPG for photos, PNG when transparency matters, WebP when the marketing site supports modern formats. Third, the preview panel shows original versus output size so you can validate results before download.
 
 If the portal publishes both **KB caps** and **pixel boxes**, always satisfy pixels first. A 50KB file at the wrong dimensions still fails. Use ${link("image-resizer", "Image Resizer")} presets or custom width and height, then return to ${link(primary.slug, primary.label)} or an exact-KB route.
 
-## Region-by-region search behavior
+## Region-by-region notes
 
-### United States (high click volume)
+### United States
 
-US searchers often click tools tied to **marketplaces**, **professional networks**, and **CMS publishing**. Common high-intent queries include Amazon product photo size, LinkedIn headshot compression, WordPress image SEO, and Core Web Vitals fixes. US mobile traffic is large — optimize on phone, download, then upload from the same device.
+US sellers and publishers often need Amazon product photos, LinkedIn headshots, WordPress assets, and mobile-friendly uploads. I test these flows on phone and desktop — many people fix a file on their phone and submit from the same device.
 
 ### United Kingdom and London
 
-UK users mirror US needs but also hit gov.uk digital photo rules, NHS-related uploads, and EU-facing marketplace specs. London-based remote workers frequently compress LinkedIn photos and passport scans. WhatsApp sharing on UK mobile networks benefits from ${link("compress-image-for-whatsapp", "WhatsApp compression")} before sending albums.
+UK users hit gov.uk digital photo rules, passport scans, and EU-facing marketplace specs. WhatsApp sharing on mobile data is smoother when you compress first with ${link("compress-image-for-whatsapp", "WhatsApp compression")}.
 
-### Global English-speaking markets
+### Other English-speaking markets
 
-Canada, Australia, New Zealand, and Singapore users search the same English keywords. Global blogs should link to tool URLs consistently (canonical on ${SITE_URL}) and avoid duplicate thin pages. One strong 2600+ word guide plus internal links outperforms many short posts.
+Canada, Australia, New Zealand, and Singapore share similar upload limits. One thorough guide with clear tool links beats a pile of short posts that repeat the same advice.
 
-## Internal linking playbook (copy this pattern)
-
-Every new blog should link to:
-
-1. One **primary tool** — ${link(primary.slug, primary.label)}
-2. Three **supporting tools** from the related list above
-3. At least **four exact-KB pages** when compression is relevant
-4. Two **converter pages** when format is relevant
-5. Two **existing blogs** for topical cluster strength
-
-Example anchor text (good): "open the compress for Amazon tool" — not "click here."
-
-Google discovers relationships through links. Users discover the next step through links. Both improve trust.
-
-## Extended tool reference for this topic
+## When to use each related tool
 
 ${topic.relatedTools
   .map(
@@ -332,30 +297,17 @@ ${topic.relatedTools
   )
   .join("\n\n")}
 
-## Content freshness and reruns
+## Keeping guides up to date
 
-Platform rules change. Amazon, LinkedIn, Instagram, and gov portals update photo guidance periodically. When rules change, update internal links from your CMS to the latest ReduceImageSize intent page rather than creating conflicting advice across old posts.
+Platform rules change. Amazon, LinkedIn, Instagram, and government portals update photo guidance from time to time. When that happens, I update the matching tool page and refresh links in related guides.
 
-If you already published about this topic, refresh the **tool links** and **FAQ** sections instead of duplicating near-identical posts. Google rewards genuinely updated helpful content.
+## About the author
 
-## Analytics and Search Console monitoring
-
-After indexing:
-
-- Watch **Queries** in Search Console for ${topic.keywords.slice(0, 3).join(", ")}
-- Compare **CTR** before and after publishing supporting blogs
-- Track **LCP** in PageSpeed Insights for money pages linked from this post
-- Confirm GA4 Realtime shows landing traffic from organic tests
-
-High-click regions like the USA and UK show movement in Search Console within days to weeks — not instantly.
-
-## Security note for teams
-
-Browser-based processing reduces third-party exposure but does not replace corporate policy. Regulated teams should document approved tools. ReduceImageSize keeps standard editing local; still avoid processing highly classified material on shared kiosks.
+${SITE_AUTHOR.bioLong} Read more at [${SITE_AUTHOR.name} — About](${SITE_URL}/about) or email ${SITE_AUTHOR.email} if you spot outdated portal limits.
 
 ## Conclusion
 
-${topic.audience} in ${topic.regions.join(", ")} should bookmark ${link(primary.slug, primary.label)} and related tools. Combine resize, convert, and compress steps, link internally between guides and tools, and request Search Console indexing when you publish.
+${topic.audience} in ${topic.regions.join(", ")} should bookmark ${link(primary.slug, primary.label)} and the related tools above. Resize when dimensions matter, convert when format matters, then compress to the target your portal expects.
 
 **Open now:** ${link(primary.slug, primary.label)} · ${link("image-compressor", "Image Compressor")} · ${link("image-resizer", "Image Resizer")} · ${link("image-converter", "Image Converter")}
 `;
@@ -385,15 +337,15 @@ export function generateBlogPost(topic: BlogTopic, date: string): GeneratedBlogP
     const primary = topic.primaryTool;
     const padding = `
 
-## Additional best practices for ${topic.regions.join(" and ")} teams
+## Extra tips from ${SITE_AUTHOR.name}
 
-Teams publishing daily should document which ${SITE_NAME} URLs they use for each platform. Maintain a shared sheet mapping **platform → tool URL → KB target → pixel box**. When Google updates Core Web Vitals thresholds or platforms change upload rules, update internal links from your CMS blog posts to the newest ReduceImageSize guides.
+When I help ${topic.audience.toLowerCase()} in ${topic.regions.join(" and ")}, I keep a simple checklist: read the portal rules, resize to the published pixel box, pick the right format, then compress with ${link(primary.slug, primary.label)}. Skipping the dimension step is the most common reason uploads fail even when the KB count looks correct.
 
-Auditing competitors in the USA and UK often reveals slow hero images and unoptimized PNG screenshots. You can outperform them by shipping WebP heroes, descriptive alt text, and internal links to intent-specific tool pages rather than generic homepages. Track click-through rates in Search Console and double down on topics that already earn impressions for ${topic.keywords.join(", ")}.
+If you manage a team, save the tool URLs you use most often in a shared doc — one link per platform beats searching every time a listing or form is due. When a platform changes its limits, update that doc and re-test with a sample photo at 100% zoom before rolling out to everyone.
 
-Publishers in London, New York, San Francisco, and other high-competition markets should treat image SEO as ongoing operations — not a one-time plugin install. Schedule quarterly audits: export top landing pages, list LCP elements, open the linked image URL, and re-compress if weight exceeds your budget. Link from those landing pages to ${link(primary.slug, primary.label)} and sibling tools so users and crawlers always find a working next step.
+For catalog work, ${link("bulk-image-compressor", "Bulk Image Compressor")} saves time, but I still spot-check faces and text on high-value images individually. A batch pass that looks fine at thumbnail size can look soft when zoomed in on a product page.
 
-Long-term trust comes from helpful depth: 2600+ word guides, honest FAQ answers, working browser tools, and a crawlable sitemap. ReduceImageSize is built as a global hub so each new blog strengthens the whole graph — not an isolated post. When your team adds a new SKU, job listing, or blog post, reuse the same internal link pattern: primary tool, exact-KB helper, converter fallback, and two related guides.
+Questions about this workflow? I read feedback at ${SITE_AUTHOR.email} and update guides when real users report new portal rules.
 
 `;
 

@@ -4,8 +4,10 @@ import Link from "next/link";
 import { Children, isValidElement, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 
+import AuthorBio from "@/components/AuthorBio";
 import { getSeoArticle } from "@/lib/seoAutomationApi";
 import { buildMetaDescription } from "@/seo/metaUtils";
+import { buildArticleAuthorSchema, buildPublisherSchema, SITE_AUTHOR } from "@/seo/author";
 import { SITE_NAME, SITE_URL } from "@/constants";
 
 type Props = {
@@ -169,20 +171,8 @@ export default async function PublicSeoArticlePage({ params }: Props) {
     headline: article.title,
     description: article.meta_description,
     image: `${SITE_URL}/og-image.png`,
-    author: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/images/logo.svg`,
-      },
-    },
+    author: buildArticleAuthorSchema(),
+    publisher: buildPublisherSchema(),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE_URL}/articles/${article.slug}`,
@@ -237,9 +227,11 @@ export default async function PublicSeoArticlePage({ params }: Props) {
                 <p className="article-summary">{article.meta_description}</p>
 
                 <div className="article-meta">
-                  <span>{publishedLabel}</span>
+                  <span>
+                    By <Link href="/about">{SITE_AUTHOR.name}</Link> · {publishedLabel}
+                  </span>
                   <span>{readTime} min read</span>
-                  <span>{headings.length} helpful sections</span>
+                  <span>{headings.length} sections</span>
                 </div>
 
                 <div className="article-actions">
@@ -270,6 +262,8 @@ export default async function PublicSeoArticlePage({ params }: Props) {
               <article className="article-prose article-prose-premium">
                 <ReactMarkdown components={markdownComponents}>{cleanedMarkdown}</ReactMarkdown>
               </article>
+
+              <AuthorBio />
 
               <section className="article-link-grid">
                 {relatedArticleLinks.map((link) => (
