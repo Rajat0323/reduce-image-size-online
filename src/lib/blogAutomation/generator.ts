@@ -268,6 +268,26 @@ When portals reject files:
 5. Aim 5–10% below published KB caps
 6. Try ${link("compress-image-to-50kb", "50KB")} or ${link("compress-image-to-100kb", "100KB")} presets
 
+## How to choose the right target file size
+
+There is no single "correct" file size — it depends on where the image will live. For ${topic.audience.toLowerCase()}, I use a simple rule of thumb: match the destination, then leave a small safety margin. A profile avatar rarely needs more than 100KB, a feed photo usually looks great between 150KB and 300KB, and a full-width hero image can sit around 200KB to 400KB after resizing. When a portal publishes a hard cap, aim 5–10% under it so metadata and re-encoding never push you back over the line at the last second.
+
+If you are unsure where to start, open the general ${link("image-compressor", "Image Compressor")} and watch the live output size as you move the quality slider. When you need an exact number rather than a range, switch to a preset such as ${link("compress-image-to-100kb", "Compress to 100KB")} or ${link("compress-image-to-200kb", "Compress to 200KB")} instead of guessing and re-exporting several times.
+
+## Mobile-first upload workflow
+
+Most ${topic.audience.toLowerCase()} in ${topic.regions.join(" and ")} now upload straight from a phone. Because every ${SITE_NAME} tool runs in the browser, the mobile flow mirrors desktop: open ${link(primary.slug, primary.label)}, pick the photo from your gallery, adjust, and save the result back to your device. There is no app to install and nothing syncs to a server while you edit. On slower mobile data, compressing before upload also means the file transfers faster and is far less likely to time out mid-submission — a common cause of "upload failed" errors that have nothing to do with the portal's size rules.
+
+If your source is an iPhone HEIC file, convert it first with ${link("heic-to-jpg-converter", "HEIC to JPG")} so the destination accepts the format, then resize and compress as usual.
+
+## A quick before-and-after quality check
+
+Before submitting anything, I run the same three checks every time. First, zoom to 100% and inspect faces, logos, and small text — these are where over-compression shows first. Second, confirm the pixel dimensions match what the platform asked for, not just the KB size, because a small file at the wrong dimensions still fails. Third, open the exported file's properties to verify the final size and format before upload. This 30-second habit prevents the most common rejection of all: a technically small file that still breaks a dimension or format rule.
+
+## Accessibility, alt text, and SEO
+
+If the image ends up on a public web page, the file itself is only half the job. Descriptive, human-readable alt text helps screen readers and gives search engines context, which matters for ${topic.regions.join(" / ")} SEO. Keep filenames meaningful — for example \`blue-running-shoe-side.jpg\` instead of \`IMG_4821.jpg\` — and reuse the same optimized asset across pages rather than uploading several heavy copies. For publishing platforms, compress once with ${link("compress-image-for-website", "Compress for Website")} and serve modern formats via ${link("jpg-to-webp-converter", "JPG to WebP")} wherever your theme supports them.
+
 ## Deep workflow for ${topic.primaryTool.label}
 
 When ${topic.audience} open ${link(primary.slug, primary.label)}, they should expect a predictable sequence. First, the upload surface appears immediately at the top of the page — no hunting through long intros. Second, format and quality controls reflect the destination: JPG for photos, PNG when transparency matters, WebP when the marketing site supports modern formats. Third, the preview panel shows original versus output size so you can validate results before download.
