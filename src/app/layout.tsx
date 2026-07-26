@@ -13,11 +13,11 @@ const siteUrl = "https://www.reduceimagesizeonline.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "PDF to Image Converter Online — Free | ReduceImageSize",
+    default: "PDF to Image Converter — Free Online Tool | ReduceImageSize",
     template: "%s | ReduceImageSize",
   },
   description:
-    "Free online PDF to image converter — convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing.",
+    "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing, multi-page support, free download.",
   robots: {
     index: true,
     follow: true,

@@ -7,9 +7,9 @@
   --home-panel: #ffffff;
   --home-line: rgba(20, 35, 58, 0.12);
   --home-muted: #5b6b7c;
-  --home-accent: #e85d04;
-  --home-accent-deep: #c44900;
-  --home-accent-soft: #fff1e6;
+  --home-accent: #e11d48;
+  --home-accent-deep: #be123c;
+  --home-accent-soft: #fff1f3;
   --home-ok: #0f766e;
   --home-shadow: 0 24px 60px rgba(20, 35, 58, 0.1);
   color: var(--home-ink);
@@ -25,9 +25,9 @@
   --home-panel: #121c28;
   --home-line: rgba(226, 232, 240, 0.12);
   --home-muted: #9aa8b8;
-  --home-accent: #ff7a33;
-  --home-accent-deep: #ff9a5c;
-  --home-accent-soft: rgba(255, 122, 51, 0.12);
+  --home-accent: #fb7185;
+  --home-accent-deep: #fda4af;
+  --home-accent-soft: rgba(225, 29, 72, 0.14);
   --home-ok: #2dd4bf;
   --home-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
   background:
@@ -790,7 +790,87 @@
 }
 
 .home-page .author-bio-avatar {
-  background: linear-gradient(135deg, var(--home-accent), #f4a261);
+  background: linear-gradient(135deg, var(--home-accent), #fb7185);
+}
+
+.home-shot {
+  margin: 18px 0;
+  padding: 16px 18px;
+  border: 1px dashed var(--home-line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--home-mist) 55%, var(--home-panel));
+}
+
+.home-shot strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--home-ink);
+  font-size: 0.92rem;
+}
+
+.home-shot p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.home-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 16px;
+  border: 1px solid var(--home-line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--home-panel);
+}
+
+.home-trust-grid article {
+  padding: 18px;
+  border-right: 1px solid var(--home-line);
+  border-bottom: 1px solid var(--home-line);
+}
+
+.home-trust-grid article:nth-child(2n) {
+  border-right: 0;
+}
+
+.home-trust-grid article:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.home-trust-grid h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: var(--home-ink);
+}
+
+.home-trust-grid p {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.home-meta-line {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--home-muted);
+}
+
+@media (max-width: 960px) {
+  .home-trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-trust-grid article {
+    border-right: 0;
+  }
+
+  .home-trust-grid article:nth-last-child(-n + 2) {
+    border-bottom: 1px solid var(--home-line);
+  }
+
+  .home-trust-grid article:last-child {
+    border-bottom: 0;
+  }
 }
 
 .home-page .author-bio-text,

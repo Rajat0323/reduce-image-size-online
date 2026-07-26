@@ -88,14 +88,15 @@ textarea {
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #e85d04;
+  color: #e11d48;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
 .logo img {
-  border-radius: 12px;
+  border-radius: 8px;
+  background: #fff;
 }
 
 .logo-title {
@@ -106,7 +107,7 @@ textarea {
 }
 
 .logo-title small {
-  color: #ff9a5c;
+  color: #fb7185;
   text-transform: none;
   letter-spacing: 0.04em;
   font-weight: 600;
