@@ -12,9 +12,10 @@ const siteUrl = "https://www.reduceimagesizeonline.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  // No title template — avoids "| ReduceImageSize" doubling that made titles too long in Ahrefs.
+  // Identity template only — avoids "| ReduceImageSize" doubling that made titles too long in Ahrefs.
   title: {
     default: "PDF to Image Converter — Free Online Tool",
+    template: "%s",
   },
   description:
     "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing, multi-page support, and free download — no account required.",
