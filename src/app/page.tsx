@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
+import { Fraunces, Outfit } from "next/font/google";
 import { Suspense } from "react";
 
 import AuthorBio from "@/components/AuthorBio";
@@ -9,11 +10,25 @@ import { SITE_NAME, SITE_URL } from "@/constants";
 import { SITE_AUTHOR } from "@/seo/author";
 import "../styles/home-studio.css";
 
+const homeDisplay = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-home-display",
+  display: "swap",
+});
+
+const homeBody = Outfit({
+  subsets: ["latin"],
+  variable: "--font-home-body",
+  display: "swap",
+});
+
 const HomeCompressorStudio = dynamic(() => import("@/components/HomeCompressorStudio"), {
   ssr: false,
   loading: () => (
-    <div className="home-studio-dropzone" style={{ display: "grid", placeItems: "center" }}>
-      <p style={{ color: "var(--color-subtle)" }}>Loading compressor…</p>
+    <div className="home-studio-shell">
+      <div className="home-studio-empty">
+        <p className="home-studio-lead">Loading compressor…</p>
+      </div>
     </div>
   ),
 });
@@ -167,34 +182,39 @@ export default function Home() {
         {JSON.stringify(websiteSearchSchema)}
       </Script>
 
-      <main className="home-page">
-        <section className="home-hero">
-          <div className="home-hero-inner">
-            <div className="home-brand">
-              <span>
-                ReduceImageSize
-                <small>One compressor. Every target size.</small>
-              </span>
+      <main className={`home-page ${homeDisplay.variable} ${homeBody.variable}`}>
+        <section className="home-stage">
+          <div className="home-stage-inner">
+            <div className="home-hero-copy">
+              <div className="home-brand-mark">
+                <strong>ReduceImageSize</strong>
+                <span>Image compressor</span>
+              </div>
+              <h1>Make any image smaller — on one clean page</h1>
+              <p>
+                Upload once. Set format and target size. Preview before and after. Download. No tool
+                hub. No lookalike KB pages.
+              </p>
+              <div className="home-trust-row">
+                <span>Private browser processing</span>
+                <span>Exact KB / MB targets</span>
+                <span>Free · no account</span>
+              </div>
             </div>
-            <h1>Compress images online without the clutter</h1>
-            <p className="home-hero-sub">
-              Drop a photo, pick a format and target size, preview the result, download. Built for
-              people who need a smaller file right now — not a maze of lookalike pages.
-            </p>
+
+            <Suspense
+              fallback={
+                <div className="home-studio-shell">
+                  <div className="home-studio-empty">
+                    <p className="home-studio-lead">Loading compressor…</p>
+                  </div>
+                </div>
+              }
+            >
+              <HomeCompressorStudio />
+            </Suspense>
           </div>
         </section>
-
-        <div className="home-studio-wrap">
-          <Suspense
-            fallback={
-              <div className="home-studio-dropzone" style={{ display: "grid", placeItems: "center" }}>
-                <p style={{ color: "var(--color-subtle)" }}>Loading compressor…</p>
-              </div>
-            }
-          >
-            <HomeCompressorStudio />
-          </Suspense>
-        </div>
 
         <div className="home-content">
           <section>
@@ -204,21 +224,25 @@ export default function Home() {
               “compress to 100KB” pages never helped anyone finish a form faster. Same tool, one
               place: upload, set the output you need, compress, download.
             </p>
-            <div className="home-steps">
-              <article className="home-step">
-                <strong>1. Upload</strong>
+            <div className="home-flow">
+              <article>
+                <em>Step 01</em>
+                <strong>Upload</strong>
                 <p>Drag & drop, browse, or paste. Phone and desktop both work.</p>
               </article>
-              <article className="home-step">
-                <strong>2. Choose output</strong>
-                <p>Pick JPG, PNG, WebP, or Auto. Set a target size or leave Auto Optimize on.</p>
+              <article>
+                <em>Step 02</em>
+                <strong>Choose output</strong>
+                <p>Pick JPG, PNG, WebP, or Auto. Set a target size or leave Auto on.</p>
               </article>
-              <article className="home-step">
-                <strong>3. Compress</strong>
+              <article>
+                <em>Step 03</em>
+                <strong>Compress</strong>
                 <p>Processing stays in your browser. Watch the After panel update.</p>
               </article>
-              <article className="home-step">
-                <strong>4. Download</strong>
+              <article>
+                <em>Step 04</em>
+                <strong>Download</strong>
                 <p>Check the new size and preview, then save the file to your device.</p>
               </article>
             </div>
