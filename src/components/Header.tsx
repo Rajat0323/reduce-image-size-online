@@ -6,8 +6,7 @@ import { useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
-  { href: "/#compressor", label: "Compress" },
-  { href: "/blog", label: "Blog" },
+  { href: "/#converter", label: "Convert" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -22,7 +21,7 @@ export default function Header() {
           <Image src="/images/logo.svg" alt="ReduceImageSize Logo" width={40} height={40} priority />
           <span className="logo-title">
             ReduceImageSize
-            <small>Image compressor</small>
+            <small>PDF to image</small>
           </span>
         </Link>
 
@@ -33,7 +32,7 @@ export default function Header() {
             </Link>
           ))}
           <ThemeToggle />
-          <Link href="/#compressor" className="btn btn-ghost">
+          <Link href="/#converter" className="btn btn-ghost">
             Open tool
           </Link>
         </nav>
@@ -56,7 +55,7 @@ export default function Header() {
             </Link>
           ))}
           <ThemeToggle />
-          <Link href="/#compressor" className="btn btn-primary" onClick={() => setMenuOpen(false)}>
+          <Link href="/#converter" className="btn btn-primary" onClick={() => setMenuOpen(false)}>
             Open tool
           </Link>
         </div>

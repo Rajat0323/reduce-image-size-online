@@ -13,11 +13,11 @@ const siteUrl = "https://www.reduceimagesizeonline.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Image Compressor Online — Reduce Image Size Free | ReduceImageSize",
+    default: "PDF to Image Converter Online — Free | ReduceImageSize",
     template: "%s | ReduceImageSize",
   },
   description:
-    "Free online image compressor — reduce JPG, PNG, and WebP file size in your browser. Convert formats, resize, and download. Private local processing.",
+    "Free online PDF to image converter — convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing.",
   robots: {
     index: true,
     follow: true,
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     apple: "/images/logo.svg",
   },
   openGraph: {
-    title: "Image Compressor Online — Reduce Image Size Free",
+    title: "PDF to Image Converter Online — Free",
     description:
-      "Compress, convert, and resize images in one private browser tool. Exact KB targets, live preview, free download.",
+      "Convert PDF pages to PNG, JPG, or WEBP in one private browser tool. Free download.",
     url: siteUrl,
     siteName: "ReduceImageSize",
     images: [
@@ -52,15 +52,15 @@ export const metadata: Metadata = {
         url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "ReduceImageSize image compressor",
+        alt: "ReduceImageSize PDF to image converter",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Compressor Online — Reduce Image Size Free",
-    description: "Compress, convert, and resize images privately in your browser.",
+    title: "PDF to Image Converter Online — Free",
+    description: "Convert PDF pages to PNG, JPG, or WEBP privately in your browser.",
     images: [`${siteUrl}/og-image.png`],
   },
 };

@@ -303,6 +303,57 @@
   border-right: 1px solid var(--home-line);
 }
 
+.home-studio-previews-pdf {
+  align-items: stretch;
+}
+
+.home-pdf-meta strong {
+  display: block;
+  word-break: break-word;
+  margin-bottom: 6px;
+  color: var(--home-ink);
+}
+
+.home-pdf-meta p {
+  margin: 0;
+}
+
+.home-pdf-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-height: 340px;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.home-pdf-thumb {
+  appearance: none;
+  border: 1px solid var(--home-line);
+  background: var(--home-panel);
+  border-radius: 12px;
+  padding: 8px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--home-ink);
+}
+
+.home-pdf-thumb img {
+  width: 100%;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--home-mist) 80%, transparent);
+  margin-bottom: 6px;
+}
+
+.home-pdf-thumb span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--home-muted);
+  font-weight: 650;
+}
+
 [data-theme="dark"] .home-studio-previews,
 :root:not([data-theme="light"]) .home-studio-previews {
   background:

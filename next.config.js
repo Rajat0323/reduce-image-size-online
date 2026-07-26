@@ -25,21 +25,6 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
-      {
-        source: "/blog/ml-to-oz-calculator-guide",
-        destination: "/blog",
-        permanent: true,
-      },
-      {
-        source: "/blog/ml-to-oz",
-        destination: "/blog",
-        permanent: true,
-      },
-      {
-        source: "/blog/reduce-image-size-to-50kb",
-        destination: "/blog/reduce-image-size-to-50kb-online",
-        permanent: true,
-      },
       ...getNextConfigRedirects(),
     ];
   },

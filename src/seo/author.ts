@@ -11,19 +11,17 @@ export const SITE_AUTHOR = {
   contactUrl: `${SITE_URL}/contact`,
   image: `${SITE_URL}/og-image.png`,
   bioShort:
-    "Rajat Gupta built ReduceImageSize after repeatedly hitting strict upload limits on forms, marketplaces, and CMS dashboards. He writes practical guides based on real testing in the browser.",
+    "Rajat Gupta built ReduceImageSize as a private, browser-based PDF to image converter.",
   bioLong:
-    "Rajat Gupta is the founder and developer behind ReduceImageSize. He has spent years building browser-based image tools for sellers, students, and website owners who need reliable compression, resizing, and format conversion without installing desktop software. Every guide on this site is written from hands-on testing with the live tools — not generic AI filler.",
+    "Rajat Gupta is the founder and developer behind ReduceImageSize — a free browser tool for converting PDF pages to PNG, JPG, or WEBP without uploading files to a server.",
   experience: [
-    "Built 60+ live image tool pages with in-browser processing (no server uploads for standard editing)",
-    "Tested upload workflows for Amazon, LinkedIn, WordPress, Instagram, passport portals, and exact-KB government forms",
-    "Maintains ReduceImageSize guides, FAQ content, and tool documentation for USA, UK, and global users",
+    "Built browser-based PDF to image conversion with local processing",
+    "Maintains ReduceImageSize as a focused single-purpose converter",
   ],
   expertise: [
-    "Image compression and exact-KB targeting",
-    "Format conversion (JPG, PNG, WebP, HEIC)",
-    "Resize, crop, and background removal workflows",
-    "Website image performance and Core Web Vitals",
+    "PDF to image conversion",
+    "Browser-based file processing",
+    "PNG, JPG, and WEBP export",
   ],
 } as const;
 

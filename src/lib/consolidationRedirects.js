@@ -1,51 +1,51 @@
 /**
- * Programmatic / near-duplicate tool URLs → single homepage authority.
- * Used by next.config.js and the dynamic [slug] route.
+ * Everything except homepage + a few static pages redirects to /.
+ * Site is PDF → image converter only.
  */
 
 const TARGET_PRESET_REDIRECTS = {
-  "compress-image-to-10kb": "/?target=10",
-  "compress-image-to-20kb": "/?target=20",
-  "compress-image-to-30kb": "/?target=30",
-  "compress-image-to-40kb": "/?target=40",
-  "compress-image-to-50kb": "/?target=50",
-  "compress-image-to-60kb": "/?target=60",
-  "compress-image-to-80kb": "/?target=80",
-  "compress-image-to-100kb": "/?target=100",
-  "compress-image-to-150kb": "/?target=150",
-  "compress-image-to-200kb": "/?target=200",
-  "compress-image-to-300kb": "/?target=300",
-  "compress-image-to-500kb": "/?target=500",
-  "compress-image-to-1mb": "/?target=1024",
-  "compress-image-to-2mb": "/?target=2048",
-  "compress-image-to-5mb": "/?target=5120",
-  "compress-to-20kb": "/?target=20",
-  "compress-to-50kb": "/?target=50",
-  "compress-to-100kb": "/?target=100",
-  "compress-to-200kb": "/?target=200",
+  "compress-image-to-10kb": "/",
+  "compress-image-to-20kb": "/",
+  "compress-image-to-30kb": "/",
+  "compress-image-to-40kb": "/",
+  "compress-image-to-50kb": "/",
+  "compress-image-to-60kb": "/",
+  "compress-image-to-80kb": "/",
+  "compress-image-to-100kb": "/",
+  "compress-image-to-150kb": "/",
+  "compress-image-to-200kb": "/",
+  "compress-image-to-300kb": "/",
+  "compress-image-to-500kb": "/",
+  "compress-image-to-1mb": "/",
+  "compress-image-to-2mb": "/",
+  "compress-image-to-5mb": "/",
+  "compress-to-20kb": "/",
+  "compress-to-50kb": "/",
+  "compress-to-100kb": "/",
+  "compress-to-200kb": "/",
 };
 
 const FORMAT_REDIRECTS = {
-  "jpg-to-webp-converter": "/?format=webp",
-  "png-to-jpg-converter": "/?format=jpeg",
-  "jpg-to-png-converter": "/?format=png",
-  "webp-to-jpg-converter": "/?format=jpeg",
-  "png-to-webp-converter": "/?format=webp",
-  "webp-to-png-converter": "/?format=png",
-  "heic-to-jpg-converter": "/?format=jpeg",
-  "heic-to-png-converter": "/?format=png",
-  "bmp-to-jpg-converter": "/?format=jpeg",
-  "tiff-to-jpg-converter": "/?format=jpeg",
+  "jpg-to-webp-converter": "/",
+  "png-to-jpg-converter": "/",
+  "jpg-to-png-converter": "/",
+  "webp-to-jpg-converter": "/",
+  "png-to-webp-converter": "/",
+  "webp-to-png-converter": "/",
+  "heic-to-jpg-converter": "/",
+  "heic-to-png-converter": "/",
+  "bmp-to-jpg-converter": "/",
+  "tiff-to-jpg-converter": "/",
 };
 
 const RESIZE_REDIRECTS = {
-  "resize-image-to-200x200": "/?width=200&height=200",
-  "resize-image-to-400x400": "/?width=400&height=400",
-  "resize-image-to-800x800": "/?width=800&height=800",
-  "resize-image-to-1080x1080": "/?width=1080&height=1080",
-  "resize-image-to-1920x1080": "/?width=1920&height=1080",
-  "resize-image-to-passport-size": "/?width=413&height=531",
-  "resize-image-for-youtube-thumbnail": "/?width=1280&height=720",
+  "resize-image-to-200x200": "/",
+  "resize-image-to-400x400": "/",
+  "resize-image-to-800x800": "/",
+  "resize-image-to-1080x1080": "/",
+  "resize-image-to-1920x1080": "/",
+  "resize-image-to-passport-size": "/",
+  "resize-image-for-youtube-thumbnail": "/",
 };
 
 const HUB_REDIRECTS = {
@@ -54,6 +54,11 @@ const HUB_REDIRECTS = {
   "image-converter": "/",
   "bulk-image-compressor": "/",
   "reduce-image-size": "/",
+  "crop-image": "/",
+  "rotate-flip-image": "/",
+  "background-remover": "/",
+  "image-upscaler": "/",
+  "remove-image-metadata": "/",
 };
 
 const INTENT_TO_HOME = [
@@ -77,14 +82,8 @@ const INTENT_TO_HOME = [
   "compress-image-for-website",
 ];
 
-/** Specialty tools that remain as their own pages (not size/intent clones). */
-const KEPT_SPECIALTY_SLUGS = new Set([
-  "crop-image",
-  "rotate-flip-image",
-  "background-remover",
-  "image-upscaler",
-  "remove-image-metadata",
-]);
+/** No specialty tool pages remain. */
+const KEPT_SPECIALTY_SLUGS = new Set();
 
 function buildConsolidationMap() {
   /** @type {Record<string, string>} */
@@ -109,11 +108,19 @@ function getConsolidationRedirect(slug) {
 }
 
 function getNextConfigRedirects() {
-  return Object.entries(consolidationMap).map(([source, destination]) => ({
+  const toolRedirects = Object.entries(consolidationMap).map(([source, destination]) => ({
     source: `/${source}`,
     destination,
     permanent: true,
   }));
+
+  return [
+    ...toolRedirects,
+    { source: "/blog", destination: "/", permanent: true },
+    { source: "/blog/:path*", destination: "/", permanent: true },
+    { source: "/articles", destination: "/", permanent: true },
+    { source: "/articles/:path*", destination: "/", permanent: true },
+  ];
 }
 
 module.exports = {
