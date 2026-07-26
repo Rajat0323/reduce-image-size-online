@@ -12,12 +12,12 @@ const siteUrl = "https://www.reduceimagesizeonline.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  // No title template — avoids "| ReduceImageSize" doubling that made titles too long in Ahrefs.
   title: {
-    default: "PDF to Image Converter — Free Online Tool | ReduceImageSize",
-    template: "%s | ReduceImageSize",
+    default: "PDF to Image Converter — Free Online Tool",
   },
   description:
-    "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing, multi-page support, free download.",
+    "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing, multi-page support, and free download — no account required.",
   robots: {
     index: true,
     follow: true,
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     apple: "/images/logo.svg",
   },
   openGraph: {
-    title: "PDF to Image Converter Online — Free",
+    title: "PDF to Image Converter — Free Online Tool",
     description:
-      "Convert PDF pages to PNG, JPG, or WEBP in one private browser tool. Free download.",
+      "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing, multi-page support, and free download — no account required.",
     url: siteUrl,
     siteName: "ReduceImageSize",
     images: [
@@ -59,8 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PDF to Image Converter Online — Free",
-    description: "Convert PDF pages to PNG, JPG, or WEBP privately in your browser.",
+    title: "PDF to Image Converter — Free Online Tool",
+    description:
+      "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing, multi-page support, and free download — no account required.",
     images: [`${siteUrl}/og-image.png`],
   },
 };

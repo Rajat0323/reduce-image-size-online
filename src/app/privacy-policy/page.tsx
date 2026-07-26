@@ -5,25 +5,29 @@ import { SITE_AUTHOR } from "@/seo/author";
 import { SITE_URL } from "@/constants";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: {
+    absolute: "Privacy Policy — PDF to Image Converter",
+  },
   description:
-    "How ReduceImageSize handles PDFs: browser-based conversion, what we do not store, and how analytics works.",
+    "How ReduceImageSize handles PDFs: browser-based conversion, no server storage of your files during convert, and how site analytics works.",
   alternates: {
     canonical: "/privacy-policy",
   },
   openGraph: {
-    title: "Privacy Policy | ReduceImageSize",
+    title: "Privacy Policy — PDF to Image Converter",
     description:
-      "Plain-English privacy details for the PDF to image converter: local processing, storage, and analytics.",
+      "Plain-English privacy details: local PDF conversion, what we do not store, and analytics.",
     url: `${SITE_URL}/privacy-policy`,
     siteName: "ReduceImageSize",
+    images: [`${SITE_URL}/og-image.png`],
     type: "website",
   },
   twitter: {
-    card: "summary",
-    title: "Privacy Policy | ReduceImageSize",
+    card: "summary_large_image",
+    title: "Privacy Policy — PDF to Image Converter",
     description:
-      "Plain-English privacy details for the PDF to image converter: local processing, storage, and analytics.",
+      "Plain-English privacy details: local PDF conversion, what we do not store, and analytics.",
+    images: [`${SITE_URL}/og-image.png`],
   },
 };
 

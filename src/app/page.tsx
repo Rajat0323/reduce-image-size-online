@@ -34,9 +34,11 @@ const HomePdfToImageStudio = dynamic(() => import("@/components/HomePdfToImageSt
 });
 
 export const metadata: Metadata = {
-  title: "PDF to Image Converter — Free Online Tool",
+  title: {
+    absolute: "PDF to Image Converter — Free Online Tool",
+  },
   description:
-    "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing, multi-page support, free download.",
+    "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing, multi-page support, and free download — no account required.",
   alternates: {
     canonical: "/",
   },
@@ -47,13 +49,20 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/`,
     siteName: SITE_NAME,
     type: "website",
-    images: [`${SITE_URL}/og-image.png`],
+    images: [
+      {
+        url: `${SITE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "ReduceImageSize PDF to image converter",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "PDF to Image Converter — Free Online Tool",
     description:
-      "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private processing. Free download.",
+      "Convert PDF pages to PNG, JPG, or WEBP in your browser. Private local processing, multi-page support, and free download.",
     images: [`${SITE_URL}/og-image.png`],
   },
 };
@@ -315,6 +324,22 @@ export default function Home() {
               Digital text PDFs usually convert quickly. Scanned pages take longer because every
               page is drawn at the selected scale on your device. If a file fails, the usual causes
               are password protection, a damaged PDF, or a format the browser cannot decode.
+            </p>
+            <h3>Site quality checks (Ahrefs)</h3>
+            <p>
+              An Ahrefs Site Audit of reduceimagesizeonline.com (July 2026) scored Health 99. The
+              crawl flagged one sitemap error (a 3XX URL listed in sitemap.xml) plus warnings from
+              the older multi-page structure: long titles, missing H1s on thin/redirect URLs, and
+              internal links that hit redirects.
+            </p>
+            <p>
+              Those issues are addressed by keeping the public site to five indexable URLs (
+              <Link href="/">home</Link>, <Link href="/about">about</Link>,{" "}
+              <Link href="/contact">contact</Link>, <Link href="/privacy-policy">privacy</Link>,{" "}
+              <Link href="/terms">terms</Link>), listing only final 200 OK URLs in the sitemap,
+              using short absolute titles (no brand suffix doubling), and giving every public page a
+              clear H1. Legacy tool, blog, and article URLs still 301 to home on purpose so old
+              links do not 404. Admin routes stay noindex.
             </p>
             <p className="home-meta-line">
               Last reviewed: July 26, 2026 · Maintainer: {SITE_AUTHOR.name}

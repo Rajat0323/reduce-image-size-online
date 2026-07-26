@@ -1,42 +1,52 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { SITE_AUTHOR } from "@/seo/author";
+import { SITE_URL } from "@/constants";
 
 export const metadata: Metadata = {
-  title: "Contact ReduceImageSize",
+  title: {
+    absolute: "Contact — PDF to Image Converter",
+  },
   description:
-    "Contact ReduceImageSize for support, questions, partnerships, or help with image tool workflows.",
+    "Contact ReduceImageSize for PDF converter support, privacy questions, or product feedback. Email vivgup64@gmail.com — we reply when we can.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact ReduceImageSize",
+    title: "Contact — PDF to Image Converter",
     description:
-      "Contact ReduceImageSize for support, questions, partnerships, or help with image tool workflows.",
-    url: "https://www.reduceimagesizeonline.com/contact",
+      "Reach Rajat Gupta for PDF to image converter support, privacy questions, or product feedback.",
+    url: `${SITE_URL}/contact`,
     siteName: "ReduceImageSize",
-    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
+    images: [`${SITE_URL}/og-image.png`],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact ReduceImageSize",
+    title: "Contact — PDF to Image Converter",
     description:
-      "Contact ReduceImageSize for support, questions, partnerships, or help with image tool workflows.",
-    images: ["https://www.reduceimagesizeonline.com/og-image.png"],
+      "Reach Rajat Gupta for PDF to image converter support, privacy questions, or product feedback.",
+    images: [`${SITE_URL}/og-image.png`],
   },
 };
 
 export default function Contact() {
   return (
-    <main style={{ maxWidth: 900, margin: "0 auto", padding: 60 }}>
-      <h1>Contact Us</h1>
-      <p>For support or business inquiries, please contact us at:</p>
-
-      <p>Email: {SITE_AUTHOR.email}</p>
-      <p>
-        Author: <a href="/about">{SITE_AUTHOR.name}</a>, {SITE_AUTHOR.jobTitle} at ReduceImageSize
-      </p>
+    <main className="home-page" style={{ padding: "48px 24px 80px" }}>
+      <article className="home-content" style={{ paddingTop: 0 }}>
+        <h1 style={{ fontFamily: "var(--font-home-display), Georgia, serif" }}>Contact</h1>
+        <p>For support, privacy questions, or product feedback, email:</p>
+        <p>
+          <a href={`mailto:${SITE_AUTHOR.email}`}>{SITE_AUTHOR.email}</a>
+        </p>
+        <p>
+          Maintainer: <Link href="/about">{SITE_AUTHOR.name}</Link>, {SITE_AUTHOR.jobTitle}
+        </p>
+        <p>
+          <Link href="/">Back to PDF to Image Converter</Link>
+        </p>
+      </article>
     </main>
   );
 }
