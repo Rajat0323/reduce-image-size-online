@@ -19,7 +19,14 @@ export const metadata: Metadata = {
       "Reach Rajat Gupta for PDF to image converter support, privacy questions, or product feedback.",
     url: `${SITE_URL}/contact`,
     siteName: "ReduceImageSize",
-    images: [`${SITE_URL}/og-image.png`],
+    images: [
+      {
+        url: `${SITE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Contact ReduceImageSize PDF to image converter",
+      },
+    ],
     type: "website",
   },
   twitter: {

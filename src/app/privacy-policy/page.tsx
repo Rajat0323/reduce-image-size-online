@@ -19,7 +19,14 @@ export const metadata: Metadata = {
       "Plain-English privacy details: local PDF conversion, what we do not store, and analytics.",
     url: `${SITE_URL}/privacy-policy`,
     siteName: "ReduceImageSize",
-    images: [`${SITE_URL}/og-image.png`],
+    images: [
+      {
+        url: `${SITE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "ReduceImageSize privacy policy",
+      },
+    ],
     type: "website",
   },
   twitter: {

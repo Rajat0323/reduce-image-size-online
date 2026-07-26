@@ -18,7 +18,14 @@ export const metadata: Metadata = {
       "Terms for using the ReduceImageSize PDF to image converter, including acceptable use and liability.",
     url: `${SITE_URL}/terms`,
     siteName: "ReduceImageSize",
-    images: [`${SITE_URL}/og-image.png`],
+    images: [
+      {
+        url: `${SITE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "ReduceImageSize terms of service",
+      },
+    ],
     type: "website",
   },
   twitter: {
