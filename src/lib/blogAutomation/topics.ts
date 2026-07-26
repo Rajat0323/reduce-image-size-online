@@ -521,7 +521,16 @@ for (const topic of blogTopicQueue) {
   validateBlogTopicTools(topic);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { getConsolidationRedirect } = require("../consolidationRedirects.js") as {
+  getConsolidationRedirect: (slug: string) => string | null;
+};
+
 export function toolUrl(slug: string) {
+  const consolidated = getConsolidationRedirect(slug);
+  if (consolidated) {
+    return `${SITE_URL}${consolidated}`;
+  }
   return `${SITE_URL}/${slug}`;
 }
 

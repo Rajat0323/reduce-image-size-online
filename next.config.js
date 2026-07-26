@@ -1,8 +1,12 @@
+const {
+  getNextConfigRedirects,
+} = require("./src/lib/consolidationRedirects");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
   async redirects() {
     return [
@@ -36,6 +40,7 @@ const nextConfig = {
         destination: "/blog/reduce-image-size-to-50kb-online",
         permanent: true,
       },
+      ...getNextConfigRedirects(),
     ];
   },
   async rewrites() {

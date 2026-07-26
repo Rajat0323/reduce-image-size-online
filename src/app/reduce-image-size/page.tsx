@@ -21,5 +21,5 @@ export default function LegacyReduceImageSizePage({
   }
 
   const query = nextSearchParams.toString();
-  redirect(query ? `/image-compressor?${query}` : "/image-compressor");
+  redirect(query ? `/?${query}` : "/");
 }

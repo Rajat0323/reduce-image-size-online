@@ -13,11 +13,11 @@ const siteUrl = "https://www.reduceimagesizeonline.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "ReduceImageSize | Fast Image Tool Hub",
+    default: "Image Compressor Online — Reduce Image Size Free | ReduceImageSize",
     template: "%s | ReduceImageSize",
   },
   description:
-    "Free online image tools worldwide — compress to exact KB, convert JPG PNG WebP HEIC, resize for social media, and optimize for websites.",
+    "Free online image compressor — reduce JPG, PNG, and WebP file size in your browser. Convert formats, resize, and download. Private local processing.",
   robots: {
     index: true,
     follow: true,
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     apple: "/images/logo.svg",
   },
   openGraph: {
-    title: "ReduceImageSize | Fast Image Tool Hub",
+    title: "Image Compressor Online — Reduce Image Size Free",
     description:
-      "Use a complete tool hub to compress, resize, convert, crop, and enhance images online.",
+      "Compress, convert, and resize images in one private browser tool. Exact KB targets, live preview, free download.",
     url: siteUrl,
     siteName: "ReduceImageSize",
     images: [
@@ -52,15 +52,15 @@ export const metadata: Metadata = {
         url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "ReduceImageSize premium image tools brand",
+        alt: "ReduceImageSize image compressor",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ReduceImageSize | Fast Image Tool Hub",
-    description: "Compress, resize, convert, crop, and enhance images in your browser.",
+    title: "Image Compressor Online — Reduce Image Size Free",
+    description: "Compress, convert, and resize images privately in your browser.",
     images: [`${siteUrl}/og-image.png`],
   },
 };

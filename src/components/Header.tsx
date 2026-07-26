@@ -6,12 +6,10 @@ import { useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/image-compressor", label: "Compressor" },
-  { href: "/image-resizer", label: "Resizer" },
-  { href: "/image-converter", label: "Converter" },
-  { href: "/background-remover", label: "Background Remover" },
+  { href: "/#compressor", label: "Compress" },
   { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -24,7 +22,7 @@ export default function Header() {
           <Image src="/images/logo.svg" alt="ReduceImageSize Logo" width={40} height={40} priority />
           <span className="logo-title">
             ReduceImageSize
-            <small>Image tool hub</small>
+            <small>Image compressor</small>
           </span>
         </Link>
 
@@ -35,8 +33,8 @@ export default function Header() {
             </Link>
           ))}
           <ThemeToggle />
-          <Link href="/image-compressor" className="btn btn-ghost">
-            Launch Tool
+          <Link href="/#compressor" className="btn btn-ghost">
+            Open tool
           </Link>
         </nav>
 
@@ -58,12 +56,8 @@ export default function Header() {
             </Link>
           ))}
           <ThemeToggle />
-          <Link
-            href="/image-compressor"
-            className="btn btn-primary"
-            onClick={() => setMenuOpen(false)}
-          >
-            Launch Tool
+          <Link href="/#compressor" className="btn btn-primary" onClick={() => setMenuOpen(false)}>
+            Open tool
           </Link>
         </div>
       )}
