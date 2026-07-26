@@ -5,7 +5,7 @@ export const SITE_AUTHOR = {
   jobTitle: "Founder & Developer",
   organization: SITE_NAME,
   organizationUrl: SITE_URL,
-  email: "rajat0323@gmail.com",
+  email: "vivgup64@gmail.com",
   github: "https://github.com/rajat0323",
   aboutUrl: `${SITE_URL}/about`,
   contactUrl: `${SITE_URL}/contact`,

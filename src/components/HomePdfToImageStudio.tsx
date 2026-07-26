@@ -264,6 +264,8 @@ export default function HomePdfToImageStudio() {
             accept="application/pdf,.pdf"
             onChange={onInputChange}
             className="hidden-input"
+            tabIndex={-1}
+            aria-hidden="true"
           />
 
           {!file ? (

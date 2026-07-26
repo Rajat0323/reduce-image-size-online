@@ -88,14 +88,14 @@ textarea {
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: #e85d04;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
 .logo img {
-  border-radius: 50%;
+  border-radius: 12px;
 }
 
 .logo-title {
@@ -103,6 +103,27 @@ textarea {
   display: flex;
   flex-direction: column;
   line-height: 1.1;
+}
+
+.logo-title small {
+  color: #ff9a5c;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.hidden-input {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .nav-links {
