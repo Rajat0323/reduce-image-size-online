@@ -233,31 +233,71 @@ export default function Home() {
             </div>
 
             <figure className="home-shot">
-              <strong>[Upload Screen Screenshot]</strong>
-              <p>
-                You should see a large drop area, a Choose PDF button, and a short note that
-                conversion stays on your device.
-              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/converter/upload-screen.png"
+                alt="Upload screen with Choose PDF button and PDF to PNG, JPG, or WEBP options"
+                width={1200}
+                height={720}
+                loading="lazy"
+              />
+              <figcaption>
+                <strong>Upload screen</strong>
+                <p>
+                  You should see a large drop area, a Choose PDF button, and a short note that
+                  conversion stays on your device.
+                </p>
+              </figcaption>
             </figure>
             <figure className="home-shot">
-              <strong>[Conversion Progress Screenshot]</strong>
-              <p>
-                After you start conversion, the button shows progress while each page is rendered.
-              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/converter/conversion-progress.png"
+                alt="Conversion progress showing Converting percent on the Convert to image button"
+                width={1200}
+                height={720}
+                loading="lazy"
+              />
+              <figcaption>
+                <strong>Conversion progress</strong>
+                <p>
+                  After you start conversion, the button shows progress while each page is rendered.
+                </p>
+              </figcaption>
             </figure>
             <figure className="home-shot">
-              <strong>[Converted Image Preview]</strong>
-              <p>
-                Finished pages appear as thumbnails with page numbers and file sizes so you can
-                check the result before downloading.
-              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/converter/converted-preview.png"
+                alt="Converted image preview thumbnails with page numbers and file sizes"
+                width={1200}
+                height={720}
+                loading="lazy"
+              />
+              <figcaption>
+                <strong>Converted image preview</strong>
+                <p>
+                  Finished pages appear as thumbnails with page numbers and file sizes so you can
+                  check the result before downloading.
+                </p>
+              </figcaption>
             </figure>
             <figure className="home-shot">
-              <strong>[Download Screen]</strong>
-              <p>
-                Download a single page by clicking its thumbnail, or use Download / Download ZIP for
-                the full set.
-              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/converter/download-screen.png"
+                alt="Download screen with page thumbnails and Download ZIP button"
+                width={1200}
+                height={720}
+                loading="lazy"
+              />
+              <figcaption>
+                <strong>Download screen</strong>
+                <p>
+                  Download a single page by clicking its thumbnail, or use Download / Download ZIP
+                  for the full set.
+                </p>
+              </figcaption>
             </figure>
           </section>
 
